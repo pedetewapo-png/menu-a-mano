@@ -483,7 +483,7 @@ El validador del catálogo garantiza que toda cantidad de receta sea convertible
 - **Imágenes:** `sharp` en un script de compilación para generar los tamaños y formatos.
 - **Móvil (fases 6 y 7):** Capacitor.
 - **Pruebas:** Vitest, fast-check, Testing Library, Playwright y axe.
-- **Alojamiento:** estático gratuito (GitHub Pages o Cloudflare Pages).
+- **Alojamiento:** GitHub Pages, en `https://pedetewapo-png.github.io/menu-a-mano/`.
 
 ### 11.2 Capas
 

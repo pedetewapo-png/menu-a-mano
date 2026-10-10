@@ -12,18 +12,20 @@ Aplicación de ordenador, instalable desde una página web, para planificar el m
 | `npm run build` | Valida el catálogo, comprueba los tipos y compila en `dist/`. |
 | `npm run preview` | Sirve `dist/` en `http://localhost:4173/` para probar la instalación y el modo sin conexión. |
 | `npm run icons` | Regenera los iconos PNG a partir de `public/icons/icon.svg`. |
+| `npm run deploy` | Compila y publica el sitio en GitHub Pages. |
 
 Para probar la versión compilada sin instalarla, abre `http://localhost:4173/app/?tab=1`. Sin `?tab=1`, la app abierta en una pestaña lleva a la página de instalación.
 
 ## Publicar
 
-El sitio está publicado en Cloudflare (Workers con archivos estáticos) en `https://menu-a-mano.menu-a-mano.workers.dev`. La configuración está en `wrangler.jsonc`.
+El sitio está publicado con GitHub Pages en <https://pedetewapo-png.github.io/menu-a-mano/>. El código está en la rama `main` y el sitio compilado en la rama `gh-pages`.
 
-- `npm run deploy` compila y publica. Requiere haber autorizado antes el equipo con `npx wrangler login`.
+- `npm run deploy` compila con la ruta base `/menu-a-mano/` y publica en `gh-pages`. Requiere tener el equipo autorizado con `gh auth login`.
+- Subir cambios a `main` (`git push`) guarda el código, pero no publica; para publicar hay que ejecutar `npm run deploy`.
 
-La app instalada se actualiza sola la siguiente vez que se abre con conexión. `public/_headers` evita que el service worker se quede en caché.
+La app instalada se actualiza sola la siguiente vez que se abre con conexión. GitHub mantiene los archivos en caché unos 10 minutos, así que una versión nueva puede tardar ese tiempo en ofrecerse.
 
-Si el sitio se sirviera desde una subcarpeta (por ejemplo en GitHub Pages), hay que compilar con la variable `BASE_PATH`, p. ej. `/menu-a-mano/`.
+Se descartó Cloudflare porque sus direcciones compartidas no eran accesibles desde España el día de la publicación (sábado 10 de octubre de 2026, en horario de partidos de LaLiga), mientras que GitHub Pages sí lo era.
 
 ## Estructura
 
@@ -57,7 +59,6 @@ La dieta y los alérgenos de una receta se calculan a partir de sus ingredientes
 - **Cobertura del catálogo.** Faltan recetas para llegar a los mínimos de §13.2 (el validador lo detalla).
 - Pruebas de recorrido completo y de accesibilidad automatizadas (Playwright y axe).
 - Regla de lint que impida a `domain` importar de otras capas.
-- Publicación del sitio.
 
 ## Nota sobre `rollup`
 
