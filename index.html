@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#2f6f4e" />
+    <meta
+      name="description"
+      content="Menú a Mano: planifica el menú de la semana y genera la lista de la compra. Gratis, sin cuenta y sin conexión."
+    />
+    <link rel="icon" href="/menu-a-mano/icons/icon.svg" type="image/svg+xml" />
+    <title>Menú a Mano · Instalar</title>
+    <script type="module" crossorigin src="/menu-a-mano/assets/landing-Dm9CGfGj.js"></script>
+    <link rel="modulepreload" crossorigin href="/menu-a-mano/assets/tokens-_R-35q-F.js">
+    <link rel="stylesheet" crossorigin href="/menu-a-mano/assets/tokens-hB6fahBT.css">
+    <link rel="stylesheet" crossorigin href="/menu-a-mano/assets/landing-Bc4uXVJE.css">
+  <link rel="manifest" href="/menu-a-mano/manifest.webmanifest"></head>
+  <body>
+    <main class="landing">
+      <img class="landing-icon" src="/menu-a-mano/icons/icon.svg" alt="" width="96" height="96" />
+      <h1>Menú a Mano</h1>
+      <p class="landing-lead">
+        Organiza las comidas de la semana en pocos minutos y sal a comprar con la lista ya hecha.
+      </p>
+
+      <!-- El script muestra solo el bloque que corresponde a este navegador. -->
+      <div class="landing-action" aria-live="polite">
+        <p id="state-checking">Comprobando si se puede instalar…</p>
+
+        <div id="state-install" hidden>
+          <button id="install-button" type="button" class="button button-primary button-large">Instalar</button>
+          <p class="hint">Se abrirá en su propia ventana, como cualquier otro programa.</p>
+        </div>
+
+        <div id="state-installed" hidden>
+          <p><strong>Menú a Mano ya está instalada.</strong></p>
+          <p>Ábrela desde su icono en el escritorio o en el menú Inicio.</p>
+        </div>
+
+        <div id="state-manual" hidden>
+          <p><strong>Instálala desde el menú del navegador.</strong></p>
+          <p>
+            En Chrome o Edge, abre el menú (⋮ o …), entra en «Guardar y compartir» o «Aplicaciones» y elige
+            «Instalar Menú a Mano».
+          </p>
+        </div>
+
+        <div id="state-unsupported" hidden>
+          <p><strong>Este navegador no permite instalar aplicaciones.</strong></p>
+          <p>Abre esta página con Google Chrome o Microsoft Edge y pulsa «Instalar».</p>
+        </div>
+      </div>
+
+      <ul class="landing-points">
+        <li><strong>Gratis y sin anuncios.</strong> Sin suscripciones ni funciones de pago.</li>
+        <li><strong>Sin cuenta.</strong> Tus datos se quedan en tu ordenador.</li>
+        <li><strong>Sin conexión.</strong> Una vez instalada, funciona sin internet.</li>
+      </ul>
+
+      <section class="landing-note" aria-labelledby="scope-title">
+        <h2 id="scope-title">Qué es y qué no es</h2>
+        <p>
+          Menú a Mano te ayuda a organizar tus comidas. No es un servicio médico ni nutricional, y su contenido no ha
+          sido revisado por profesionales sanitarios. Los filtros de alérgenos no sustituyen la comprobación de las
+          etiquetas.
+        </p>
+        <p>La app no recoge datos, no usa cookies y no incluye analítica.</p>
+      </section>
+    </main>
+    <noscript>Para instalar Menú a Mano hace falta JavaScript.</noscript>
+  </body>
+</html>

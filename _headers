@@ -1,0 +1,8 @@
+# Cabeceras para Cloudflare Pages.
+# El service worker y el manifiesto no deben quedarse en caché, o las
+# actualizaciones de la app tardarían en llegar.
+/sw.js
+  Cache-Control: no-cache
+
+/manifest.webmanifest
+  Cache-Control: no-cache

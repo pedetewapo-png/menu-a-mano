@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- El dibujo queda dentro del 60 % central para que también sirva como icono enmascarable. -->
+  <rect width="512" height="512" fill="#2f6f4e"/>
+  <circle cx="256" cy="256" r="150" fill="#faf8f3"/>
+  <circle cx="256" cy="256" r="104" fill="none" stroke="#2f6f4e" stroke-width="10" opacity="0.35"/>
+  <path d="M256 196c44 8 70 40 70 78-44-4-70-34-70-78z" fill="#2f6f4e"/>
+  <path d="M256 196c-44 8-70 40-70 78 44-4 70-34 70-78z" fill="#4c9a72"/>
+  <path d="M256 204v112" stroke="#2f6f4e" stroke-width="10" stroke-linecap="round"/>
+</svg>
