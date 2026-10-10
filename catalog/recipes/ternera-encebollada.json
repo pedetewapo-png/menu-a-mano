@@ -1,0 +1,27 @@
+{
+  "id": "ternera-encebollada",
+  "name": "Ternera encebollada",
+  "summary": "Filetes tiernos sobre una cama de cebolla pochada.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 25,
+  "activeMinutes": 20,
+  "cost": 3,
+  "mainGroup": "redMeat",
+  "cuisine": "spanish",
+  "ingredients": [
+    { "ingredientId": "filetes-ternera", "quantity": 250, "unit": "g" },
+    { "ingredientId": "cebolla", "quantity": 2, "unit": "unit" },
+    { "ingredientId": "laurel", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" },
+    { "ingredientId": "pimienta-negra", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Corta la cebolla en tiras finas.",
+    "Póchala con el aceite, el laurel y una pizca de sal, a fuego suave, unos 15 minutos, hasta que esté blanda y dorada.",
+    "Aparta la cebolla, sube el fuego y cocina los filetes salpimentados un minuto por cada lado.",
+    "Sirve los filetes con la cebolla por encima."
+  ],
+  "source": { "author": "Menú a Mano", "license": "Contenido propio" }
+}

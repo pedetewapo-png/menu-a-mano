@@ -1,0 +1,805 @@
+/* ---------- Estructura general ---------- */
+
+.loading {
+  padding: 2rem;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999rem;
+  top: 0.5rem;
+  z-index: 10;
+  padding: 0.5rem 1rem;
+  background: var(--surface);
+  border-radius: var(--radius);
+}
+
+.skip-link:focus {
+  left: 0.5rem;
+}
+
+.shell {
+  display: grid;
+  grid-template-columns: 12rem minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100vh;
+  padding: 1.25rem 0.75rem;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+}
+
+.brand {
+  margin: 0 0.5rem 1.25rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.sidebar ul {
+  display: grid;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sidebar a {
+  display: flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.sidebar a:hover {
+  background: var(--surface-alt);
+}
+
+/* La sección actual se distingue por la barra y la negrita, no solo por el color. */
+.sidebar a[aria-current='page'] {
+  background: var(--surface-alt);
+  box-shadow: inset 4px 0 0 var(--primary);
+  font-weight: 700;
+}
+
+.content {
+  padding: 1.5rem 2rem 4rem;
+  max-width: 96rem;
+}
+
+.content:focus {
+  outline: none;
+}
+
+.page-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--gap);
+  margin-bottom: 1rem;
+}
+
+.page-header h1 {
+  margin-bottom: 0;
+}
+
+.week-range {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+}
+
+/* ---------- Piezas comunes ---------- */
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.stack {
+  display: grid;
+  gap: 0.75rem;
+  align-content: start;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.card {
+  margin-bottom: var(--gap);
+  padding: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.callout {
+  padding: 0.75rem 1rem;
+  background: var(--accent-bg);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius);
+}
+
+.callout ul {
+  margin: 0 0 0.5rem;
+  padding-left: 1.25rem;
+}
+
+.callout-title {
+  font-size: 1rem;
+}
+
+.status {
+  min-height: 1.5rem;
+  margin: 0.75rem 0;
+}
+
+.empty {
+  margin: 1rem 0;
+  padding: 2rem;
+  text-align: center;
+  background: var(--surface-alt);
+  border-radius: var(--radius);
+}
+
+.tag {
+  display: inline-block;
+  margin: 0;
+  padding: 0.1rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.tag-warn {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+
+.button-small {
+  min-height: 2.75rem;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.9rem;
+}
+
+.button-quiet {
+  border-color: transparent;
+  background: transparent;
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.button-danger {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.button[aria-pressed='true'] {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+  font-weight: 600;
+}
+
+/* ---------- Formularios ---------- */
+
+.field {
+  min-width: 0;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  border: 0;
+}
+
+.field-label,
+legend {
+  display: block;
+  margin-bottom: 0.25rem;
+  padding: 0;
+  font-weight: 600;
+}
+
+input[type='search'],
+input:not([type]),
+select {
+  min-height: 2.75rem;
+  max-width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+}
+
+input[type='search'] {
+  width: 100%;
+}
+
+input[type='checkbox'],
+input[type='radio'] {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: none;
+  accent-color: var(--primary);
+}
+
+.choice {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  min-height: 2.75rem;
+  padding: 0.5rem 0;
+  cursor: pointer;
+}
+
+.check-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+  column-gap: var(--gap);
+}
+
+.stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.stepper .button {
+  width: 2.75rem;
+  padding: 0;
+  font-size: 1.25rem;
+}
+
+.stepper output {
+  min-width: 2ch;
+  text-align: center;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.option-list,
+.chips,
+.picker-list {
+  margin: 0.5rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.option-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.75rem;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+
+.chip-remove {
+  width: 2rem;
+  height: 2rem;
+  margin-right: -0.5rem;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.slot-table {
+  border-collapse: collapse;
+}
+
+.slot-table th,
+.slot-table td {
+  padding: 0.4rem 1rem 0.4rem 0;
+  text-align: left;
+}
+
+.slot-table td {
+  text-align: center;
+}
+
+.slot-table tbody th {
+  font-weight: 400;
+}
+
+/* ---------- Diálogos ---------- */
+
+.dialog {
+  width: min(34rem, calc(100vw - 2rem));
+  max-height: calc(100vh - 2rem);
+  padding: 0;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.dialog::backdrop {
+  background: rgb(0 0 0 / 0.45);
+}
+
+.dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap);
+  padding: 1rem 1.25rem 0;
+}
+
+.dialog-header h2 {
+  margin: 0;
+}
+
+.dialog-body {
+  padding: 1rem 1.25rem 1.25rem;
+}
+
+.picker-list {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.picker-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--gap);
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.picker-option:hover {
+  border-color: var(--primary);
+}
+
+.saved-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--gap);
+  padding: 0.25rem 0;
+}
+
+/* ---------- Configuración inicial ---------- */
+
+.onboarding {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 4rem;
+}
+
+.onboarding .card {
+  margin-top: 1.5rem;
+}
+
+.onboarding h2:focus {
+  outline: none;
+}
+
+/* ---------- Menú semanal ---------- */
+
+.week {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-template-rows: auto auto auto;
+  gap: 0.75rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Cada día ocupa tres filas compartidas (título, comida, cena) para que las cenas queden alineadas. */
+.day {
+  display: grid;
+  grid-row: span 3;
+  grid-template-rows: subgrid;
+}
+
+.day-title {
+  margin-bottom: 0;
+  font-size: 1rem;
+}
+
+.day-number {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.day-slots {
+  display: contents;
+  list-style: none;
+}
+
+.slot {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.6rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.slot-off {
+  background: transparent;
+  border-style: dashed;
+}
+
+.slot > .tag {
+  align-self: flex-start;
+  justify-self: start;
+}
+
+.slot-meal {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.slot-name {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.slot-meta,
+.slot-placeholder {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.slot-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.25rem;
+}
+
+.slot-actions {
+  margin-top: auto;
+}
+
+.slot-actions .button {
+  flex: 1 1 auto;
+  padding-inline: 0.35rem;
+}
+
+.recipe-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: calc(var(--radius) - 4px);
+  background: var(--surface-alt);
+}
+
+.recipe-image-empty {
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+}
+
+/* En ventanas estrechas los días pasan a filas, con comida y cena lado a lado. */
+@media (max-width: 76rem) {
+  .week {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+  }
+
+  .day {
+    display: block;
+    grid-row: auto;
+  }
+
+  .day-title {
+    margin-bottom: 0.5rem;
+  }
+
+  .day-slots {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .slot {
+    display: grid;
+    grid-template-columns: 7rem minmax(0, 1fr);
+    align-content: start;
+    column-gap: 0.75rem;
+  }
+
+  .slot > * {
+    grid-column: 2;
+  }
+
+  .slot > .recipe-image {
+    grid-column: 1;
+    grid-row: 1 / span 4;
+  }
+
+  .slot > .slot-meal,
+  .slot > .slot-actions {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ---------- Recetas ---------- */
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.5rem 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.filters .field {
+  margin-bottom: 0;
+}
+
+.filters .field:first-child {
+  flex: 1 1 16rem;
+}
+
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+  gap: var(--gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.recipe-card {
+  position: relative;
+  display: grid;
+  align-content: start;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.recipe-card .recipe-image {
+  border-radius: 0;
+}
+
+.recipe-card-body {
+  display: grid;
+  gap: 0.35rem;
+  justify-items: start;
+  padding: 0.75rem;
+}
+
+.recipe-card-name {
+  font-weight: 600;
+}
+
+/* Toda la tarjeta es pulsable a través del enlace del nombre. */
+.recipe-card-name::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.recipe-card:hover {
+  border-color: var(--primary);
+}
+
+.recipe {
+  max-width: 68rem;
+}
+
+.recipe-top {
+  display: grid;
+  grid-template-columns: minmax(0, 24rem) minmax(0, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.recipe-figure {
+  margin: 0;
+}
+
+.recipe-figure figcaption {
+  margin-top: 0.35rem;
+}
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 2rem;
+  margin: 0;
+}
+
+.facts dt {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.facts dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.recipe-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.ingredient-list,
+.step-list {
+  display: grid;
+  gap: 0.5rem;
+  padding-left: 1.25rem;
+}
+
+.step-list li::marker {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+@media (max-width: 56rem) {
+  .recipe-top,
+  .recipe-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Lista de la compra ---------- */
+
+.shop-columns {
+  columns: 22rem;
+  column-gap: var(--gap);
+}
+
+.shop-section {
+  break-inside: avoid;
+}
+
+.shop-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.shop-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 0.5rem;
+  border-top: 1px solid var(--surface-alt);
+}
+
+/* El desglose por recetas va debajo, alineado con el texto del artículo. */
+.shop-item > .shop-sources {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  padding-left: 1.85rem;
+}
+
+.shop-name {
+  font-weight: 600;
+}
+
+.shop-quantity {
+  color: var(--muted);
+}
+
+.shop-item-done .shop-name,
+.shop-item-done .shop-quantity {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+.shop-sources {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.shop-sources summary,
+details.card > summary {
+  cursor: pointer;
+}
+
+details.card > summary {
+  font-weight: 600;
+}
+
+.shop-sources summary {
+  width: fit-content;
+  min-height: 1.75rem;
+  text-decoration: underline;
+}
+
+.shop-sources ul {
+  margin: 0 0 0.5rem;
+  padding-left: 1.25rem;
+}
+
+/* ---------- Ajustes ---------- */
+
+.settings-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem;
+}
+
+@media (max-width: 64rem) {
+  .settings-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Ventanas muy estrechas ---------- */
+
+@media (max-width: 44rem) {
+  .shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+    height: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sidebar ul {
+    grid-auto-flow: column;
+  }
+
+  .content {
+    padding: 1rem;
+  }
+
+  .day-slots {
+    grid-template-columns: 1fr;
+  }
+}

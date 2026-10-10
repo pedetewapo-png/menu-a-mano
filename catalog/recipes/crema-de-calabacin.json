@@ -1,0 +1,26 @@
+{
+  "id": "crema-de-calabacin",
+  "name": "Crema de calabacín",
+  "summary": "Suave y ligera, sin lácteos.",
+  "mealTypes": ["dinner"],
+  "baseServings": 2,
+  "totalMinutes": 25,
+  "activeMinutes": 10,
+  "cost": 1,
+  "mainGroup": "vegetables",
+  "cuisine": "spanish",
+  "ingredients": [
+    { "ingredientId": "calabacin", "quantity": 2, "unit": "unit" },
+    { "ingredientId": "patata", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "cebolla", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "aceite-oliva", "quantity": 1, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Trocea el calabacín sin pelar, la patata pelada y la cebolla.",
+    "Rehoga la cebolla con el aceite en una olla 3 minutos.",
+    "Añade el calabacín y la patata, cubre justo con agua, sala y cuece 15 minutos.",
+    "Tritura hasta obtener una crema fina. Si queda espesa, añade un poco de agua."
+  ],
+  "source": { "author": "Menú a Mano", "license": "Contenido propio" }
+}

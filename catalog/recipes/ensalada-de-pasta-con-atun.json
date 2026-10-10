@@ -1,0 +1,29 @@
+{
+  "id": "ensalada-de-pasta-con-atun",
+  "name": "Ensalada de pasta con atún",
+  "summary": "Fría y completa, ideal para llevar.",
+  "mealTypes": ["lunch"],
+  "baseServings": 2,
+  "totalMinutes": 20,
+  "activeMinutes": 10,
+  "cost": 1,
+  "mainGroup": "grainsPasta",
+  "cuisine": "mediterranean",
+  "ingredients": [
+    { "ingredientId": "pasta-corta", "quantity": 160, "unit": "g" },
+    { "ingredientId": "atun-conserva", "quantity": 120, "unit": "g" },
+    { "ingredientId": "tomate-cherry", "quantity": 150, "unit": "g" },
+    { "ingredientId": "aceitunas", "quantity": 40, "unit": "g" },
+    { "ingredientId": "cebolleta", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "vinagre", "quantity": 1, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Cuece la pasta en agua con sal, escúrrela y enfríala bajo el grifo.",
+    "Corta los tomates por la mitad y pica la cebolleta.",
+    "Mezcla la pasta con el atún desmigado, los tomates, las aceitunas y la cebolleta.",
+    "Aliña con el aceite, el vinagre y sal."
+  ],
+  "source": { "author": "Menú a Mano", "license": "Contenido propio" }
+}

@@ -1,0 +1,43 @@
+{
+  "name": "menu-a-mano",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "npm run catalog:check && tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "catalog:check": "tsx scripts/check-catalog.ts",
+    "icons": "node scripts/make-icons.mjs",
+    "deploy": "node scripts/deploy.mjs"
+  },
+  "overrides": {
+    "rollup": "npm:@rollup/wasm-node@^4.64.5"
+  },
+  "dependencies": {
+    "dexie": "^4.4.6",
+    "dexie-react-hooks": "^4.4.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "react-router-dom": "^7.18.4",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "fast-check": "^4.10.2",
+    "gh-pages": "^6.3.0",
+    "sharp": "^0.35.5",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.4",
+    "vite-plugin-pwa": "^2.0.0",
+    "vitest": "^5.0.3",
+    "workbox-window": "^7.4.1",
+    "wrangler": "^4.149.0"
+  }
+}

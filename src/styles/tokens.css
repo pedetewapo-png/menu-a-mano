@@ -1,0 +1,154 @@
+/* Colores y medidas compartidos por la app y la página de instalación. */
+:root {
+  color-scheme: light dark;
+  --bg: #faf8f3;
+  --surface: #ffffff;
+  --surface-alt: #f1eee6;
+  --text: #1f2a24;
+  --muted: #56645c;
+  --border: #cfcabd;
+  --primary: #2f6f4e;
+  --primary-hover: #245a3e;
+  --on-primary: #ffffff;
+  --accent: #9a3f12;
+  --accent-bg: #fbeadd;
+  --danger: #a3261f;
+  --focus: #0b57d0;
+  --radius: 10px;
+  --gap: 1rem;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.5;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #161b18;
+    --surface: #1f2622;
+    --surface-alt: #2a332e;
+    --text: #edf1ee;
+    --muted: #aab6ae;
+    --border: #46524b;
+    --primary: #7fd0a4;
+    --primary-hover: #9adbb8;
+    --on-primary: #10231a;
+    --accent: #f3b48b;
+    --accent-bg: #3d2a1e;
+    --danger: #ff9d94;
+    --focus: #9cc2ff;
+  }
+}
+
+:root[data-theme='dark'] {
+  --bg: #161b18;
+  --surface: #1f2622;
+  --surface-alt: #2a332e;
+  --text: #edf1ee;
+  --muted: #aab6ae;
+  --border: #46524b;
+  --primary: #7fd0a4;
+  --primary-hover: #9adbb8;
+  --on-primary: #10231a;
+  --accent: #f3b48b;
+  --accent-bg: #3d2a1e;
+  --danger: #ff9d94;
+  --focus: #9cc2ff;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  margin: 0 0 0.5rem;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: 1.75rem;
+}
+
+h2 {
+  font-size: 1.2rem;
+}
+
+h3 {
+  font-size: 1rem;
+}
+
+p {
+  margin: 0 0 0.75rem;
+}
+
+a {
+  color: var(--primary);
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.hint {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button:hover:not(:disabled) {
+  border-color: var(--primary);
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.button-primary {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--on-primary);
+  font-weight: 600;
+}
+
+.button-primary:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+.button-large {
+  min-height: 3.5rem;
+  padding: 0.75rem 2.5rem;
+  font-size: 1.2rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .button {
+    transition:
+      background-color 0.15s,
+      border-color 0.15s;
+  }
+}

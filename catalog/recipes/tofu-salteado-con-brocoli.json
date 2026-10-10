@@ -1,0 +1,29 @@
+{
+  "id": "tofu-salteado-con-brocoli",
+  "name": "Tofu salteado con brócoli y arroz",
+  "summary": "Tofu dorado con verduras crujientes y salsa de soja.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 25,
+  "activeMinutes": 20,
+  "cost": 2,
+  "mainGroup": "plantProtein",
+  "cuisine": "other",
+  "ingredients": [
+    { "ingredientId": "tofu", "quantity": 250, "unit": "g" },
+    { "ingredientId": "brocoli", "quantity": 300, "unit": "g" },
+    { "ingredientId": "zanahoria", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "ajo", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "arroz", "quantity": 140, "unit": "g" },
+    { "ingredientId": "salsa-soja", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "aceite-oliva", "quantity": 1, "unit": "tbsp" }
+  ],
+  "steps": [
+    "Cuece el arroz el tiempo que indique el envase y escúrrelo.",
+    "Seca el tofu con papel de cocina y córtalo en dados. Separa el brócoli en ramilletes pequeños y corta la zanahoria en rodajas finas.",
+    "Dora el tofu con el aceite a fuego vivo, 5 minutos, y resérvalo.",
+    "Saltea el brócoli, la zanahoria y el ajo picado 6 minutos, con un chorrito de agua.",
+    "Devuelve el tofu, añade la salsa de soja, remueve un minuto y sirve con el arroz."
+  ],
+  "source": { "author": "Menú a Mano", "license": "Contenido propio" }
+}

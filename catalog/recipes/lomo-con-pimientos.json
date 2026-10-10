@@ -1,0 +1,26 @@
+{
+  "id": "lomo-con-pimientos",
+  "name": "Lomo con pimientos",
+  "summary": "Filetes de lomo con pimientos verdes fritos.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 25,
+  "activeMinutes": 20,
+  "cost": 2,
+  "mainGroup": "redMeat",
+  "cuisine": "spanish",
+  "ingredients": [
+    { "ingredientId": "lomo-cerdo", "quantity": 250, "unit": "g", "note": "en filetes finos" },
+    { "ingredientId": "pimiento-verde", "quantity": 2, "unit": "unit" },
+    { "ingredientId": "ajo", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Corta los pimientos en tiras anchas.",
+    "Fríelos con el aceite y el ajo laminado, a fuego medio, unos 12 minutos. Sala y resérvalos.",
+    "En la misma sartén, a fuego vivo, cocina los filetes de lomo un par de minutos por cada lado, con sal.",
+    "Sirve el lomo con los pimientos por encima."
+  ],
+  "source": { "author": "Menú a Mano", "license": "Contenido propio" }
+}

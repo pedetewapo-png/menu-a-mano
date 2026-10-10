@@ -1,0 +1,58 @@
+[
+  { "id": "cebolla", "name": "cebolla", "namePlural": "cebollas", "section": "produce", "baseUnit": "g", "gramsPerUnit": 150, "diet": "vegan" },
+  { "id": "ajo", "name": "ajo", "unitName": "diente de ajo", "unitNamePlural": "dientes de ajo", "section": "produce", "baseUnit": "unit", "diet": "vegan", "pantryStaple": true },
+  { "id": "zanahoria", "name": "zanahoria", "namePlural": "zanahorias", "section": "produce", "baseUnit": "g", "gramsPerUnit": 80, "diet": "vegan" },
+  { "id": "pimiento-verde", "name": "pimiento verde", "namePlural": "pimientos verdes", "section": "produce", "baseUnit": "g", "gramsPerUnit": 120, "diet": "vegan" },
+  { "id": "pimiento-rojo", "name": "pimiento rojo", "namePlural": "pimientos rojos", "section": "produce", "baseUnit": "g", "gramsPerUnit": 200, "diet": "vegan" },
+  { "id": "tomate", "name": "tomate", "namePlural": "tomates", "section": "produce", "baseUnit": "g", "gramsPerUnit": 150, "diet": "vegan" },
+  { "id": "tomate-cherry", "name": "tomate cherry", "section": "produce", "baseUnit": "g", "diet": "vegan" },
+  { "id": "calabacin", "name": "calabacín", "namePlural": "calabacines", "section": "produce", "baseUnit": "g", "gramsPerUnit": 300, "diet": "vegan" },
+  { "id": "berenjena", "name": "berenjena", "namePlural": "berenjenas", "section": "produce", "baseUnit": "g", "gramsPerUnit": 300, "diet": "vegan" },
+  { "id": "patata", "name": "patata", "namePlural": "patatas", "section": "produce", "baseUnit": "g", "gramsPerUnit": 180, "diet": "vegan" },
+  { "id": "espinacas", "name": "espinacas frescas", "section": "produce", "baseUnit": "g", "diet": "vegan" },
+  { "id": "champinones", "name": "champiñones", "section": "produce", "baseUnit": "g", "diet": "vegan", "groups": ["mushrooms"] },
+  { "id": "brocoli", "name": "brócoli", "namePlural": "brócolis", "section": "produce", "baseUnit": "g", "gramsPerUnit": 400, "diet": "vegan" },
+  { "id": "calabaza", "name": "calabaza", "section": "produce", "baseUnit": "g", "diet": "vegan" },
+  { "id": "judias-verdes", "name": "judías verdes", "section": "produce", "baseUnit": "g", "diet": "vegan" },
+  { "id": "cebolleta", "name": "cebolleta", "namePlural": "cebolletas", "section": "produce", "baseUnit": "g", "gramsPerUnit": 60, "diet": "vegan" },
+  { "id": "limon", "name": "limón", "namePlural": "limones", "section": "produce", "baseUnit": "unit", "diet": "vegan" },
+  { "id": "perejil", "name": "perejil fresco", "section": "produce", "baseUnit": "g", "diet": "vegan", "pantryStaple": true },
+
+  { "id": "contramuslos-pollo", "name": "contramuslos de pollo", "section": "meat", "baseUnit": "g", "diet": "omnivore", "groups": ["poultry"] },
+  { "id": "pechuga-pollo", "name": "pechuga de pollo", "section": "meat", "baseUnit": "g", "diet": "omnivore", "groups": ["poultry"] },
+  { "id": "lomo-cerdo", "name": "cinta de lomo de cerdo", "section": "meat", "baseUnit": "g", "diet": "omnivore", "groups": ["pork"] },
+  { "id": "filetes-ternera", "name": "filetes de ternera", "section": "meat", "baseUnit": "g", "diet": "omnivore", "groups": ["beef"] },
+
+  { "id": "merluza", "name": "lomos de merluza", "section": "fish", "baseUnit": "g", "diet": "omnivore", "allergens": ["fish"], "groups": ["fish"] },
+  { "id": "salmon", "name": "lomos de salmón", "section": "fish", "baseUnit": "g", "diet": "omnivore", "allergens": ["fish"], "groups": ["fish"] },
+  { "id": "bacalao-desalado", "name": "bacalao desalado", "section": "fish", "baseUnit": "g", "diet": "omnivore", "allergens": ["fish"], "groups": ["fish"] },
+
+  { "id": "huevo", "name": "huevo", "namePlural": "huevos", "section": "dairyEggs", "baseUnit": "unit", "diet": "vegetarian", "allergens": ["eggs"], "groups": ["eggs"] },
+
+  { "id": "lentejas", "name": "lentejas pardinas secas", "section": "dryGoods", "baseUnit": "g", "diet": "vegan", "mayContain": ["gluten"], "groups": ["legumes"] },
+  { "id": "arroz", "name": "arroz", "section": "dryGoods", "baseUnit": "g", "diet": "vegan" },
+  { "id": "pasta-corta", "name": "pasta corta (macarrones o hélices)", "section": "dryGoods", "baseUnit": "g", "diet": "vegan", "allergens": ["gluten"], "mayContain": ["eggs"] },
+  { "id": "cuscus", "name": "cuscús", "section": "dryGoods", "baseUnit": "g", "diet": "vegan", "allergens": ["gluten"] },
+
+  { "id": "garbanzos-cocidos", "name": "garbanzos cocidos (escurridos)", "section": "canned", "baseUnit": "g", "diet": "vegan", "groups": ["legumes"] },
+  { "id": "alubias-cocidas", "name": "alubias blancas cocidas (escurridas)", "section": "canned", "baseUnit": "g", "diet": "vegan", "groups": ["legumes"] },
+  { "id": "tomate-triturado", "name": "tomate triturado", "section": "canned", "baseUnit": "g", "diet": "vegan" },
+  { "id": "leche-coco", "name": "leche de coco", "section": "canned", "baseUnit": "ml", "diet": "vegan" },
+  { "id": "aceitunas", "name": "aceitunas sin hueso", "section": "canned", "baseUnit": "g", "diet": "vegan" },
+  { "id": "atun-conserva", "name": "atún en conserva (escurrido)", "section": "canned", "baseUnit": "g", "diet": "omnivore", "allergens": ["fish"], "mayContain": ["soy"], "groups": ["fish"] },
+
+  { "id": "menestra-congelada", "name": "menestra de verduras congelada", "section": "frozen", "baseUnit": "g", "diet": "vegan" },
+
+  { "id": "tofu", "name": "tofu firme", "section": "other", "baseUnit": "g", "diet": "vegan", "allergens": ["soy"] },
+
+  { "id": "aceite-oliva", "name": "aceite de oliva", "section": "condiments", "baseUnit": "ml", "diet": "vegan", "pantryStaple": true },
+  { "id": "sal", "name": "sal", "section": "condiments", "baseUnit": "g", "diet": "vegan", "pantryStaple": true },
+  { "id": "pimienta-negra", "name": "pimienta negra", "section": "condiments", "baseUnit": "g", "diet": "vegan", "pantryStaple": true },
+  { "id": "pimenton-dulce", "name": "pimentón dulce", "section": "condiments", "baseUnit": "g", "diet": "vegan", "pantryStaple": true },
+  { "id": "comino-molido", "name": "comino molido", "section": "condiments", "baseUnit": "g", "diet": "vegan", "pantryStaple": true },
+  { "id": "laurel", "name": "laurel", "unitName": "hoja de laurel", "unitNamePlural": "hojas de laurel", "section": "condiments", "baseUnit": "unit", "diet": "vegan", "pantryStaple": true },
+  { "id": "oregano", "name": "orégano seco", "section": "condiments", "baseUnit": "g", "diet": "vegan", "pantryStaple": true },
+  { "id": "curry-polvo", "name": "curry en polvo", "section": "condiments", "baseUnit": "g", "diet": "vegan", "mayContain": ["mustard", "celery"], "pantryStaple": true },
+  { "id": "vinagre", "name": "vinagre de vino", "section": "condiments", "baseUnit": "ml", "diet": "vegan", "allergens": ["sulphites"], "pantryStaple": true },
+  { "id": "salsa-soja", "name": "salsa de soja", "section": "condiments", "baseUnit": "ml", "diet": "vegan", "allergens": ["soy", "gluten"], "pantryStaple": true }
+]

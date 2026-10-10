@@ -1,0 +1,30 @@
+{
+  "id": "pisto",
+  "name": "Pisto",
+  "summary": "Verduras de huerta cocinadas despacio en tomate.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 40,
+  "activeMinutes": 20,
+  "cost": 1,
+  "mainGroup": "vegetables",
+  "cuisine": "spanish",
+  "ingredients": [
+    { "ingredientId": "calabacin", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "berenjena", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "pimiento-rojo", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "pimiento-verde", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "cebolla", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "tomate-triturado", "quantity": 300, "unit": "g" },
+    { "ingredientId": "aceite-oliva", "quantity": 3, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Corta todas las verduras en dados pequeños.",
+    "Sofríe la cebolla y los pimientos con el aceite, a fuego medio, 8 minutos.",
+    "Añade la berenjena y el calabacín, sala y cocina 10 minutos más.",
+    "Incorpora el tomate y cocina a fuego suave 15 minutos, removiendo de vez en cuando."
+  ],
+  "notes": "Se conserva bien en la nevera un par de días.",
+  "source": { "author": "Menú a Mano", "license": "Contenido propio" }
+}

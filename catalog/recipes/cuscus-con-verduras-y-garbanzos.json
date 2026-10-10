@@ -1,0 +1,30 @@
+{
+  "id": "cuscus-con-verduras-y-garbanzos",
+  "name": "Cuscús con verduras y garbanzos",
+  "summary": "El cuscús se hidrata solo mientras se saltean las verduras.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 20,
+  "activeMinutes": 15,
+  "cost": 1,
+  "mainGroup": "grainsPasta",
+  "cuisine": "other",
+  "ingredients": [
+    { "ingredientId": "cuscus", "quantity": 140, "unit": "g" },
+    { "ingredientId": "garbanzos-cocidos", "quantity": 200, "unit": "g" },
+    { "ingredientId": "calabacin", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "zanahoria", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "cebolla", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "comino-molido", "quantity": 0.5, "unit": "tsp" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Pon el cuscús en un bol con sal, cúbrelo con la misma cantidad de agua hirviendo y tápalo 5 minutos.",
+    "Corta el calabacín, la zanahoria y la cebolla en dados pequeños.",
+    "Saltéalos con la mitad del aceite y el comino unos 8 minutos.",
+    "Añade los garbanzos escurridos y cocina 2 minutos más.",
+    "Suelta el cuscús con un tenedor y el resto del aceite, y mézclalo con las verduras."
+  ],
+  "source": { "author": "Menú a Mano", "license": "Contenido propio" }
+}

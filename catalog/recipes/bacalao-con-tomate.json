@@ -1,0 +1,28 @@
+{
+  "id": "bacalao-con-tomate",
+  "name": "Bacalao con tomate",
+  "summary": "Bacalao desalado en una salsa de tomate casera.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 30,
+  "activeMinutes": 15,
+  "cost": 2,
+  "mainGroup": "fish",
+  "cuisine": "spanish",
+  "ingredients": [
+    { "ingredientId": "bacalao-desalado", "quantity": 300, "unit": "g" },
+    { "ingredientId": "tomate-triturado", "quantity": 300, "unit": "g" },
+    { "ingredientId": "cebolla", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "pimiento-verde", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "ajo", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste", "note": "prueba antes: el bacalao ya aporta sal" }
+  ],
+  "steps": [
+    "Pica la cebolla, el pimiento y el ajo, y sofríelos con el aceite 8 minutos.",
+    "Añade el tomate y cocina a fuego suave 10 minutos.",
+    "Coloca el bacalao sobre la salsa, tapa y cocina 6 u 8 minutos, hasta que se separe en lascas.",
+    "Prueba y rectifica de sal solo si hace falta."
+  ],
+  "source": { "author": "Menú a Mano", "license": "Contenido propio" }
+}

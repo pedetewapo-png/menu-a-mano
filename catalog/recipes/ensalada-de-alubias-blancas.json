@@ -1,0 +1,30 @@
+{
+  "id": "ensalada-de-alubias-blancas",
+  "name": "Ensalada de alubias blancas",
+  "summary": "Sin encender el fuego: lista en diez minutos.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 10,
+  "activeMinutes": 10,
+  "cost": 1,
+  "mainGroup": "legumes",
+  "cuisine": "mediterranean",
+  "ingredients": [
+    { "ingredientId": "alubias-cocidas", "quantity": 400, "unit": "g" },
+    { "ingredientId": "tomate", "quantity": 2, "unit": "unit" },
+    { "ingredientId": "pimiento-rojo", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "cebolleta", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "aceitunas", "quantity": 40, "unit": "g" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "vinagre", "quantity": 1, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Enjuaga las alubias bajo el grifo y escúrrelas bien.",
+    "Corta en dados el tomate y el pimiento, y pica la cebolleta.",
+    "Mezcla todo en un bol junto con las aceitunas.",
+    "Aliña con el aceite, el vinagre y la sal, y remueve con cuidado."
+  ],
+  "notes": "Gana sabor si reposa un rato en la nevera antes de servir.",
+  "source": { "author": "Menú a Mano", "license": "Contenido propio" }
+}

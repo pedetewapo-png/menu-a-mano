@@ -1,0 +1,27 @@
+{
+  "id": "revuelto-de-champinones",
+  "name": "Revuelto de champiñones",
+  "summary": "Una cena ligera en un cuarto de hora.",
+  "mealTypes": ["dinner"],
+  "baseServings": 2,
+  "totalMinutes": 15,
+  "activeMinutes": 15,
+  "cost": 1,
+  "mainGroup": "eggs",
+  "cuisine": "spanish",
+  "ingredients": [
+    { "ingredientId": "champinones", "quantity": 250, "unit": "g" },
+    { "ingredientId": "huevo", "quantity": 4, "unit": "unit" },
+    { "ingredientId": "ajo", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "perejil", "quantity": null, "unit": "toTaste" },
+    { "ingredientId": "aceite-oliva", "quantity": 1, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Limpia los champiñones y córtalos en láminas. Pica el ajo.",
+    "Saltea el ajo y los champiñones con el aceite, a fuego vivo, hasta que pierdan el agua y se doren.",
+    "Baja el fuego, añade los huevos ligeramente batidos con sal y remueve sin parar hasta que cuajen, pero queden jugosos.",
+    "Sirve con perejil picado."
+  ],
+  "source": { "author": "Menú a Mano", "license": "Contenido propio" }
+}

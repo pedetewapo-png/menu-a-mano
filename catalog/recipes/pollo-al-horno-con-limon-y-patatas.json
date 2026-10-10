@@ -1,0 +1,28 @@
+{
+  "id": "pollo-al-horno-con-limon-y-patatas",
+  "name": "Pollo al horno con limón y patatas",
+  "summary": "Diez minutos de preparación y el horno hace el resto.",
+  "mealTypes": ["lunch"],
+  "baseServings": 2,
+  "totalMinutes": 55,
+  "activeMinutes": 10,
+  "cost": 1,
+  "mainGroup": "whiteMeat",
+  "cuisine": "mediterranean",
+  "ingredients": [
+    { "ingredientId": "contramuslos-pollo", "quantity": 400, "unit": "g" },
+    { "ingredientId": "patata", "quantity": 2, "unit": "unit" },
+    { "ingredientId": "cebolla", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "limon", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "oregano", "quantity": 1, "unit": "tsp" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Precalienta el horno a 200 °C.",
+    "Corta las patatas en gajos y la cebolla en trozos grandes. Ponlas en una bandeja.",
+    "Coloca el pollo encima y aliña todo con el aceite, el zumo de limón, el orégano y sal.",
+    "Hornea 45 minutos, dando la vuelta al pollo a mitad de cocción, hasta que esté dorado."
+  ],
+  "source": { "author": "Menú a Mano", "license": "Contenido propio" }
+}

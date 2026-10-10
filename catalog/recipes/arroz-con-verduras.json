@@ -1,0 +1,30 @@
+{
+  "id": "arroz-con-verduras",
+  "name": "Arroz con verduras",
+  "summary": "Arroz seco en sartén, con judías verdes y pimiento.",
+  "mealTypes": ["lunch"],
+  "baseServings": 2,
+  "totalMinutes": 35,
+  "activeMinutes": 15,
+  "cost": 1,
+  "mainGroup": "grainsPasta",
+  "cuisine": "spanish",
+  "ingredients": [
+    { "ingredientId": "arroz", "quantity": 160, "unit": "g" },
+    { "ingredientId": "judias-verdes", "quantity": 150, "unit": "g" },
+    { "ingredientId": "pimiento-rojo", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "tomate-triturado", "quantity": 100, "unit": "g" },
+    { "ingredientId": "ajo", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "pimenton-dulce", "quantity": 1, "unit": "tsp" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Trocea las judías verdes y corta el pimiento en dados. Pica el ajo.",
+    "Sofríe las verduras con el aceite en una sartén amplia, 6 minutos.",
+    "Añade el tomate y el pimentón y cocina 2 minutos.",
+    "Incorpora el arroz, remueve y añade el doble de su volumen de agua caliente, con sal.",
+    "Cuece 18 minutos sin remover y deja reposar 5 minutos fuera del fuego."
+  ],
+  "source": { "author": "Menú a Mano", "license": "Contenido propio" }
+}

@@ -1,0 +1,27 @@
+{
+  "id": "crema-de-calabaza-y-zanahoria",
+  "name": "Crema de calabaza y zanahoria",
+  "summary": "Dulce, reconfortante y muy fácil.",
+  "mealTypes": ["dinner"],
+  "baseServings": 2,
+  "totalMinutes": 30,
+  "activeMinutes": 10,
+  "cost": 1,
+  "mainGroup": "vegetables",
+  "cuisine": "mediterranean",
+  "ingredients": [
+    { "ingredientId": "calabaza", "quantity": 400, "unit": "g", "note": "pelada" },
+    { "ingredientId": "zanahoria", "quantity": 2, "unit": "unit" },
+    { "ingredientId": "cebolla", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "aceite-oliva", "quantity": 1, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" },
+    { "ingredientId": "pimienta-negra", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Trocea la calabaza, las zanahorias y la cebolla.",
+    "Rehoga la cebolla con el aceite en una olla 3 minutos.",
+    "Añade la calabaza y la zanahoria, cubre justo con agua, sala y cuece 20 minutos.",
+    "Tritura hasta que quede fina y sirve con un poco de pimienta."
+  ],
+  "source": { "author": "Menú a Mano", "license": "Contenido propio" }
+}

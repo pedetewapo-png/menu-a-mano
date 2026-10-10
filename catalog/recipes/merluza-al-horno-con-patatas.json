@@ -1,0 +1,30 @@
+{
+  "id": "merluza-al-horno-con-patatas",
+  "name": "Merluza al horno con patatas",
+  "summary": "Pescado y guarnición en una sola bandeja.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 40,
+  "activeMinutes": 15,
+  "cost": 2,
+  "mainGroup": "fish",
+  "cuisine": "spanish",
+  "ingredients": [
+    { "ingredientId": "merluza", "quantity": 300, "unit": "g" },
+    { "ingredientId": "patata", "quantity": 2, "unit": "unit" },
+    { "ingredientId": "cebolla", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "ajo", "quantity": 2, "unit": "unit" },
+    { "ingredientId": "limon", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "perejil", "quantity": null, "unit": "toTaste" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Precalienta el horno a 200 °C.",
+    "Corta las patatas en rodajas finas y la cebolla en tiras. Repártelas en una bandeja con la mitad del aceite y sal.",
+    "Hornea 20 minutos, hasta que la patata empiece a estar tierna.",
+    "Coloca encima la merluza con sal, el ajo laminado, el resto del aceite y un chorro de limón.",
+    "Hornea 10 minutos más y sirve con perejil picado."
+  ],
+  "source": { "author": "Menú a Mano", "license": "Contenido propio" }
+}

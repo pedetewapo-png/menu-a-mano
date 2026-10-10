@@ -1,0 +1,27 @@
+{
+  "id": "tortilla-de-patatas",
+  "name": "Tortilla de patatas",
+  "summary": "La de siempre, con cebolla.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 40,
+  "activeMinutes": 30,
+  "cost": 1,
+  "mainGroup": "eggs",
+  "cuisine": "spanish",
+  "ingredients": [
+    { "ingredientId": "patata", "quantity": 3, "unit": "unit" },
+    { "ingredientId": "huevo", "quantity": 4, "unit": "unit" },
+    { "ingredientId": "cebolla", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "aceite-oliva", "quantity": 6, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Pela las patatas y córtalas en láminas finas. Corta la cebolla en tiras.",
+    "Cocínalas con el aceite y sal en una sartén antiadherente, a fuego medio-bajo, unos 20 minutos, hasta que estén tiernas.",
+    "Escurre el aceite sobrante y mezcla la patata con los huevos batidos. Deja reposar 5 minutos.",
+    "Cuaja la mezcla en la sartén con un poco de aceite, 3 minutos a fuego medio.",
+    "Dale la vuelta con ayuda de un plato y cuaja el otro lado 2 minutos más."
+  ],
+  "source": { "author": "Menú a Mano", "license": "Contenido propio" }
+}

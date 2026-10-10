@@ -1,0 +1,27 @@
+{
+  "id": "menestra-salteada",
+  "name": "Menestra salteada con ajo y pimentón",
+  "summary": "Verduras congeladas convertidas en cena en un momento.",
+  "mealTypes": ["dinner"],
+  "baseServings": 2,
+  "totalMinutes": 15,
+  "activeMinutes": 10,
+  "cost": 1,
+  "mainGroup": "vegetables",
+  "cuisine": "spanish",
+  "ingredients": [
+    { "ingredientId": "menestra-congelada", "quantity": 500, "unit": "g" },
+    { "ingredientId": "ajo", "quantity": 2, "unit": "unit" },
+    { "ingredientId": "pimenton-dulce", "quantity": 1, "unit": "tsp" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Cuece la menestra en agua con sal el tiempo que indique el envase y escúrrela bien.",
+    "Dora el ajo laminado con el aceite en una sartén.",
+    "Aparta del fuego, añade el pimentón y remueve.",
+    "Incorpora la menestra, saltea un par de minutos y sirve."
+  ],
+  "notes": "Comprueba en el envase los ingredientes de la menestra: la composición varía según la marca.",
+  "source": { "author": "Menú a Mano", "license": "Contenido propio" }
+}

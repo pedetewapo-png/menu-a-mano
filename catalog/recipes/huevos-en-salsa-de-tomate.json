@@ -1,0 +1,29 @@
+{
+  "id": "huevos-en-salsa-de-tomate",
+  "name": "Huevos en salsa de tomate",
+  "summary": "Huevos cuajados sobre un sofrito de tomate y pimiento.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 25,
+  "activeMinutes": 15,
+  "cost": 1,
+  "mainGroup": "eggs",
+  "cuisine": "mediterranean",
+  "ingredients": [
+    { "ingredientId": "huevo", "quantity": 4, "unit": "unit" },
+    { "ingredientId": "tomate-triturado", "quantity": 400, "unit": "g" },
+    { "ingredientId": "pimiento-rojo", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "cebolla", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "ajo", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "comino-molido", "quantity": 0.5, "unit": "tsp" },
+    { "ingredientId": "aceite-oliva", "quantity": 1, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Pica la cebolla, el pimiento y el ajo, y sofríelos con el aceite 8 minutos.",
+    "Añade el tomate, el comino y sal. Cocina a fuego suave 10 minutos.",
+    "Haz cuatro huecos en la salsa y casca un huevo en cada uno.",
+    "Tapa y cocina 4 o 5 minutos, hasta que la clara esté cuajada."
+  ],
+  "source": { "author": "Menú a Mano", "license": "Contenido propio" }
+}

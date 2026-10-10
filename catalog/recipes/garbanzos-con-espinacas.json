@@ -1,0 +1,30 @@
+{
+  "id": "garbanzos-con-espinacas",
+  "name": "Garbanzos con espinacas",
+  "summary": "Un clásico rápido con garbanzos de bote.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 20,
+  "activeMinutes": 15,
+  "cost": 1,
+  "mainGroup": "legumes",
+  "cuisine": "spanish",
+  "ingredients": [
+    { "ingredientId": "garbanzos-cocidos", "quantity": 400, "unit": "g" },
+    { "ingredientId": "espinacas", "quantity": 200, "unit": "g" },
+    { "ingredientId": "ajo", "quantity": 2, "unit": "unit" },
+    { "ingredientId": "tomate-triturado", "quantity": 100, "unit": "g" },
+    { "ingredientId": "comino-molido", "quantity": 0.5, "unit": "tsp" },
+    { "ingredientId": "pimenton-dulce", "quantity": 1, "unit": "tsp" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Enjuaga y escurre los garbanzos. Lamina el ajo.",
+    "Dora el ajo con el aceite en una sartén amplia, a fuego medio.",
+    "Añade el pimentón y el comino, remueve unos segundos y agrega el tomate. Cocina 3 minutos.",
+    "Incorpora las espinacas y remueve hasta que reduzcan.",
+    "Añade los garbanzos, sala y cocina 5 minutos más."
+  ],
+  "source": { "author": "Menú a Mano", "license": "Contenido propio" }
+}

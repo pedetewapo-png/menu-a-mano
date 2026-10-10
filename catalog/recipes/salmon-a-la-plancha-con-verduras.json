@@ -1,0 +1,28 @@
+{
+  "id": "salmon-a-la-plancha-con-verduras",
+  "name": "Salmón a la plancha con verduras",
+  "summary": "Rápido, con calabacín y pimiento salteados.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 20,
+  "activeMinutes": 20,
+  "cost": 3,
+  "mainGroup": "fish",
+  "cuisine": "mediterranean",
+  "ingredients": [
+    { "ingredientId": "salmon", "quantity": 300, "unit": "g" },
+    { "ingredientId": "calabacin", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "pimiento-rojo", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "limon", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "aceite-oliva", "quantity": 1, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" },
+    { "ingredientId": "pimienta-negra", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Corta el calabacín en medias lunas y el pimiento en tiras.",
+    "Saltea las verduras con el aceite y sal, a fuego vivo, unos 8 minutos. Resérvalas.",
+    "En la misma sartén, cocina el salmón 3 o 4 minutos por cada lado, con sal y pimienta.",
+    "Sirve el salmón con las verduras y un chorro de limón."
+  ],
+  "source": { "author": "Menú a Mano", "license": "Contenido propio" }
+}

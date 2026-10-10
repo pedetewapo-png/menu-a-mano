@@ -1,0 +1,62 @@
+.landing {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 3rem 1.25rem 4rem;
+  text-align: center;
+}
+
+.landing-icon {
+  border-radius: 22%;
+}
+
+.landing h1 {
+  font-size: 2.5rem;
+  margin-top: 1rem;
+}
+
+.landing-lead {
+  font-size: 1.2rem;
+  color: var(--muted);
+}
+
+.landing-action {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.landing-action p:last-child {
+  margin-bottom: 0;
+}
+
+.landing-action .hint {
+  margin-top: 0.75rem;
+}
+
+.landing-points {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: var(--gap);
+  padding: 0;
+  margin: 0 0 2rem;
+  list-style: none;
+  text-align: left;
+}
+
+.landing-points li {
+  padding: 1rem;
+  background: var(--surface-alt);
+  border-radius: var(--radius);
+}
+
+.landing-points strong {
+  display: block;
+}
+
+.landing-note {
+  text-align: left;
+  color: var(--muted);
+  font-size: 0.95rem;
+}

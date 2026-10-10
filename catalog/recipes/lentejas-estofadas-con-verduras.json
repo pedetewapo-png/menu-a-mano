@@ -1,0 +1,33 @@
+{
+  "id": "lentejas-estofadas-con-verduras",
+  "name": "Lentejas estofadas con verduras",
+  "summary": "Un guiso de cuchara sencillo, que se hace casi solo.",
+  "mealTypes": ["lunch"],
+  "baseServings": 2,
+  "totalMinutes": 45,
+  "activeMinutes": 15,
+  "cost": 1,
+  "mainGroup": "legumes",
+  "cuisine": "spanish",
+  "ingredients": [
+    { "ingredientId": "lentejas", "quantity": 160, "unit": "g" },
+    { "ingredientId": "cebolla", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "zanahoria", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "pimiento-verde", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "ajo", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "tomate-triturado", "quantity": 100, "unit": "g" },
+    { "ingredientId": "pimenton-dulce", "quantity": 1, "unit": "tsp" },
+    { "ingredientId": "laurel", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Pica en trozos pequeños la cebolla, la zanahoria, el pimiento y el ajo.",
+    "Sofríe las verduras con el aceite en una olla, a fuego medio, unos 8 minutos.",
+    "Añade el tomate y el pimentón, remueve y cocina 2 minutos más.",
+    "Incorpora las lentejas y el laurel, y cubre con agua hasta dos dedos por encima.",
+    "Cuece a fuego suave unos 30 minutos, hasta que estén tiernas. Añade la sal al final."
+  ],
+  "notes": "Las lentejas pardinas no necesitan remojo. Si el guiso queda seco, añade un poco más de agua caliente.",
+  "source": { "author": "Menú a Mano", "license": "Contenido propio" }
+}

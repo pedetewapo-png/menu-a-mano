@@ -1,0 +1,30 @@
+{
+  "id": "macarrones-con-tomate-y-verduras",
+  "name": "Macarrones con tomate y verduras",
+  "summary": "Pasta con una salsa de tomate y calabacín.",
+  "mealTypes": ["lunch"],
+  "baseServings": 2,
+  "totalMinutes": 25,
+  "activeMinutes": 15,
+  "cost": 1,
+  "mainGroup": "grainsPasta",
+  "cuisine": "mediterranean",
+  "ingredients": [
+    { "ingredientId": "pasta-corta", "quantity": 180, "unit": "g" },
+    { "ingredientId": "tomate-triturado", "quantity": 300, "unit": "g" },
+    { "ingredientId": "calabacin", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "cebolla", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "ajo", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "oregano", "quantity": 1, "unit": "tsp" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Pica la cebolla y el ajo y corta el calabacín en dados pequeños.",
+    "Sofríelos con el aceite 8 minutos.",
+    "Añade el tomate, el orégano y sal, y cocina a fuego suave 10 minutos.",
+    "Mientras tanto, cuece la pasta en agua con sal el tiempo que indique el envase.",
+    "Escurre la pasta y mézclala con la salsa."
+  ],
+  "source": { "author": "Menú a Mano", "license": "Contenido propio" }
+}
