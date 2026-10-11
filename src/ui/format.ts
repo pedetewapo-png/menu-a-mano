@@ -100,11 +100,15 @@ export function describeViolation(violation: Violation, catalog: Catalog): strin
   }
 }
 
-export function describeNotice(notice: PlannerNotice): string {
+export function describeNotice(notice: PlannerNotice, catalog: Catalog): string {
   let text: string;
   switch (notice.kind) {
     case 'repeatedFromPreviousWeek':
       return t.menu.noticePrevWeek;
+    case 'breakfastsUnavailable':
+      return t.menu.noticeBreakfasts(
+        notice.recipeIds.map((id) => catalog.recipeById.get(id)?.name ?? t.menu.missingRecipe).join(', '),
+      );
     case 'repeatedInWeek':
       text = t.menu.noticeRepeated(notice.compatible, notice.needed);
       break;

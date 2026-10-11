@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { catalog } from '../data/catalog';
 import { buildCatalog } from '../domain/catalog';
 import { violations } from '../domain/filters';
-import { emptyPlan, generatePlan, suggestReplacement } from '../domain/planner';
+import { emptyPlan, redistributeBreakfasts, generatePlan, slotIndex, SLOT_COUNT, suggestReplacement } from '../domain/planner';
 import {
   ALLERGENS,
   DEFAULT_PREFERENCES,
@@ -15,6 +15,8 @@ import {
 } from '../domain/types';
 
 const WEEK = '2026-10-12';
+const BREAKFAST_IDS = catalog.recipes.filter((r) => r.mealTypes.includes('breakfast')).map((r) => r.id);
+const isMain = (slot: { mealType: string }) => slot.mealType !== 'breakfast';
 
 const preferencesArb: fc.Arbitrary<Preferences> = fc.record({
   diet: fc.constantFrom(...DIETS),
@@ -24,7 +26,8 @@ const preferencesArb: fc.Arbitrary<Preferences> = fc.record({
   excludedAllergens: fc.subarray([...ALLERGENS], { maxLength: 3 }),
   maxTotalMinutes: fc.constantFrom(null, 20, 30, 45, 60),
   preferBudget: fc.boolean(),
-  activeSlots: fc.array(fc.array(fc.boolean(), { minLength: 2, maxLength: 2 }), { minLength: 7, maxLength: 7 }),
+  activeSlots: fc.array(fc.array(fc.boolean(), { minLength: 3, maxLength: 3 }), { minLength: 7, maxLength: 7 }),
+  habitualBreakfastIds: fc.subarray(BREAKFAST_IDS, { maxLength: 3 }),
   onboardingDone: fc.constant(true),
 });
 
@@ -56,7 +59,7 @@ describe('generatePlan con el catálogo real', () => {
 
   it('no altera los platos bloqueados', () => {
     fc.assert(
-      fc.property(fc.integer(), fc.integer(), fc.subarray([...Array(14).keys()]), (seedA, seedB, lockedIndexes) => {
+      fc.property(fc.integer(), fc.integer(), fc.subarray([...Array(SLOT_COUNT).keys()]), (seedA, seedB, lockedIndexes) => {
         const preferences = { ...DEFAULT_PREFERENCES };
         const first = generatePlan({
           catalog,
@@ -95,15 +98,17 @@ describe('generatePlan con el catálogo real', () => {
       currentPlan: emptyPlan(WEEK, preferences),
       seed: 7,
     });
-    const ids = plan.slots.map((s) => s.recipeId);
+    const ids = plan.slots.filter(isMain).map((s) => s.recipeId);
     expect(ids.every(Boolean)).toBe(true);
     expect(new Set(ids).size).toBe(14);
+    // Sin desayunos habituales, los desayunos quedan vacíos.
+    expect(plan.slots.filter((s) => !isMain(s)).every((s) => s.recipeId === null)).toBe(true);
     expect(notices).toEqual([]);
   });
 
   it('una sustitución respeta las restricciones y evita lo rechazado', () => {
     fc.assert(
-      fc.property(preferencesArb, fc.integer(), fc.integer({ min: 0, max: 13 }), (preferences, seed, index) => {
+      fc.property(preferencesArb, fc.integer(), fc.integer({ min: 0, max: SLOT_COUNT - 1 }), (preferences, seed, index) => {
         const plan = generatePlan({
           catalog,
           preferences,
@@ -195,11 +200,74 @@ describe('relajación con un catálogo reducido', () => {
   it('usa recetas de la semana anterior antes que repetir en la misma semana', () => {
     const preferences = {
       ...DEFAULT_PREFERENCES,
-      activeSlots: DEFAULT_PREFERENCES.activeSlots.map((row, day) => (day < 2 ? row : [false, false])),
+      activeSlots: DEFAULT_PREFERENCES.activeSlots.map((row, day) => (day < 2 ? row : [false, false, false])),
     };
     const { plan, notices } = run(preferences, ['a', 'b', 'c']);
-    const ids = plan.slots.filter((s) => s.active).map((s) => s.recipeId);
+    const ids = plan.slots.filter((s) => s.active && isMain(s)).map((s) => s.recipeId);
     expect(new Set(ids).size).toBe(4);
     expect(notices).toEqual([{ kind: 'repeatedFromPreviousWeek' }]);
+  });
+});
+
+describe('desayunos habituales', () => {
+  const withBreakfasts = (ids: string[]): Preferences => ({ ...DEFAULT_PREFERENCES, habitualBreakfastIds: ids });
+  const breakfastsOf = (plan: { slots: { mealType: string; recipeId: string | null }[] }) =>
+    plan.slots.filter((s) => !isMain(s)).map((s) => s.recipeId);
+  const run = (preferences: Preferences, seed = 3) =>
+    generatePlan({ catalog, preferences, favorites: new Set(), currentPlan: emptyPlan(WEEK, preferences), seed });
+
+  it('se reparten por turnos entre los siete días', () => {
+    const habitual = ['tostadas-con-tomate-y-aceite', 'fruta-con-nueces'];
+    const breakfasts = breakfastsOf(run(withBreakfasts(habitual)).plan);
+    expect(breakfasts).toHaveLength(7);
+    for (const [day, id] of breakfasts.entries()) {
+      expect(habitual).toContain(id);
+      if (day > 0) expect(id).not.toBe(breakfasts[day - 1]);
+    }
+  });
+
+  it('no alteran las comidas ni las cenas', () => {
+    const without = run({ ...DEFAULT_PREFERENCES }).plan.slots.filter(isMain).map((s) => s.recipeId);
+    const withThem = run(withBreakfasts(['fruta-con-nueces'])).plan.slots.filter(isMain).map((s) => s.recipeId);
+    expect(withThem).toEqual(without);
+  });
+
+  it('un desayuno habitual que deja de cumplir no se asigna y se avisa', () => {
+    const preferences: Preferences = {
+      ...withBreakfasts(['yogur-con-platano-y-nueces', 'fruta-con-nueces']),
+      excludedAllergens: ['milk'],
+    };
+    const { plan, notices } = run(preferences);
+    expect(new Set(breakfastsOf(plan))).toEqual(new Set(['fruta-con-nueces']));
+    expect(notices).toContainEqual({ kind: 'breakfastsUnavailable', recipeIds: ['yogur-con-platano-y-nueces'] });
+  });
+
+  it('respetan los días sin planificar y los desayunos bloqueados', () => {
+    const preferences = withBreakfasts(['tostadas-con-tomate-y-aceite', 'fruta-con-nueces']);
+    const current = emptyPlan(WEEK, preferences);
+    current.slots[slotIndex(2, 'breakfast')]!.active = false;
+    Object.assign(current.slots[slotIndex(4, 'breakfast')]!, { recipeId: 'tortitas-de-platano-y-huevo', locked: true });
+    const { plan } = generatePlan({ catalog, preferences, favorites: new Set(), currentPlan: current, seed: 1 });
+    expect(plan.slots[slotIndex(2, 'breakfast')]!.recipeId).toBeNull();
+    expect(plan.slots[slotIndex(4, 'breakfast')]!.recipeId).toBe('tortitas-de-platano-y-huevo');
+  });
+
+  it('redistributeBreakfasts vuelve a repartir sin tocar comidas, cenas ni lo elegido a mano', () => {
+    const before = run(withBreakfasts(['fruta-con-nueces'])).plan;
+    Object.assign(before.slots[slotIndex(0, 'breakfast')]!, { recipeId: 'gachas-de-avena-con-platano', origin: 'manual' });
+    const habitual = ['tostadas-con-tomate-y-aceite', 'tostadas-con-aguacate'];
+    const after = redistributeBreakfasts(before, catalog, withBreakfasts(habitual), 4);
+
+    expect(after.slots.filter(isMain)).toEqual(before.slots.filter(isMain));
+    const [monday, ...rest] = breakfastsOf(after);
+    expect(monday).toBe('gachas-de-avena-con-platano');
+    /* Los que venían del reparto anterior se sustituyen por los nuevos habituales, alternados. */
+    expect(new Set(rest)).toEqual(new Set(habitual));
+  });
+
+  it('sin desayunos habituales, los repartidos se retiran', () => {
+    const before = run(withBreakfasts(['fruta-con-nueces'])).plan;
+    const after = redistributeBreakfasts(before, catalog, withBreakfasts([]), 4);
+    expect(breakfastsOf(after).every((id) => id === null)).toBe(true);
   });
 });

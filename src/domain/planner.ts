@@ -1,7 +1,7 @@
 import { violations } from './filters';
 import { mulberry32 } from './rng';
 import type { Catalog, MainGroup, MealSlot, MealType, Preferences, Recipe, WeekPlan } from './types';
-import { MEAL_TYPES } from './types';
+import { DAYS_PER_WEEK, MEAL_TYPES, MEALS_PER_DAY } from './types';
 
 /** Pesos y umbrales de los criterios de variedad. Son valores internos, no recomendaciones nutricionales. */
 export const PLANNER_CONFIG = {
@@ -21,6 +21,8 @@ export const PLANNER_CONFIG = {
     vegetables: 5,
     grainsPasta: 4,
     plantProtein: 4,
+    dairy: 3,
+    fruit: 3,
   } satisfies Record<MainGroup, number>,
   overCapPenalty: 20,
   minPresence: { legumes: 2, fish: 2 } as Partial<Record<MainGroup, number>>,
@@ -33,20 +35,23 @@ export const PLANNER_CONFIG = {
   maxRepeatsInWeek: 2,
 };
 
-export const SLOT_COUNT = 14;
+export const SLOT_COUNT = DAYS_PER_WEEK * MEALS_PER_DAY;
 
 export function slotIndex(day: number, mealType: MealType): number {
-  return day * 2 + (mealType === 'lunch' ? 0 : 1);
+  return day * MEALS_PER_DAY + MEAL_TYPES.indexOf(mealType);
 }
+
+const dayOf = (index: number) => Math.floor(index / MEALS_PER_DAY);
+const mealOf = (index: number): MealType => MEAL_TYPES[index % MEALS_PER_DAY]!;
 
 export function emptyPlan(weekStart: string, prefs: Preferences): WeekPlan {
   const slots: MealSlot[] = [];
-  for (let day = 0; day < 7; day++) {
-    for (const mealType of MEAL_TYPES) {
+  for (let day = 0; day < DAYS_PER_WEEK; day++) {
+    for (const [meal, mealType] of MEAL_TYPES.entries()) {
       slots.push({
         day,
         mealType,
-        active: prefs.activeSlots[day]?.[mealType === 'lunch' ? 0 : 1] ?? true,
+        active: prefs.activeSlots[day]?.[meal] ?? true,
         recipeId: null,
         locked: false,
         origin: 'generated',
@@ -67,7 +72,9 @@ export interface LimitingFilter {
 export type PlannerNotice =
   | { kind: 'repeatedFromPreviousWeek' }
   | { kind: 'repeatedInWeek'; compatible: number; needed: number; limiting?: LimitingFilter }
-  | { kind: 'emptySlots'; count: number; compatible: number; limiting?: LimitingFilter };
+  | { kind: 'emptySlots'; count: number; compatible: number; limiting?: LimitingFilter }
+  /** Desayunos habituales que ya no cumplen las preferencias y no se han podido asignar. */
+  | { kind: 'breakfastsUnavailable'; recipeIds: string[] };
 
 export interface PlannerInput {
   catalog: Catalog;
@@ -134,19 +141,12 @@ interface ScoreContext {
 
 function score(recipe: Recipe, index: number, assigned: readonly (string | null)[], ctx: ScoreContext): number {
   const cfg = PLANNER_CONFIG;
+  const meal = mealOf(index);
   const groupAt = (i: number): MainGroup | undefined => {
     const id = assigned[i];
     return id ? ctx.catalog.recipeById.get(id)?.mainGroup : undefined;
   };
-  const isLunch = index % 2 === 0;
   let total = 0;
-
-  // Alternancia: ni dos veces el mismo día ni en comidas consecutivas.
-  if (groupAt(isLunch ? index + 1 : index - 1) === recipe.mainGroup) total -= cfg.sameDayGroupPenalty;
-  const neighbour = isLunch ? index - 1 : index + 1;
-  if (neighbour >= 0 && neighbour < SLOT_COUNT && groupAt(neighbour) === recipe.mainGroup) {
-    total -= cfg.adjacentGroupPenalty;
-  }
 
   let groupCount = 0;
   let favoriteCount = 0;
@@ -155,19 +155,37 @@ function score(recipe: Recipe, index: number, assigned: readonly (string | null)
     const id = assigned[i];
     if (!id || i === index) continue;
     if (id === recipe.id) uses++;
-    if (groupAt(i) === recipe.mainGroup) groupCount++;
     if (ctx.favorites.has(id)) favoriteCount++;
+    // El reparto semanal solo mira comidas y cenas.
+    if (mealOf(i) !== 'breakfast' && groupAt(i) === recipe.mainGroup) groupCount++;
   }
 
-  // Reparto semanal.
-  const cap = cfg.groupWeeklyCap[recipe.mainGroup];
-  if (groupCount >= cap) total -= cfg.overCapPenalty * (groupCount - cap + 1);
-  const minimum = cfg.minPresence[recipe.mainGroup];
-  if (minimum !== undefined && groupCount < minimum) total += cfg.minPresenceBonus;
+  // Los desayunos no participan en la alternancia ni en el reparto semanal.
+  if (meal !== 'breakfast') {
+    const day = dayOf(index);
+    const isLunch = meal === 'lunch';
+    // Alternancia: ni dos veces el mismo día ni en comidas consecutivas.
+    if (groupAt(slotIndex(day, isLunch ? 'dinner' : 'lunch')) === recipe.mainGroup) total -= cfg.sameDayGroupPenalty;
+    const neighbourDay = isLunch ? day - 1 : day + 1;
+    if (
+      neighbourDay >= 0 &&
+      neighbourDay < DAYS_PER_WEEK &&
+      groupAt(slotIndex(neighbourDay, isLunch ? 'dinner' : 'lunch')) === recipe.mainGroup
+    ) {
+      total -= cfg.adjacentGroupPenalty;
+    }
 
-  if (!isLunch) {
-    total += Math.max(0, cfg.dinnerQuickReferenceMinutes - recipe.activeMinutes) * cfg.dinnerQuickBonusPerMinute;
+    // Reparto semanal.
+    const cap = cfg.groupWeeklyCap[recipe.mainGroup];
+    if (groupCount >= cap) total -= cfg.overCapPenalty * (groupCount - cap + 1);
+    const minimum = cfg.minPresence[recipe.mainGroup];
+    if (minimum !== undefined && groupCount < minimum) total += cfg.minPresenceBonus;
+
+    if (!isLunch) {
+      total += Math.max(0, cfg.dinnerQuickReferenceMinutes - recipe.activeMinutes) * cfg.dinnerQuickBonusPerMinute;
+    }
   }
+
   if (ctx.favorites.has(recipe.id) && favoriteCount < cfg.maxFavoritesBoosted) total += cfg.favoriteBonus;
   if (ctx.preferences.preferBudget) total += (2 - recipe.cost) * cfg.budgetBonus;
   if (ctx.previous.has(recipe.id)) total -= cfg.previousWeekPenalty;
@@ -188,6 +206,41 @@ function pick(
   const best = scored[0]!.value;
   const top = scored.filter((s) => best - s.value <= PLANNER_CONFIG.topMargin).slice(0, PLANNER_CONFIG.topChoices);
   return top[Math.floor(rng() * top.length)]!.recipe;
+}
+
+/** Desayunos habituales que siguen cumpliendo las preferencias, y los que ya no. */
+export function habitualBreakfasts(catalog: Catalog, prefs: Preferences): { valid: Recipe[]; invalidIds: string[] } {
+  const compatible = new Set(hardCandidates(catalog, prefs, 'breakfast').map((r) => r.id));
+  const valid: Recipe[] = [];
+  const invalidIds: string[] = [];
+  for (const id of prefs.habitualBreakfastIds) {
+    const recipe = catalog.recipeById.get(id);
+    if (recipe && compatible.has(id)) valid.push(recipe);
+    else invalidIds.push(id);
+  }
+  return { valid, invalidIds };
+}
+
+/**
+ * Reparte los desayunos habituales por turnos entre los días activos. No pasan por el
+ * algoritmo de variedad: se repiten a propósito. `shouldFill` decide qué franjas se tocan.
+ */
+function rotateBreakfasts(
+  slots: readonly MealSlot[],
+  assigned: (string | null)[],
+  valid: readonly Recipe[],
+  seed: number,
+  shouldFill: (slot: MealSlot) => boolean,
+): void {
+  let turn = valid.length > 0 ? Math.abs(seed) % valid.length : 0;
+  for (let day = 0; day < DAYS_PER_WEEK; day++) {
+    const index = slotIndex(day, 'breakfast');
+    const slot = slots[index];
+    if (!slot?.active) continue;
+    if (shouldFill(slot)) assigned[index] = valid.length > 0 ? valid[turn % valid.length]!.id : null;
+    // El turno avanza también en los días que no se tocan, para no romper la alternancia.
+    turn++;
+  }
 }
 
 /**
@@ -213,22 +266,20 @@ export function generatePlan(input: PlannerInput): PlannerResult {
     dinner: hardCandidates(catalog, preferences, 'dinner'),
   };
 
-  // Primero las franjas con menos candidatos.
+  // Comidas y cenas: primero las franjas con menos candidatos.
   const order = slots
-    .map((slot, index) => ({ slot, index }))
-    .filter(({ slot }) => isFree(slot))
-    .sort((a, b) => candidates[a.slot.mealType].length - candidates[b.slot.mealType].length || a.index - b.index);
+    .map((slot, index) => ({ slot, index, pool: slot.mealType === 'breakfast' ? null : candidates[slot.mealType] }))
+    .filter((entry): entry is typeof entry & { pool: Recipe[] } => isFree(entry.slot) && entry.pool !== null)
+    .sort((a, b) => a.pool.length - b.pool.length || a.index - b.index);
 
   const uses = (id: string) => assigned.filter((x) => x === id).length;
-  const usedNearDay = (id: string, day: number) =>
-    assigned.some((x, i) => x === id && Math.abs(Math.floor(i / 2) - day) <= 1);
+  const usedNearDay = (id: string, day: number) => assigned.some((x, i) => x === id && Math.abs(dayOf(i) - day) <= 1);
 
   let usedPreviousWeek = false;
   let repeatedInWeek = false;
   let emptyCount = 0;
 
-  for (const { slot, index } of order) {
-    const hard = candidates[slot.mealType];
+  for (const { slot, index, pool: hard } of order) {
     // Relajación por pasos; solo afecta a criterios de variedad.
     let pool = hard.filter((r) => uses(r.id) === 0 && !ctx.previous.has(r.id));
     if (pool.length === 0) {
@@ -246,6 +297,9 @@ export function generatePlan(input: PlannerInput): PlannerResult {
     assigned[index] = pick(pool, index, assigned, ctx, rng).id;
   }
 
+  const breakfasts = habitualBreakfasts(catalog, preferences);
+  rotateBreakfasts(slots, assigned, breakfasts.valid, seed, isFree);
+
   for (const [index, slot] of slots.entries()) {
     if (isFree(slot)) {
       slot.recipeId = assigned[index] ?? null;
@@ -261,7 +315,7 @@ export function generatePlan(input: PlannerInput): PlannerResult {
   }
 
   const notices: PlannerNotice[] = [];
-  const freeMealTypes = MEAL_TYPES.filter((m) => order.some(({ slot }) => slot.mealType === m));
+  const freeMealTypes = (['lunch', 'dinner'] as const).filter((m) => order.some(({ slot }) => slot.mealType === m));
   if (usedPreviousWeek) notices.push({ kind: 'repeatedFromPreviousWeek' });
   if (repeatedInWeek || emptyCount > 0) {
     const compatible = countCompatible(catalog, preferences, freeMealTypes);
@@ -269,8 +323,31 @@ export function generatePlan(input: PlannerInput): PlannerResult {
     if (repeatedInWeek) notices.push({ kind: 'repeatedInWeek', compatible, needed: order.length, limiting });
     if (emptyCount > 0) notices.push({ kind: 'emptySlots', count: emptyCount, compatible, limiting });
   }
+  if (breakfasts.invalidIds.length > 0) notices.push({ kind: 'breakfastsUnavailable', recipeIds: breakfasts.invalidIds });
 
   return { plan: { ...currentPlan, slots, seed }, notices };
+}
+
+/**
+ * Vuelve a repartir los desayunos habituales tras cambiar cuáles son, sin tocar comidas ni cenas.
+ * Conserva los desayunos bloqueados y los elegidos a mano.
+ */
+export function redistributeBreakfasts(plan: WeekPlan, catalog: Catalog, preferences: Preferences, seed: number): WeekPlan {
+  const assigned = plan.slots.map((s) => s.recipeId);
+  const { valid } = habitualBreakfasts(catalog, preferences);
+  rotateBreakfasts(
+    plan.slots,
+    assigned,
+    valid,
+    seed,
+    (slot) => !slot.locked && (slot.recipeId === null || slot.origin === 'generated'),
+  );
+  return {
+    ...plan,
+    slots: plan.slots.map((slot, index) =>
+      assigned[index] === slot.recipeId ? slot : { ...slot, recipeId: assigned[index] ?? null, origin: 'generated' },
+    ),
+  };
 }
 
 export interface ReplacementInput {

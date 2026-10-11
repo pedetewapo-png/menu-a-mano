@@ -1,0 +1,25 @@
+{
+  "id": "tostadas-con-aguacate",
+  "name": "Tostadas con aguacate",
+  "summary": "Aguacate chafado con limón sobre pan tostado.",
+  "mealTypes": ["breakfast"],
+  "baseServings": 2,
+  "totalMinutes": 5,
+  "activeMinutes": 5,
+  "cost": 2,
+  "mainGroup": "grainsPasta",
+  "cuisine": "other",
+  "ingredients": [
+    { "ingredientId": "pan", "quantity": 120, "unit": "g" },
+    { "ingredientId": "aguacate", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "limon", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" },
+    { "ingredientId": "pimienta-negra", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Tuesta el pan.",
+    "Chafa el aguacate con un tenedor y mézclalo con unas gotas de limón y sal.",
+    "Extiéndelo sobre las tostadas y termina con un poco de pimienta."
+  ],
+  "source": { "author": "Menú a Mano", "license": "Contenido propio" }
+}

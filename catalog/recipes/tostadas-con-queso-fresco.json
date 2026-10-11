@@ -1,0 +1,25 @@
+{
+  "id": "tostadas-con-queso-fresco",
+  "name": "Tostadas con queso fresco y tomate",
+  "summary": "Pan tostado con queso fresco, tomate y orégano.",
+  "mealTypes": ["breakfast"],
+  "baseServings": 2,
+  "totalMinutes": 5,
+  "activeMinutes": 5,
+  "cost": 1,
+  "mainGroup": "dairy",
+  "cuisine": "mediterranean",
+  "ingredients": [
+    { "ingredientId": "pan", "quantity": 120, "unit": "g" },
+    { "ingredientId": "queso-fresco", "quantity": 120, "unit": "g" },
+    { "ingredientId": "tomate", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "aceite-oliva", "quantity": 1, "unit": "tbsp" },
+    { "ingredientId": "oregano", "quantity": 1, "unit": "pinch" }
+  ],
+  "steps": [
+    "Tuesta el pan.",
+    "Corta el queso y el tomate en rodajas y colócalos sobre las tostadas.",
+    "Aliña con el aceite y el orégano."
+  ],
+  "source": { "author": "Menú a Mano", "license": "Contenido propio" }
+}

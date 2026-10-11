@@ -15,15 +15,34 @@ export interface CatalogReport {
   catalog?: Catalog;
 }
 
-/** Cobertura mínima del catálogo completo (especificación §13.2). */
+const isMain = (r: Recipe) => r.mealTypes.includes('lunch') || r.mealTypes.includes('dinner');
+const isBreakfast = (r: Recipe) => r.mealTypes.includes('breakfast');
+
+/** Cobertura mínima del catálogo completo (especificación v2 §9.2). */
 const COVERAGE: { label: string; minimum: number; test: (r: Recipe, c: Catalog) => boolean }[] = [
-  { label: 'recetas veganas', minimum: 16, test: (r, c) => c.derived.get(r.id)!.diet === 'vegan' },
-  { label: 'recetas vegetarianas (incluye veganas)', minimum: 26, test: (r, c) => c.derived.get(r.id)!.diet !== 'omnivore' },
-  { label: 'recetas de 30 min o menos', minimum: 20, test: (r) => r.totalMinutes <= 30 },
-  { label: 'recetas aptas para cena', minimum: 20, test: (r) => r.mealTypes.includes('dinner') },
-  { label: 'recetas sin gluten', minimum: 16, test: (r, c) => !c.derived.get(r.id)!.allergens.includes('gluten') },
-  { label: 'recetas de coste 1', minimum: 15, test: (r) => r.cost === 1 },
-  { label: 'recetas con legumbres como grupo principal', minimum: 8, test: (r) => r.mainGroup === 'legumes' },
+  { label: 'recetas de comida y cena', minimum: 70, test: isMain },
+  { label: 'desayunos', minimum: 8, test: isBreakfast },
+  { label: 'recetas veganas de comida o cena', minimum: 20, test: (r, c) => isMain(r) && c.derived.get(r.id)!.diet === 'vegan' },
+  {
+    label: 'recetas vegetarianas de comida o cena (incluye veganas)',
+    minimum: 35,
+    test: (r, c) => isMain(r) && c.derived.get(r.id)!.diet !== 'omnivore',
+  },
+  { label: 'recetas de comida o cena de 30 min o menos', minimum: 30, test: (r) => isMain(r) && r.totalMinutes <= 30 },
+  { label: 'recetas aptas para cena', minimum: 35, test: (r) => r.mealTypes.includes('dinner') },
+  {
+    label: 'recetas de comida o cena sin gluten',
+    minimum: 25,
+    test: (r, c) => isMain(r) && !c.derived.get(r.id)!.allergens.includes('gluten'),
+  },
+  { label: 'recetas de comida o cena de coste 1', minimum: 25, test: (r) => isMain(r) && r.cost === 1 },
+  { label: 'recetas con legumbres como grupo principal', minimum: 10, test: (r) => r.mainGroup === 'legumes' },
+  { label: 'desayunos veganos', minimum: 3, test: (r, c) => isBreakfast(r) && c.derived.get(r.id)!.diet === 'vegan' },
+  {
+    label: 'desayunos sin gluten',
+    minimum: 3,
+    test: (r, c) => isBreakfast(r) && !c.derived.get(r.id)!.allergens.includes('gluten'),
+  },
 ];
 
 function describeIssues(error: { issues: { path: PropertyKey[]; message: string }[] }): string {

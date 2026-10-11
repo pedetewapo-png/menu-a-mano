@@ -1,8 +1,11 @@
 export type Diet = 'omnivore' | 'vegetarian' | 'vegan';
 export const DIETS = ['omnivore', 'vegetarian', 'vegan'] as const;
 
-export type MealType = 'lunch' | 'dinner';
-export const MEAL_TYPES = ['lunch', 'dinner'] as const;
+export type MealType = 'breakfast' | 'lunch' | 'dinner';
+/** En el orden del día; es también el orden de las franjas dentro de cada día. */
+export const MEAL_TYPES = ['breakfast', 'lunch', 'dinner'] as const;
+export const MEALS_PER_DAY = MEAL_TYPES.length;
+export const DAYS_PER_WEEK = 7;
 
 export const BASE_UNITS = ['g', 'ml', 'unit'] as const;
 export type BaseUnit = (typeof BASE_UNITS)[number];
@@ -52,6 +55,8 @@ export const MAIN_GROUPS = [
   'vegetables',
   'grainsPasta',
   'plantProtein',
+  'dairy',
+  'fruit',
 ] as const;
 export type MainGroup = (typeof MAIN_GROUPS)[number];
 
@@ -160,13 +165,17 @@ export interface Preferences {
   excludedAllergens: Allergen[];
   maxTotalMinutes: number | null;
   preferBudget: boolean;
-  /** [día 0–6][0 = comida, 1 = cena] */
+  /** [día 0–6][desayuno, comida, cena] */
   activeSlots: boolean[][];
+  /** Desayunos que se alternan durante la semana. Vacío = el menú no tiene desayunos. */
+  habitualBreakfastIds: string[];
   onboardingDone: boolean;
 }
 
 export const MIN_SERVINGS = 1;
 export const MAX_SERVINGS = 12;
+export const MAX_HABITUAL_BREAKFASTS = 3;
+export const NOTE_MAX_LENGTH = 80;
 
 export const DEFAULT_PREFERENCES: Preferences = {
   diet: 'omnivore',
@@ -176,9 +185,15 @@ export const DEFAULT_PREFERENCES: Preferences = {
   excludedAllergens: [],
   maxTotalMinutes: null,
   preferBudget: false,
-  activeSlots: Array.from({ length: 7 }, () => [true, true]),
+  activeSlots: Array.from({ length: DAYS_PER_WEEK }, () => [true, true, true]),
+  habitualBreakfastIds: [],
   onboardingDone: false,
 };
+
+/** Los desayunos solo forman parte del menú cuando se han elegido los habituales. */
+export function breakfastsEnabled(prefs: Preferences): boolean {
+  return prefs.habitualBreakfastIds.length > 0;
+}
 
 export interface MealSlot {
   /** 0 = lunes */
@@ -189,12 +204,14 @@ export interface MealSlot {
   locked: boolean;
   servingsOverride?: number;
   origin: 'generated' | 'manual';
+  /** Nota de la comida ("llevar al trabajo"). Pertenece a la franja, no a la receta. */
+  note?: string;
 }
 
 export interface WeekPlan {
   /** Fecha ISO del lunes. */
   weekStart: string;
-  /** 14 franjas, ordenadas por día y después comida/cena. */
+  /** 21 franjas, ordenadas por día y después desayuno, comida y cena. */
   slots: MealSlot[];
   /** Semilla de la última generación. */
   seed: number;

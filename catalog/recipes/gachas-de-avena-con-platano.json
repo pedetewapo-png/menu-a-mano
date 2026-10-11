@@ -1,0 +1,24 @@
+{
+  "id": "gachas-de-avena-con-platano",
+  "name": "Gachas de avena con plátano",
+  "summary": "Avena cocida en leche, cremosa y caliente.",
+  "mealTypes": ["breakfast"],
+  "baseServings": 2,
+  "totalMinutes": 10,
+  "activeMinutes": 10,
+  "cost": 1,
+  "mainGroup": "grainsPasta",
+  "cuisine": "other",
+  "ingredients": [
+    { "ingredientId": "copos-avena", "quantity": 80, "unit": "g" },
+    { "ingredientId": "leche", "quantity": 400, "unit": "ml" },
+    { "ingredientId": "platano", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "canela", "quantity": 1, "unit": "pinch", "optional": true }
+  ],
+  "steps": [
+    "Pon la avena y la leche en un cazo a fuego medio.",
+    "Cuece 5 minutos sin dejar de remover, hasta que espese.",
+    "Sirve en dos cuencos con el plátano en rodajas y, si te gusta, un poco de canela."
+  ],
+  "source": { "author": "Menú a Mano", "license": "Contenido propio" }
+}

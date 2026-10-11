@@ -1,8 +1,10 @@
 import { z } from 'zod';
+import { migrateBackupDataV1 } from './migrations';
 import { favoriteSchema, preferencesSchema, savedPlanSchema, shoppingListSchema, weekPlanSchema } from './schemas';
 
 export const BACKUP_APP_ID = 'menu-a-mano';
-export const BACKUP_SCHEMA_VERSION = 1;
+/** 1 = v1 (comida y cena). 2 = v2 (se añaden los desayunos). */
+export const BACKUP_SCHEMA_VERSION = 2;
 
 const backupDataSchema = z.object({
   preferences: preferencesSchema,
@@ -38,8 +40,10 @@ export function parseBackup(text: string): BackupParseResult {
   const header = z.object({ app: z.string(), schemaVersion: z.number().int().positive() }).safeParse(raw);
   if (!header.success || header.data.app !== BACKUP_APP_ID) return { ok: false, reason: 'otherApp' };
   if (header.data.schemaVersion > BACKUP_SCHEMA_VERSION) return { ok: false, reason: 'newerVersion' };
-  // Aquí se encadenarán las migraciones cuando exista un esquema 2.
-  const body = z.object({ data: backupDataSchema }).safeParse(raw);
+  // Las copias antiguas se llevan paso a paso al formato actual antes de validarlas.
+  let candidate = raw as { data?: unknown };
+  if (header.data.schemaVersion === 1) candidate = { data: migrateBackupDataV1(candidate.data) };
+  const body = z.object({ data: backupDataSchema }).safeParse(candidate);
   if (!body.success) {
     const issue = body.error.issues[0];
     return { ok: false, reason: 'invalid', detail: issue ? `${issue.path.join('.')}: ${issue.message}` : undefined };

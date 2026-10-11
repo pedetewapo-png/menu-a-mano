@@ -1,0 +1,25 @@
+{
+  "id": "tortitas-de-platano-y-huevo",
+  "name": "Tortitas de plátano y huevo",
+  "summary": "Dos ingredientes y una sartén. Sin harina.",
+  "mealTypes": ["breakfast"],
+  "baseServings": 2,
+  "totalMinutes": 15,
+  "activeMinutes": 15,
+  "cost": 1,
+  "mainGroup": "eggs",
+  "cuisine": "other",
+  "ingredients": [
+    { "ingredientId": "platano", "quantity": 2, "unit": "unit", "note": "maduros" },
+    { "ingredientId": "huevo", "quantity": 2, "unit": "unit" },
+    { "ingredientId": "aceite-oliva", "quantity": 1, "unit": "tsp" },
+    { "ingredientId": "canela", "quantity": 1, "unit": "pinch", "optional": true }
+  ],
+  "steps": [
+    "Chafa los plátanos con un tenedor hasta hacerlos puré.",
+    "Añade los huevos y bate hasta que la mezcla quede uniforme.",
+    "Engrasa una sartén antiadherente con el aceite y ponla a fuego medio.",
+    "Vierte pequeñas porciones de masa y cocina 2 minutos por cada lado, con cuidado al darles la vuelta."
+  ],
+  "source": { "author": "Menú a Mano", "license": "Contenido propio" }
+}

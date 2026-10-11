@@ -1,0 +1,24 @@
+{
+  "id": "tostadas-con-tomate-y-aceite",
+  "name": "Tostadas con tomate y aceite",
+  "summary": "El desayuno de siempre: pan tostado, tomate rallado y aceite de oliva.",
+  "mealTypes": ["breakfast"],
+  "baseServings": 2,
+  "totalMinutes": 5,
+  "activeMinutes": 5,
+  "cost": 1,
+  "mainGroup": "grainsPasta",
+  "cuisine": "spanish",
+  "ingredients": [
+    { "ingredientId": "pan", "quantity": 120, "unit": "g" },
+    { "ingredientId": "tomate", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Tuesta el pan.",
+    "Ralla el tomate y repártelo sobre las tostadas.",
+    "Añade el aceite y una pizca de sal."
+  ],
+  "source": { "author": "Menú a Mano", "license": "Contenido propio" }
+}

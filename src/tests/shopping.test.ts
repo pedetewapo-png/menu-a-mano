@@ -162,6 +162,13 @@ describe('buildShoppingList', () => {
     expect(items.map((i) => i.ingredientId)).toEqual(['cebolla', 'arroz', 'caldo', 'sal']);
   });
 
+  it('cuenta los desayunos solo cuando el menú los incluye', () => {
+    const plan = planWith([{ day: 0, meal: 'lunch', recipeId: 'paella' }]);
+    plan.slots[slotIndex(0, 'breakfast')]!.recipeId = 'revuelto';
+    expect(find(buildShoppingList(plan, catalog, 2), 'huevo').quantity).toBe(3);
+    expect(buildShoppingList(plan, catalog, 2, false).map((i) => i.ingredientId)).not.toContain('huevo');
+  });
+
   it('devuelve una lista vacía si no hay menú', () => {
     expect(buildShoppingList(planWith([]), catalog, 2)).toEqual([]);
   });

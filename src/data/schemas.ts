@@ -2,12 +2,16 @@ import { z } from 'zod';
 import {
   ALLERGENS,
   BASE_UNITS,
+  DAYS_PER_WEEK,
   DIETS,
   INGREDIENT_GROUPS,
   MAIN_GROUPS,
+  MAX_HABITUAL_BREAKFASTS,
   MAX_SERVINGS,
   MEAL_TYPES,
+  MEALS_PER_DAY,
   MIN_SERVINGS,
+  NOTE_MAX_LENGTH,
   RECIPE_UNITS,
   SHOP_SECTIONS,
 } from '../domain/types';
@@ -87,7 +91,8 @@ export const preferencesSchema = z.object({
   excludedAllergens: z.array(z.enum(ALLERGENS)),
   maxTotalMinutes: z.number().int().positive().nullable(),
   preferBudget: z.boolean(),
-  activeSlots: z.array(z.array(z.boolean()).length(2)).length(7),
+  activeSlots: z.array(z.array(z.boolean()).length(MEALS_PER_DAY)).length(DAYS_PER_WEEK),
+  habitualBreakfastIds: z.array(z.string()).max(MAX_HABITUAL_BREAKFASTS),
   onboardingDone: z.boolean(),
 });
 
@@ -99,11 +104,12 @@ const mealSlotSchema = z.object({
   locked: z.boolean(),
   servingsOverride: servings.optional(),
   origin: z.enum(['generated', 'manual']),
+  note: z.string().max(NOTE_MAX_LENGTH).optional(),
 });
 
 export const weekPlanSchema = z.object({
   weekStart: isoDate,
-  slots: z.array(mealSlotSchema).length(14),
+  slots: z.array(mealSlotSchema).length(DAYS_PER_WEEK * MEALS_PER_DAY),
   seed: z.number(),
   updatedAt: z.string(),
 });

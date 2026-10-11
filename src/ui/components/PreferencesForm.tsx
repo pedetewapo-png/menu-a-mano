@@ -1,10 +1,14 @@
 import { useId, useState } from 'react';
 import { catalog } from '../../data/catalog';
+import { hardCandidates } from '../../domain/planner';
 import {
   ALLERGENS,
+  breakfastsEnabled,
   DIETS,
   INGREDIENT_GROUPS,
+  MAX_HABITUAL_BREAKFASTS,
   MAX_SERVINGS,
+  MEAL_TYPES,
   MIN_SERVINGS,
   type IngredientGroup,
   type Preferences,
@@ -168,8 +172,56 @@ export function AvoidSection({ value, onChange }: SectionProps) {
   );
 }
 
+function BreakfastPicker({ value, onChange }: SectionProps) {
+  const chosen = value.habitualBreakfastIds;
+  const compatible = hardCandidates(catalog, value, 'breakfast');
+  // Los ya elegidos se muestran siempre, aunque hayan dejado de cumplir, para poder quitarlos.
+  const stale = chosen
+    .filter((id) => !compatible.some((r) => r.id === id))
+    .flatMap((id) => catalog.recipeById.get(id) ?? []);
+  const options = [...compatible, ...stale].sort((a, b) => a.name.localeCompare(b.name, 'es'));
+  const full = chosen.length >= MAX_HABITUAL_BREAKFASTS;
+
+  return (
+    <fieldset className="field">
+      <legend>{t.prefs.breakfasts}</legend>
+      <p className="hint">{t.prefs.breakfastsHint(MAX_HABITUAL_BREAKFASTS)}</p>
+      {options.length === 0 && <p className="hint">{t.prefs.breakfastsNone}</p>}
+      {options.map((recipe) => {
+        const checked = chosen.includes(recipe.id);
+        return (
+          <label key={recipe.id} className="choice">
+            <input
+              type="checkbox"
+              checked={checked}
+              disabled={!checked && full}
+              onChange={(e) =>
+                onChange({
+                  habitualBreakfastIds: e.target.checked ? [...chosen, recipe.id] : chosen.filter((id) => id !== recipe.id),
+                })
+              }
+            />
+            <span>
+              {recipe.name}
+              <span className="hint">
+                {' '}
+                {t.common.minutes(recipe.totalMinutes)}
+                {stale.includes(recipe) && ` · ${t.prefs.breakfastNoLongerFits}`}
+              </span>
+            </span>
+          </label>
+        );
+      })}
+    </fieldset>
+  );
+}
+
 export function WeekSection({ value, onChange }: SectionProps) {
   const timeId = useId();
+  // La columna de desayunos solo tiene sentido cuando el menú los incluye.
+  const meals = MEAL_TYPES.map((mealType, meal) => ({ mealType, meal })).filter(
+    ({ mealType }) => mealType !== 'breakfast' || breakfastsEnabled(value),
+  );
   const toggleSlot = (day: number, meal: number, active: boolean) =>
     onChange({
       activeSlots: value.activeSlots.map((row, d) => (d === day ? row.map((v, m) => (m === meal ? active : v)) : row)),
@@ -210,19 +262,25 @@ export function WeekSection({ value, onChange }: SectionProps) {
           <thead>
             <tr>
               <th scope="col">{t.prefs.dayColumn}</th>
-              <th scope="col">{t.meal.lunch}</th>
-              <th scope="col">{t.meal.dinner}</th>
+              {meals.map(({ mealType }) => (
+                <th key={mealType} scope="col">
+                  {t.meal[mealType]}
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody>
             {t.days.map((dayName, day) => (
               <tr key={dayName}>
-                <th scope="row">{dayName}</th>
-                {([t.meal.lunch, t.meal.dinner] as const).map((mealName, meal) => (
-                  <td key={mealName}>
+                <th scope="row">
+                  {/* Nombre corto para que la tabla quepa en un móvil; las casillas llevan el nombre completo. */}
+                  <abbr title={dayName}>{t.daysShort[day]}</abbr>
+                </th>
+                {meals.map(({ mealType, meal }) => (
+                  <td key={mealType}>
                     <input
                       type="checkbox"
-                      aria-label={t.prefs.slotLabel(dayName, mealName)}
+                      aria-label={t.prefs.slotLabel(dayName, t.meal[mealType])}
                       checked={value.activeSlots[day]?.[meal] ?? true}
                       onChange={(e) => toggleSlot(day, meal, e.target.checked)}
                     />
@@ -233,6 +291,7 @@ export function WeekSection({ value, onChange }: SectionProps) {
           </tbody>
         </table>
       </fieldset>
+      <BreakfastPicker value={value} onChange={onChange} />
     </>
   );
 }

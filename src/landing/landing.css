@@ -35,6 +35,17 @@
   margin-top: 0.75rem;
 }
 
+.landing-install {
+  margin: 0 0 2rem;
+  padding: 1.25rem;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+}
+
+.landing-install p:last-child {
+  margin-bottom: 0;
+}
+
 .landing-points {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));

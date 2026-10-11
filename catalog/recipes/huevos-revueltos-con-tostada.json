@@ -1,0 +1,25 @@
+{
+  "id": "huevos-revueltos-con-tostada",
+  "name": "Huevos revueltos con tostada",
+  "summary": "Huevos cremosos sobre pan tostado.",
+  "mealTypes": ["breakfast"],
+  "baseServings": 2,
+  "totalMinutes": 10,
+  "activeMinutes": 10,
+  "cost": 1,
+  "mainGroup": "eggs",
+  "cuisine": "other",
+  "ingredients": [
+    { "ingredientId": "huevo", "quantity": 4, "unit": "unit" },
+    { "ingredientId": "pan", "quantity": 80, "unit": "g" },
+    { "ingredientId": "aceite-oliva", "quantity": 1, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Tuesta el pan.",
+    "Bate ligeramente los huevos con una pizca de sal.",
+    "Calienta el aceite en una sartén a fuego suave y añade los huevos.",
+    "Remueve sin parar hasta que cuajen, pero queden jugosos, y sírvelos sobre las tostadas."
+  ],
+  "source": { "author": "Menú a Mano", "license": "Contenido propio" }
+}

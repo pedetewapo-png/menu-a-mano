@@ -1,16 +1,16 @@
 import type { Meta, Preferences, SavedPlan, ShoppingListState, WeekPlan } from '../domain/types';
-import { DEFAULT_PREFERENCES } from '../domain/types';
-import { db, SCHEMA_VERSION } from './db';
+import { db, PREFERENCES_KEY, SCHEMA_VERSION } from './db';
+import { migratePreferences } from './migrations';
 
 // La interfaz solo accede a los datos a través de este módulo, para poder
 // cambiar IndexedDB por otro almacenamiento sin tocar las pantallas.
 
-const PREFERENCES_KEY = 'preferences';
 const META_KEY = 'meta';
 
 export async function getPreferences(): Promise<Preferences> {
   const row = await db.kv.get(PREFERENCES_KEY);
-  return { ...DEFAULT_PREFERENCES, ...(row?.value as Partial<Preferences> | undefined) };
+  // Completa con los valores por defecto cualquier campo que falte.
+  return migratePreferences(row?.value);
 }
 
 export async function savePreferences(preferences: Preferences): Promise<void> {

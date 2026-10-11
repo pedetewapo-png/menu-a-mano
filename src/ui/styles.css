@@ -49,9 +49,14 @@
   list-style: none;
 }
 
+.nav-icon {
+  flex: none;
+}
+
 .sidebar a {
   display: flex;
   align-items: center;
+  gap: 0.6rem;
   min-height: 2.75rem;
   padding: 0.5rem 0.75rem;
   border-radius: var(--radius);
@@ -92,9 +97,32 @@
   margin-bottom: 0;
 }
 
+.week-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.week-nav-arrow {
+  width: 2.75rem;
+  padding: 0;
+  font-size: 1.2rem;
+}
+
 .week-range {
-  margin: 0.25rem 0 0;
+  margin: 0;
   color: var(--muted);
+}
+
+/* Va al final de la página: informa sin estorbar. */
+.storage-notice {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+}
+
+.storage-notice p {
+  margin-bottom: 0.5rem;
 }
 
 /* ---------- Piezas comunes ---------- */
@@ -144,8 +172,11 @@
 }
 
 .status {
-  min-height: 1.5rem;
   margin: 0.75rem 0;
+}
+
+.status > :last-child {
+  margin-bottom: 0;
 }
 
 .empty {
@@ -320,16 +351,24 @@ input[type='radio'] {
 
 .slot-table th,
 .slot-table td {
-  padding: 0.4rem 1rem 0.4rem 0;
+  padding: 0.4rem 0.75rem 0.4rem 0;
+  text-align: center;
+}
+
+.slot-table th:first-child {
   text-align: left;
 }
 
-.slot-table td {
-  text-align: center;
+.slot-table thead th {
+  font-size: 0.9rem;
 }
 
 .slot-table tbody th {
   font-weight: 400;
+}
+
+.slot-table abbr {
+  text-decoration: none;
 }
 
 /* ---------- Diálogos ---------- */
@@ -433,6 +472,15 @@ input[type='radio'] {
   grid-template-rows: subgrid;
 }
 
+/* Con desayunos, cada día tiene una fila más. */
+.week-with-breakfast {
+  grid-template-rows: auto auto auto auto;
+}
+
+.week-with-breakfast .day {
+  grid-row: span 4;
+}
+
 .day-title {
   margin-bottom: 0;
   font-size: 1rem;
@@ -441,6 +489,47 @@ input[type='radio'] {
 .day-number {
   color: var(--muted);
   font-weight: 400;
+}
+
+.day-today {
+  margin-left: 0.35rem;
+  vertical-align: middle;
+}
+
+.day-strip {
+  display: none;
+}
+
+.day-chip {
+  display: grid;
+  justify-items: center;
+  min-height: 3rem;
+  padding: 0.25rem 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.day-chip-number {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+/* Hoy se distingue por el subrayado; el día elegido, por el fondo y el borde. */
+.day-chip-today .day-chip-number {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.day-chip[aria-pressed='true'] {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: var(--on-primary);
 }
 
 .day-slots {
@@ -487,6 +576,27 @@ input[type='radio'] {
   margin: 0;
   color: var(--muted);
   font-size: 0.9rem;
+}
+
+.slot-note {
+  margin: 0;
+  padding: 0.2rem 0.5rem;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-bg);
+  border-radius: 4px;
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
+}
+
+.note-suggestions {
+  margin-top: 0.5rem;
+}
+
+/* En la cuadrícula semanal las tarjetas son estrechas: "Cocinar" queda dentro de "Más". */
+@media (min-width: 76.01rem) {
+  .slot-cook {
+    display: none;
+  }
 }
 
 .slot-actions {
@@ -556,9 +666,11 @@ input[type='radio'] {
     grid-column: 2;
   }
 
+  /* Arriba el tipo de comida; debajo, la foto a la izquierda y los datos a la derecha. */
   .slot > .recipe-image {
     grid-column: 1;
-    grid-row: 1 / span 4;
+    grid-row: 2 / span 4;
+    align-self: start;
   }
 
   .slot > .slot-meal,
@@ -587,11 +699,17 @@ input[type='radio'] {
 
 .recipe-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 9.5rem), 1fr));
   gap: var(--gap);
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+@media (min-width: 44.01rem) {
+  .recipe-grid {
+    grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+  }
 }
 
 .recipe-card {
@@ -692,6 +810,90 @@ input[type='radio'] {
   }
 }
 
+/* ---------- Modo cocina ---------- */
+
+.cook {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 1rem;
+  max-width: 48rem;
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: 1rem 1.25rem calc(1rem + env(safe-area-inset-bottom));
+}
+
+.cook-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap);
+}
+
+.cook-recipe {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.cook-body {
+  align-self: center;
+}
+
+.cook-body h1:focus {
+  outline: none;
+}
+
+.cook-progress {
+  font-size: 1.1rem;
+  color: var(--muted);
+}
+
+.cook-bar {
+  display: block;
+  width: 100%;
+  height: 0.5rem;
+  margin-bottom: 1.5rem;
+  accent-color: var(--primary);
+}
+
+/* Texto grande: se lee a un brazo de distancia. */
+.cook-step {
+  font-size: clamp(1.4rem, 2.5vw + 1rem, 2.1rem);
+  line-height: 1.35;
+}
+
+.cook-ingredients {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 1.15rem;
+}
+
+.cook-ingredients li + li {
+  border-top: 1px solid var(--border);
+}
+
+.cook-ingredients input[type='checkbox'] {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.cook-ingredients input:checked + span {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+.cook-footer {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.cook-footer .button {
+  flex: 1 1 0;
+  padding-inline: 0.75rem;
+}
+
 /* ---------- Lista de la compra ---------- */
 
 .shop-columns {
@@ -779,27 +981,80 @@ details.card > summary {
 
 /* ---------- Ventanas muy estrechas ---------- */
 
+/* ---------- Móvil ---------- */
+
 @media (max-width: 44rem) {
   .shell {
     grid-template-columns: 1fr;
   }
 
+  /* La navegación pasa a una barra fija abajo, al alcance del pulgar. */
   .sidebar {
-    position: static;
+    position: fixed;
+    inset: auto 0 0;
+    z-index: 5;
     height: auto;
+    padding: 0.25rem 0.25rem calc(0.25rem + env(safe-area-inset-bottom));
     border-right: 0;
-    border-bottom: 1px solid var(--border);
+    border-top: 1px solid var(--border);
+  }
+
+  .brand {
+    display: none;
   }
 
   .sidebar ul {
-    grid-auto-flow: column;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .sidebar a {
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.1rem;
+    min-height: 3.25rem;
+    padding: 0.25rem;
+    font-size: 0.8rem;
+  }
+
+  .sidebar a[aria-current='page'] {
+    box-shadow: inset 0 3px 0 var(--primary);
   }
 
   .content {
-    padding: 1rem;
+    padding: 1rem 1rem calc(5.5rem + env(safe-area-inset-bottom));
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  /* Lo que en móvil ya está a un toque en la barra inferior, o solo ocupa sitio. */
+  .only-wide {
+    display: none;
+  }
+
+  /* El menú muestra un día cada vez; la tira de días permite saltar de uno a otro. */
+  .day-strip {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 0.25rem;
+    margin-top: 0.75rem;
+  }
+
+  .week .day:not(.day-selected) {
+    display: none;
   }
 
   .day-slots {
     grid-template-columns: 1fr;
+  }
+
+  .shop-columns {
+    columns: auto;
+  }
+
+  .shop-item input[type='checkbox'] {
+    width: 1.5rem;
+    height: 1.5rem;
   }
 }

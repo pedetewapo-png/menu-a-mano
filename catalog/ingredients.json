@@ -17,6 +17,9 @@
   { "id": "cebolleta", "name": "cebolleta", "namePlural": "cebolletas", "section": "produce", "baseUnit": "g", "gramsPerUnit": 60, "diet": "vegan" },
   { "id": "limon", "name": "limón", "namePlural": "limones", "section": "produce", "baseUnit": "unit", "diet": "vegan" },
   { "id": "perejil", "name": "perejil fresco", "section": "produce", "baseUnit": "g", "diet": "vegan", "pantryStaple": true },
+  { "id": "aguacate", "name": "aguacate", "namePlural": "aguacates", "section": "produce", "baseUnit": "g", "gramsPerUnit": 200, "diet": "vegan" },
+  { "id": "platano", "name": "plátano", "namePlural": "plátanos", "section": "produce", "baseUnit": "g", "gramsPerUnit": 120, "diet": "vegan" },
+  { "id": "manzana", "name": "manzana", "namePlural": "manzanas", "section": "produce", "baseUnit": "g", "gramsPerUnit": 180, "diet": "vegan" },
 
   { "id": "contramuslos-pollo", "name": "contramuslos de pollo", "section": "meat", "baseUnit": "g", "diet": "omnivore", "groups": ["poultry"] },
   { "id": "pechuga-pollo", "name": "pechuga de pollo", "section": "meat", "baseUnit": "g", "diet": "omnivore", "groups": ["poultry"] },
@@ -28,11 +31,18 @@
   { "id": "bacalao-desalado", "name": "bacalao desalado", "section": "fish", "baseUnit": "g", "diet": "omnivore", "allergens": ["fish"], "groups": ["fish"] },
 
   { "id": "huevo", "name": "huevo", "namePlural": "huevos", "section": "dairyEggs", "baseUnit": "unit", "diet": "vegetarian", "allergens": ["eggs"], "groups": ["eggs"] },
+  { "id": "yogur-natural", "name": "yogur natural", "namePlural": "yogures naturales", "section": "dairyEggs", "baseUnit": "g", "gramsPerUnit": 125, "diet": "vegetarian", "allergens": ["milk"], "groups": ["dairy"] },
+  { "id": "leche", "name": "leche", "section": "dairyEggs", "baseUnit": "ml", "diet": "vegetarian", "allergens": ["milk"], "groups": ["dairy"] },
+  { "id": "queso-fresco", "name": "queso fresco", "section": "dairyEggs", "baseUnit": "g", "diet": "vegetarian", "allergens": ["milk"], "groups": ["dairy"] },
+
+  { "id": "pan", "name": "pan", "section": "bakery", "baseUnit": "g", "diet": "vegan", "allergens": ["gluten"], "mayContain": ["sesame", "soy", "milk"] },
 
   { "id": "lentejas", "name": "lentejas pardinas secas", "section": "dryGoods", "baseUnit": "g", "diet": "vegan", "mayContain": ["gluten"], "groups": ["legumes"] },
   { "id": "arroz", "name": "arroz", "section": "dryGoods", "baseUnit": "g", "diet": "vegan" },
   { "id": "pasta-corta", "name": "pasta corta (macarrones o hélices)", "section": "dryGoods", "baseUnit": "g", "diet": "vegan", "allergens": ["gluten"], "mayContain": ["eggs"] },
   { "id": "cuscus", "name": "cuscús", "section": "dryGoods", "baseUnit": "g", "diet": "vegan", "allergens": ["gluten"] },
+  { "id": "copos-avena", "name": "copos de avena", "section": "dryGoods", "baseUnit": "g", "diet": "vegan", "allergens": ["gluten"] },
+  { "id": "nueces", "name": "nueces peladas", "section": "dryGoods", "baseUnit": "g", "diet": "vegan", "allergens": ["treeNuts"], "mayContain": ["peanuts"], "groups": ["nuts"] },
 
   { "id": "garbanzos-cocidos", "name": "garbanzos cocidos (escurridos)", "section": "canned", "baseUnit": "g", "diet": "vegan", "groups": ["legumes"] },
   { "id": "alubias-cocidas", "name": "alubias blancas cocidas (escurridas)", "section": "canned", "baseUnit": "g", "diet": "vegan", "groups": ["legumes"] },
@@ -51,6 +61,7 @@
   { "id": "pimenton-dulce", "name": "pimentón dulce", "section": "condiments", "baseUnit": "g", "diet": "vegan", "pantryStaple": true },
   { "id": "comino-molido", "name": "comino molido", "section": "condiments", "baseUnit": "g", "diet": "vegan", "pantryStaple": true },
   { "id": "laurel", "name": "laurel", "unitName": "hoja de laurel", "unitNamePlural": "hojas de laurel", "section": "condiments", "baseUnit": "unit", "diet": "vegan", "pantryStaple": true },
+  { "id": "canela", "name": "canela molida", "section": "condiments", "baseUnit": "g", "diet": "vegan", "pantryStaple": true },
   { "id": "oregano", "name": "orégano seco", "section": "condiments", "baseUnit": "g", "diet": "vegan", "pantryStaple": true },
   { "id": "curry-polvo", "name": "curry en polvo", "section": "condiments", "baseUnit": "g", "diet": "vegan", "mayContain": ["mustard", "celery"], "pantryStaple": true },
   { "id": "vinagre", "name": "vinagre de vino", "section": "condiments", "baseUnit": "ml", "diet": "vegan", "allergens": ["sulphites"], "pantryStaple": true },

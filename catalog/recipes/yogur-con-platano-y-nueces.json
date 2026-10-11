@@ -1,0 +1,23 @@
+{
+  "id": "yogur-con-platano-y-nueces",
+  "name": "Yogur con plátano y nueces",
+  "summary": "Yogur natural con fruta y frutos secos, sin cocinar nada.",
+  "mealTypes": ["breakfast"],
+  "baseServings": 2,
+  "totalMinutes": 5,
+  "activeMinutes": 5,
+  "cost": 1,
+  "mainGroup": "dairy",
+  "cuisine": "other",
+  "ingredients": [
+    { "ingredientId": "yogur-natural", "quantity": 2, "unit": "unit" },
+    { "ingredientId": "platano", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "nueces", "quantity": 30, "unit": "g" }
+  ],
+  "steps": [
+    "Reparte los yogures en dos cuencos.",
+    "Añade el plátano en rodajas.",
+    "Termina con las nueces troceadas."
+  ],
+  "source": { "author": "Menú a Mano", "license": "Contenido propio" }
+}

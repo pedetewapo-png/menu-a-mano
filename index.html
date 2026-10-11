@@ -2,14 +2,15 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#2f6f4e" />
     <meta
       name="description"
       content="Menú a Mano: planifica el menú de la semana y genera la lista de la compra. Gratis, sin cuenta y sin conexión."
     />
     <link rel="icon" href="/icons/icon.svg" type="image/svg+xml" />
-    <title>Menú a Mano · Instalar</title>
+    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+    <title>Menú a Mano</title>
   </head>
   <body>
     <main class="landing">
@@ -19,38 +20,54 @@
         Organiza las comidas de la semana en pocos minutos y sal a comprar con la lista ya hecha.
       </p>
 
-      <!-- El script muestra solo el bloque que corresponde a este navegador. -->
-      <div class="landing-action" aria-live="polite">
-        <p id="state-checking">Comprobando si se puede instalar…</p>
-
-        <div id="state-install" hidden>
-          <button id="install-button" type="button" class="button button-primary button-large">Instalar</button>
-          <p class="hint">Se abrirá en su propia ventana, como cualquier otro programa.</p>
-        </div>
-
-        <div id="state-installed" hidden>
-          <p><strong>Menú a Mano ya está instalada.</strong></p>
-          <p>Ábrela desde su icono en el escritorio o en el menú Inicio.</p>
-        </div>
-
-        <div id="state-manual" hidden>
-          <p><strong>Instálala desde el menú del navegador.</strong></p>
-          <p>
-            En Chrome o Edge, abre el menú (⋮ o …), entra en «Guardar y compartir» o «Aplicaciones» y elige
-            «Instalar Menú a Mano».
-          </p>
-        </div>
-
-        <div id="state-unsupported" hidden>
-          <p><strong>Este navegador no permite instalar aplicaciones.</strong></p>
-          <p>Abre esta página con Google Chrome o Microsoft Edge y pulsa «Instalar».</p>
-        </div>
+      <div class="landing-action">
+        <a class="button button-primary button-large" href="app/">Abrir Menú a Mano</a>
+        <p class="hint">Se usa aquí mismo, en el navegador, sin instalar nada.</p>
       </div>
+
+      <section class="landing-install" aria-labelledby="install-title">
+        <h2 id="install-title">Instalarla es opcional</h2>
+        <p>Instalada tiene su propio icono y se abre en su ventana, como cualquier otra aplicación.</p>
+
+        <!-- El script muestra solo el bloque que corresponde a este navegador. -->
+        <div aria-live="polite">
+          <p id="state-checking">Comprobando si se puede instalar…</p>
+
+          <div id="state-available" hidden>
+            <button id="install-button" type="button" class="button">Instalar</button>
+          </div>
+
+          <div id="state-installed" hidden>
+            <p><strong>Ya está instalada.</strong> Ábrela desde su icono.</p>
+          </div>
+
+          <div id="state-ios" hidden>
+            <p>
+              <strong>En iPhone y iPad:</strong> abre esta página en Safari, pulsa el botón Compartir y elige «Añadir a
+              pantalla de inicio».
+            </p>
+          </div>
+
+          <div id="state-manual" hidden>
+            <p>
+              <strong>Desde el menú del navegador:</strong> abre el menú (⋮ o …) y elige «Instalar Menú a Mano» o
+              «Añadir a pantalla de inicio».
+            </p>
+          </div>
+
+          <div id="state-unsupported" hidden>
+            <p>
+              <strong>Este navegador no instala aplicaciones,</strong> pero puedes usar Menú a Mano aquí igualmente.
+              Para instalarla, abre esta página con Chrome o Edge.
+            </p>
+          </div>
+        </div>
+      </section>
 
       <ul class="landing-points">
         <li><strong>Gratis y sin anuncios.</strong> Sin suscripciones ni funciones de pago.</li>
-        <li><strong>Sin cuenta.</strong> Tus datos se quedan en tu ordenador.</li>
-        <li><strong>Sin conexión.</strong> Una vez instalada, funciona sin internet.</li>
+        <li><strong>Sin cuenta.</strong> Tus datos se quedan en tu dispositivo.</li>
+        <li><strong>Sin conexión.</strong> Tras abrirla una vez, funciona sin internet.</li>
       </ul>
 
       <section class="landing-note" aria-labelledby="scope-title">
@@ -63,7 +80,7 @@
         <p>La app no recoge datos, no usa cookies y no incluye analítica.</p>
       </section>
     </main>
-    <noscript>Para instalar Menú a Mano hace falta JavaScript.</noscript>
+    <noscript>Menú a Mano necesita JavaScript para funcionar.</noscript>
     <script type="module" src="/src/landing/main.ts"></script>
   </body>
 </html>

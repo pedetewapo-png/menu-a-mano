@@ -23,12 +23,22 @@ export interface ShoppingItem {
   sources: ShoppingSource[];
 }
 
-/** Lista de la compra derivada del menú. Función pura. */
-export function buildShoppingList(plan: WeekPlan, catalog: Catalog, defaultServings: number): ShoppingItem[] {
+/**
+ * Lista de la compra derivada del menú. Función pura.
+ * Con `includeBreakfasts` a false se ignoran los desayunos, que no forman parte
+ * del menú mientras no se hayan elegido los habituales.
+ */
+export function buildShoppingList(
+  plan: WeekPlan,
+  catalog: Catalog,
+  defaultServings: number,
+  includeBreakfasts = true,
+): ShoppingItem[] {
   const totals = new Map<string, { sum: number; hasQuantity: boolean; optional: boolean; sources: ShoppingSource[] }>();
 
   for (const slot of plan.slots) {
     if (!slot.active || !slot.recipeId) continue;
+    if (slot.mealType === 'breakfast' && !includeBreakfasts) continue;
     const recipe = catalog.recipeById.get(slot.recipeId);
     if (!recipe) continue;
     const factor = (slot.servingsOverride ?? defaultServings) / recipe.baseServings;

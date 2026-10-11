@@ -1,0 +1,24 @@
+{
+  "id": "fruta-con-nueces",
+  "name": "Fruta troceada con nueces",
+  "summary": "Manzana y plátano con un puñado de nueces.",
+  "mealTypes": ["breakfast"],
+  "baseServings": 2,
+  "totalMinutes": 5,
+  "activeMinutes": 5,
+  "cost": 1,
+  "mainGroup": "fruit",
+  "cuisine": "other",
+  "ingredients": [
+    { "ingredientId": "manzana", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "platano", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "nueces", "quantity": 40, "unit": "g" },
+    { "ingredientId": "canela", "quantity": 1, "unit": "pinch", "optional": true }
+  ],
+  "steps": [
+    "Lava la manzana y córtala en dados. Pela el plátano y córtalo en rodajas.",
+    "Reparte la fruta en dos cuencos.",
+    "Añade las nueces troceadas y, si te gusta, un poco de canela."
+  ],
+  "source": { "author": "Menú a Mano", "license": "Contenido propio" }
+}

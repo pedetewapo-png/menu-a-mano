@@ -5,24 +5,32 @@ import { catalog } from '../../data/catalog';
 import { db } from '../../data/db';
 import { emptyShoppingState, updateShoppingState } from '../../data/repos';
 import { buildShoppingList, type ShoppingItem } from '../../domain/shopping';
-import { SHOP_SECTIONS, type ShoppingListState } from '../../domain/types';
+import { breakfastsEnabled, SHOP_SECTIONS, type ShoppingListState } from '../../domain/types';
 import { t } from '../../i18n';
 import { formatBaseQuantity, formatWeekRange, shoppingItemName, shoppingItemQuantity } from '../format';
-import { usePreferences, useWeek, useWeekPlan } from '../hooks';
+import { usePending, usePreferences, useWakeLock, useWeek, useWeekPlan } from '../hooks';
 
 export function ShoppingPage() {
   const { weekStart } = useWeek();
   const prefs = usePreferences();
   const loaded = useWeekPlan(weekStart);
-  const stored = useLiveQuery(async () => ({ state: await db.shoppingLists.get(weekStart) }), [weekStart]);
+  const [stored, showState] = usePending(
+    useLiveQuery(async () => ({ state: await db.shoppingLists.get(weekStart) }), [weekStart]),
+  );
   const [text, setText] = useState('');
   const [message, setMessage] = useState('');
+  // En el supermercado la pantalla no debe apagarse entre un artículo y el siguiente.
+  useWakeLock();
 
   if (!prefs || !loaded || !stored) return <p>{t.common.loading}</p>;
 
   const state = stored.state ?? emptyShoppingState(weekStart);
-  const items = loaded.plan ? buildShoppingList(loaded.plan, catalog, prefs.servings) : [];
-  const update = (change: (s: ShoppingListState) => ShoppingListState) => updateShoppingState(weekStart, change);
+  const items = loaded.plan ? buildShoppingList(loaded.plan, catalog, prefs.servings, breakfastsEnabled(prefs)) : [];
+  const update = (change: (s: ShoppingListState) => ShoppingListState) => {
+    // Se muestra ya el resultado; la casilla no espera a que termine el guardado.
+    showState({ state: change(state) });
+    return updateShoppingState(weekStart, change);
+  };
 
   // Un artículo cuenta como comprado solo si su cantidad no ha cambiado desde que se marcó.
   const isChecked = (item: ShoppingItem) => state.checked[item.ingredientId]?.quantityWhenChecked === item.quantity;

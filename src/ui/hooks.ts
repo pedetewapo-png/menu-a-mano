@@ -1,8 +1,61 @@
 import { useLiveQuery } from 'dexie-react-hooks';
-import { createContext, useContext } from 'react';
+import { createContext, useContext, useEffect, useState, useSyncExternalStore } from 'react';
 import { db } from '../data/db';
 import { getMeta, getPreferences } from '../data/repos';
 import type { Meta, Preferences, WeekPlan } from '../domain/types';
+import { getInstallState, subscribeInstall, type InstallState } from '../install';
+import { getPwaState, subscribePwa, type PwaState } from '../pwa';
+
+export function useInstallState(): InstallState {
+  return useSyncExternalStore(subscribeInstall, getInstallState);
+}
+
+export function usePwaState(): PwaState {
+  return useSyncExternalStore(subscribePwa, getPwaState);
+}
+
+/**
+ * Muestra un cambio al instante mientras se guarda. Sin esto, una casilla marcada
+ * volvería un momento a su estado anterior hasta que la base de datos confirmase
+ * el cambio. En cuanto llegan datos guardados nuevos, mandan ellos.
+ */
+export function usePending<T>(stored: T): [T, (next: T) => void] {
+  const [pending, setPending] = useState<{ value: T } | null>(null);
+  useEffect(() => {
+    setPending(null);
+  }, [stored]);
+  return [pending ? pending.value : stored, (next) => setPending({ value: next })];
+}
+
+/** Mantiene la pantalla encendida mientras el componente está a la vista, si el dispositivo lo permite. */
+export function useWakeLock(): void {
+  useEffect(() => {
+    if (!('wakeLock' in navigator)) return;
+    let sentinel: WakeLockSentinel | null = null;
+    let cancelled = false;
+
+    const acquire = async () => {
+      if (document.visibilityState !== 'visible') return;
+      try {
+        const lock = await navigator.wakeLock.request('screen');
+        if (cancelled) void lock.release();
+        else sentinel = lock;
+      } catch {
+        // El sistema puede negarlo (batería baja, por ejemplo); no es un error para la app.
+      }
+    };
+    // El bloqueo se pierde al cambiar de pestaña; se recupera al volver.
+    const onVisibilityChange = () => void acquire();
+
+    void acquire();
+    document.addEventListener('visibilitychange', onVisibilityChange);
+    return () => {
+      cancelled = true;
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+      void sentinel?.release();
+    };
+  }, []);
+}
 
 /** undefined mientras carga. */
 export function usePreferences(): Preferences | undefined {

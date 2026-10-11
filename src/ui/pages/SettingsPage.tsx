@@ -5,14 +5,18 @@ import { catalog } from '../../data/catalog';
 import { clearAllData, savePreferences } from '../../data/repos';
 import type { Preferences } from '../../domain/types';
 import { t } from '../../i18n';
+import { promptInstall } from '../../install';
 import { getTextScale, getTheme, setTextScale, setTheme, TEXT_SCALES, THEMES } from '../appearance';
 import { AvoidSection, DietSection, WeekSection } from '../components/PreferencesForm';
 import { formatDateTime } from '../format';
-import { useMeta, usePreferences } from '../hooks';
+import { useInstallState, useMeta, usePending, usePreferences, useWeek } from '../hooks';
+import { refreshBreakfasts } from '../planActions';
 
 export function SettingsPage() {
-  const prefs = usePreferences();
+  const [prefs, showPrefs] = usePending(usePreferences());
   const meta = useMeta();
+  const install = useInstallState();
+  const { weekStart } = useWeek();
   const fileInput = useRef<HTMLInputElement>(null);
   const [message, setMessage] = useState('');
   const [textScale, setScale] = useState(getTextScale);
@@ -20,7 +24,12 @@ export function SettingsPage() {
 
   if (!prefs || !meta) return <p>{t.common.loading}</p>;
 
-  const change = (patch: Partial<Preferences>) => savePreferences({ ...prefs, ...patch });
+  const change = async (patch: Partial<Preferences>) => {
+    const next = { ...prefs, ...patch };
+    showPrefs(next);
+    await savePreferences(next);
+    if ('habitualBreakfastIds' in patch) await refreshBreakfasts(weekStart, next);
+  };
 
   const download = async () => {
     const backup = await exportBackup();
@@ -103,6 +112,19 @@ export function SettingsPage() {
             {t.settings.deleteAll}
           </button>
         </div>
+      </section>
+
+      <section className="card" aria-labelledby="settings-install">
+        <h2 id="settings-install">{t.install.title}</h2>
+        <p>{t.install.intro}</p>
+        <p role="status" aria-live="polite">
+          {t.install.state[install]}
+        </p>
+        {install === 'available' && (
+          <button type="button" className="button button-primary" onClick={() => void promptInstall()}>
+            {t.install.button}
+          </button>
+        )}
       </section>
 
       <section className="card" aria-labelledby="settings-appearance">

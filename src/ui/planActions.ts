@@ -1,7 +1,13 @@
 import { catalog } from '../data/catalog';
 import { getWeekPlan, saveWeekPlan } from '../data/repos';
 import { isCompatible } from '../domain/filters';
-import { emptyPlan, generatePlan, suggestReplacement, type PlannerNotice } from '../domain/planner';
+import {
+  emptyPlan,
+  redistributeBreakfasts,
+  generatePlan,
+  suggestReplacement,
+  type PlannerNotice,
+} from '../domain/planner';
 import type { MealSlot, Preferences, SavedPlan, WeekPlan } from '../domain/types';
 import { addDays } from '../domain/week';
 
@@ -31,6 +37,14 @@ export async function generateWeek(
   });
   await saveWeekPlan(result.plan);
   return result.notices;
+}
+
+/** Tras cambiar los desayunos habituales, los vuelve a repartir en la semana que se está viendo. */
+export async function refreshBreakfasts(weekStart: string, prefs: Preferences): Promise<void> {
+  const plan = await getWeekPlan(weekStart);
+  // Sin menú todavía no hay nada que rellenar: lo hará "Generar menú".
+  if (!plan) return;
+  await saveWeekPlan(redistributeBreakfasts(plan, catalog, prefs, randomSeed()));
 }
 
 /** Sustituye el plato de una franja por otro compatible. Devuelve el id nuevo o null si no hay alternativas. */

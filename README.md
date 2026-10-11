@@ -7,14 +7,18 @@ Aplicación de ordenador, instalable desde una página web, para planificar el m
 | Orden | Qué hace |
 |---|---|
 | `npm run dev` | Arranca el servidor de desarrollo. La app está en `http://localhost:5173/app/` y la página de instalación en `http://localhost:5173/`. |
-| `npm test` | Ejecuta las pruebas (planificador, lista de la compra, copias de seguridad). |
+| `npm test` | Ejecuta las pruebas unitarias (planificador, lista de la compra, copias de seguridad, migraciones). |
+| `npm run test:e2e` | Recorre la app en un navegador real, en tamaño de ordenador y de móvil, y comprueba la accesibilidad y el uso sin conexión. Usa el Edge instalado en el equipo. |
+| `npm run check:layers` | Comprueba la regla de capas (`ui → data → domain`). |
+| `npm run catalog:images` | Genera las imágenes de las recetas a partir de `catalog/images/`. |
+| `npm run screenshots` | Captura las pantallas principales en `test-results/screens/` (necesita `npm run dev` en marcha). |
 | `npm run catalog:check` | Valida el catálogo. Los errores impiden compilar; los avisos señalan trabajo pendiente. |
-| `npm run build` | Valida el catálogo, comprueba los tipos y compila en `dist/`. |
+| `npm run build` | Valida el catálogo, genera las imágenes, comprueba las capas y los tipos, y compila en `dist/`. |
 | `npm run preview` | Sirve `dist/` en `http://localhost:4173/` para probar la instalación y el modo sin conexión. |
 | `npm run icons` | Regenera los iconos PNG a partir de `public/icons/icon.svg`. |
 | `npm run deploy` | Compila y publica el sitio en GitHub Pages. |
 
-Para probar la versión compilada sin instalarla, abre `http://localhost:4173/app/?tab=1`. Sin `?tab=1`, la app abierta en una pestaña lleva a la página de instalación.
+La app se usa directamente en el navegador; instalarla es opcional.
 
 ## Publicar
 
@@ -37,9 +41,12 @@ src/domain/       Lógica pura: planificador, lista de la compra, filtros, unida
 src/data/         Catálogo, esquemas, base de datos local, copias de seguridad.
 src/ui/           Pantallas y componentes.
 src/i18n/         Textos de la interfaz.
-src/landing/      Código de la página de instalación.
-src/tests/        Pruebas.
-scripts/          Validación del catálogo y generación de iconos.
+src/landing/      Código de la página de entrada.
+src/install.ts    Instalación opcional, compartida por la página de entrada y la app.
+src/pwa.ts        Service worker: uso sin conexión y actualizaciones.
+src/tests/        Pruebas unitarias.
+e2e/              Pruebas de recorrido en navegador.
+scripts/          Validación del catálogo, imágenes, capas, iconos, capturas y publicación.
 ```
 
 Dependencias entre capas: `ui → data → domain`. `domain` no importa nada de las otras dos.
@@ -52,13 +59,28 @@ Dependencias entre capas: `ui → data → domain`. `domain` no importa nada de 
 
 La dieta y los alérgenos de una receta se calculan a partir de sus ingredientes; no se escriben en la receta.
 
-## Pendiente
+## Estado de la v2
 
-- **Revisión del catálogo.** Las 25 recetas son un borrador: ninguna tiene `reviewedOn` porque nadie ha revisado todavía sus ingredientes y alérgenos uno a uno.
-- **Imágenes.** Ninguna receta tiene foto; la app muestra un marcador. Falta el script que genera los tamaños (§11.3 de la especificación).
-- **Cobertura del catálogo.** Faltan recetas para llegar a los mínimos de §13.2 (el validador lo detalla).
-- Pruebas de recorrido completo y de accesibilidad automatizadas (Playwright y axe).
-- Regla de lint que impida a `domain` importar de otras capas.
+Los requisitos están en [ESPECIFICACION-v2.md](ESPECIFICACION-v2.md), que divide el trabajo en fases.
+
+| Fase | Contenido | Estado |
+|---|---|---|
+| 0 | Pruebas de recorrido y accesibilidad, comprobación de capas, procesado de imágenes | Hecha |
+| 1 | Móvil y navegador: navegación inferior, menú día a día, uso en pestaña, instalación opcional | Hecha |
+| 2 | Notas en las comidas, modo cocina, desayunos y migración de los datos de la v1 | Hecha |
+| 3 | Perfiles de comensal | Pendiente |
+| 4 | Recetas propias | Pendiente |
+| 5 | Catálogo: 70 recetas y 8 desayunos, con foto y revisados; calorías | En curso: 25 recetas y 8 desayunos, sin fotos ni revisión |
+| 6 | Cuenta con Google y sincronización | Pendiente |
+| 7 | Plan familiar y copia personal | Pendiente |
+| 8 | IA de texto a receta | Pendiente |
+| 9 | Política de privacidad y prueba con 5–10 personas | Pendiente |
+
+Pendiente dentro de lo ya hecho:
+
+- **Revisión del catálogo.** Las 33 recetas son un borrador: ninguna tiene `reviewedOn` porque nadie ha revisado todavía sus ingredientes y alérgenos uno a uno.
+- **Imágenes.** Ninguna receta tiene foto; la app muestra un marcador. El script que las procesa ya existe.
+- Probar la instalación en un iPhone y en un Android reales.
 
 ## Nota sobre `rollup`
 

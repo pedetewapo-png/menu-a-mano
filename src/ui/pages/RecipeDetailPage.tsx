@@ -103,6 +103,9 @@ export function RecipeDetailPage() {
             </p>
           )}
           <div className="toolbar">
+            <Link className="button button-primary" to={`/cocinar/${recipe.id}?c=${shownServings}`}>
+              {t.menu.cook}
+            </Link>
             <button type="button" className="button" aria-pressed={isFavorite} onClick={() => toggleFavorite(recipe.id)}>
               {isFavorite ? t.recipes.removeFavorite : t.recipes.addFavorite}
             </button>

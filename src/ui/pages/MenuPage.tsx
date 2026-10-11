@@ -5,7 +5,15 @@ import { catalog } from '../../data/catalog';
 import { addSavedPlan, deleteSavedPlan, listSavedPlans } from '../../data/repos';
 import { violations } from '../../domain/filters';
 import { emptyPlan, hardCandidates, type PlannerNotice } from '../../domain/planner';
-import { MAX_SERVINGS, MIN_SERVINGS, type MealSlot, type Preferences, type WeekPlan } from '../../domain/types';
+import {
+  breakfastsEnabled,
+  MAX_SERVINGS,
+  MIN_SERVINGS,
+  NOTE_MAX_LENGTH,
+  type MealSlot,
+  type Preferences,
+  type WeekPlan,
+} from '../../domain/types';
 import { addDays, mondayOf } from '../../domain/week';
 import { t } from '../../i18n';
 import { Dialog } from '../components/Dialog';
@@ -30,18 +38,26 @@ export function MenuPage() {
   const [openSlot, setOpenSlot] = useState<number | null>(null);
   const [pickerSlot, setPickerSlot] = useState<number | null>(null);
   const [savedOpen, setSavedOpen] = useState(false);
+  const [daySelection, setDaySelection] = useState<{ weekStart: string; day: number } | null>(null);
   // Platos ya rechazados en cada franja durante esta sesión, para no volver a proponerlos.
   const rejected = useRef(new Map<string, string[]>());
 
   if (!prefs || !favorites || !loaded) return <p>{t.common.loading}</p>;
 
   const plan = loaded.plan ?? emptyPlan(weekStart, prefs);
-  const hasRecipes = plan.slots.some((s) => s.recipeId);
+  const withBreakfast = breakfastsEnabled(prefs);
+  // Los desayunos solo se muestran cuando se han elegido los habituales.
+  const isShown = (slot: MealSlot) => slot.mealType !== 'breakfast' || withBreakfast;
+  const hasRecipes = plan.slots.some((s) => s.recipeId && isShown(s));
+  const currentWeek = mondayOf(new Date());
+  // En móvil se ve un día cada vez: hoy si es la semana en curso, el lunes si no.
+  const todayIndex = weekStart === currentWeek ? (new Date().getDay() + 6) % 7 : -1;
+  const selectedDay = daySelection?.weekStart === weekStart ? daySelection.day : Math.max(todayIndex, 0);
   const current = feedback?.weekStart === weekStart ? feedback : null;
   const say = (message: string, notices: PlannerNotice[] = []) => setFeedback({ weekStart, notices, message });
 
   const generate = async () => {
-    const manual = plan.slots.some((s) => s.recipeId && s.origin === 'manual' && !s.locked);
+    const manual = plan.slots.some((s) => s.recipeId && s.origin === 'manual' && !s.locked && isShown(s));
     if (manual && !window.confirm(t.menu.confirmRegenerate)) return;
     rejected.current.clear();
     say(t.menu.generated, await generateWeek(weekStart, prefs, favorites));
@@ -59,22 +75,32 @@ export function MenuPage() {
   return (
     <>
       <header className="page-header">
-        <div>
-          <h1>{t.menu.title}</h1>
-          <p className="week-range">{t.menu.weekOf(formatWeekRange(weekStart))}</p>
-        </div>
-        <div className="toolbar">
-          <button type="button" className="button" onClick={() => setWeekStart(addDays(weekStart, -7))}>
-            ← {t.menu.previousWeek}
+        <h1>{t.menu.title}</h1>
+        <div className="week-nav">
+          <button
+            type="button"
+            className="button week-nav-arrow"
+            aria-label={t.menu.previousWeek}
+            onClick={() => setWeekStart(addDays(weekStart, -7))}
+          >
+            ←
           </button>
-          {weekStart !== mondayOf(new Date()) && (
-            <button type="button" className="button" onClick={() => setWeekStart(mondayOf(new Date()))}>
+          <p className="week-range" aria-live="polite">
+            {t.menu.weekOf(formatWeekRange(weekStart))}
+          </p>
+          <button
+            type="button"
+            className="button week-nav-arrow"
+            aria-label={t.menu.nextWeek}
+            onClick={() => setWeekStart(addDays(weekStart, 7))}
+          >
+            →
+          </button>
+          {weekStart !== currentWeek && (
+            <button type="button" className="button" onClick={() => setWeekStart(currentWeek)}>
               {t.menu.thisWeek}
             </button>
           )}
-          <button type="button" className="button" onClick={() => setWeekStart(addDays(weekStart, 7))}>
-            {t.menu.nextWeek} →
-          </button>
         </div>
       </header>
 
@@ -86,11 +112,11 @@ export function MenuPage() {
           {t.menu.saved}
         </button>
         {hasRecipes && (
-          <Link className="button" to="/compra">
+          <Link className="button only-wide" to="/compra">
             {t.menu.goShopping}
           </Link>
         )}
-        {hasRecipes && <span className="hint">{t.menu.regenerateHint}</span>}
+        {hasRecipes && <span className="hint only-wide">{t.menu.regenerateHint}</span>}
       </div>
 
       <div className="status" role="status" aria-live="polite">
@@ -100,7 +126,7 @@ export function MenuPage() {
             <h2 className="callout-title">{t.menu.noticesTitle}</h2>
             <ul>
               {current.notices.map((notice) => (
-                <li key={notice.kind}>{describeNotice(notice)}</li>
+                <li key={notice.kind}>{describeNotice(notice, catalog)}</li>
               ))}
             </ul>
             <Link to="/ajustes">{t.menu.reviewPrefs}</Link>
@@ -115,16 +141,34 @@ export function MenuPage() {
         </div>
       )}
 
-      <ol className="week">
+      {/* Solo visible en móvil, donde el menú muestra un día cada vez. */}
+      <div className="day-strip" role="group" aria-label={t.menu.dayStrip}>
+        {t.daysShort.map((shortName, day) => (
+          <button
+            key={shortName}
+            type="button"
+            className={`day-chip${day === todayIndex ? ' day-chip-today' : ''}`}
+            aria-pressed={day === selectedDay}
+            aria-label={t.menu.dayLabel(t.days[day]!, formatDayNumber(weekStart, day), day === todayIndex)}
+            onClick={() => setDaySelection({ weekStart, day })}
+          >
+            <span>{shortName}</span>
+            <span className="day-chip-number">{formatDayNumber(weekStart, day)}</span>
+          </button>
+        ))}
+      </div>
+
+      <ol className={`week${withBreakfast ? ' week-with-breakfast' : ''}`}>
         {t.days.map((dayName, day) => (
-          <li key={dayName} className="day">
+          <li key={dayName} className={`day${day === selectedDay ? ' day-selected' : ''}`}>
             <h2 className="day-title">
               {dayName} <span className="day-number">{formatDayNumber(weekStart, day)}</span>
+              {day === todayIndex && <span className="tag day-today">{t.menu.today}</span>}
             </h2>
             <ul className="day-slots">
               {plan.slots
                 .map((slot, index) => ({ slot, index }))
-                .filter(({ slot }) => slot.day === day)
+                .filter(({ slot }) => slot.day === day && isShown(slot))
                 .map(({ slot, index }) => (
                   <SlotCard
                     key={index}
@@ -200,7 +244,17 @@ function SlotCard({ slot, prefs, dayName, onChange, onToggleLock, onMore }: Slot
           {broken && <p className="tag tag-warn">{t.menu.violates}</p>}
         </>
       )}
+      {slot.note && <p className="slot-note">{slot.note}</p>}
       <div className="slot-actions">
+        {slot.active && recipe && (
+          <Link
+            className="button button-small slot-cook"
+            to={`/cocinar/${recipe.id}?c=${slot.servingsOverride ?? prefs.servings}`}
+            aria-label={t.menu.cookFor(recipe.name)}
+          >
+            {t.menu.cook}
+          </Link>
+        )}
         {slot.active && !slot.locked && (
           <button
             type="button"
@@ -245,6 +299,8 @@ function SlotDialog({ index, plan, prefs, onClose, onChoose }: SlotDialogProps) 
   const title = `${t.days[slot.day]} · ${t.meal[slot.mealType]}`;
   const recipe = slot.recipeId ? catalog.recipeById.get(slot.recipeId) : undefined;
   const patch = (change: Partial<MealSlot>) => patchSlot(plan.weekStart, prefs, index, change);
+  // Un plato solo se mueve entre comidas del mismo tipo: los desayunos, con los desayunos.
+  const canMoveTo = (other: MealSlot) => (other.mealType === 'breakfast') === (slot.mealType === 'breakfast');
 
   return (
     <Dialog open onClose={onClose} title={title}>
@@ -253,6 +309,9 @@ function SlotDialog({ index, plan, prefs, onClose, onChoose }: SlotDialogProps) 
         <span>{t.menu.plan}</span>
       </label>
 
+      {/* La clave reinicia el campo al abrir otra comida. */}
+      <NoteField key={index} note={slot.note ?? ''} onSave={(note) => patch({ note: note || undefined })} />
+
       {slot.active && (
         <div className="stack">
           {recipe && (
@@ -260,6 +319,10 @@ function SlotDialog({ index, plan, prefs, onClose, onChoose }: SlotDialogProps) 
               <strong>{recipe.name}</strong> ·{' '}
               <Link to={`/recetas/${recipe.id}`} onClick={onClose}>
                 {t.menu.viewRecipe}
+              </Link>{' '}
+              ·{' '}
+              <Link to={`/cocinar/${recipe.id}?c=${slot.servingsOverride ?? prefs.servings}`} onClick={onClose}>
+                {t.menu.cook}
               </Link>
             </p>
           )}
@@ -303,7 +366,7 @@ function SlotDialog({ index, plan, prefs, onClose, onChoose }: SlotDialogProps) 
                   <select id="move-target" value={target} onChange={(e) => setTarget(e.target.value)}>
                     <option value="">—</option>
                     {plan.slots.map((other, i) =>
-                      i === index ? null : (
+                      i === index || !canMoveTo(other) ? null : (
                         <option key={i} value={i}>
                           {t.days[other.day]} · {t.meal[other.mealType]}
                         </option>
@@ -329,6 +392,47 @@ function SlotDialog({ index, plan, prefs, onClose, onChoose }: SlotDialogProps) 
         </div>
       )}
     </Dialog>
+  );
+}
+
+function NoteField({ note, onSave }: { note: string; onSave: (note: string) => void }) {
+  const [text, setText] = useState(note);
+  const save = (value: string) => {
+    const trimmed = value.trim();
+    setText(trimmed);
+    if (trimmed !== note) onSave(trimmed);
+  };
+
+  return (
+    <div className="field">
+      <label className="field-label" htmlFor="slot-note">
+        {t.menu.note}
+      </label>
+      <p className="hint">{t.menu.noteHint}</p>
+      <input
+        id="slot-note"
+        value={text}
+        maxLength={NOTE_MAX_LENGTH}
+        onChange={(e) => setText(e.target.value)}
+        // Se guarda al salir del campo o al pulsar Intro.
+        onBlur={() => save(text)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') save(text);
+        }}
+      />
+      <div className="toolbar note-suggestions">
+        {t.menu.noteSuggestions.map((suggestion) => (
+          <button key={suggestion} type="button" className="button button-small" onClick={() => save(suggestion)}>
+            {suggestion}
+          </button>
+        ))}
+        {note && (
+          <button type="button" className="button button-small button-quiet" onClick={() => save('')}>
+            {t.menu.noteRemove}
+          </button>
+        )}
+      </div>
+    </div>
   );
 }
 

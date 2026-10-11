@@ -4,4 +4,8 @@ dev-dist/
 *.local
 .DS_Store
 .wrangler/
+# Imágenes generadas a partir de catalog/images/
+public/recipes/
+test-results/
+playwright-report/
 .env*

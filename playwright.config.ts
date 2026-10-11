@@ -1,0 +1,50 @@
+import { defineConfig } from '@playwright/test';
+
+const DEV = 'http://localhost:5173';
+const BUILT = 'http://localhost:4173';
+
+// Las pruebas usan el Edge instalado en el equipo, así que no hay que descargar navegadores.
+export default defineConfig({
+  testDir: 'e2e',
+  fullyParallel: true,
+  forbidOnly: true,
+  reporter: [['list']],
+  use: {
+    channel: 'msedge',
+    locale: 'es-ES',
+    timezoneId: 'Europe/Madrid',
+    trace: 'retain-on-failure',
+    screenshot: 'only-on-failure',
+  },
+  projects: [
+    {
+      name: 'ordenador',
+      testIgnore: /compilada/,
+      use: { baseURL: DEV, viewport: { width: 1280, height: 800 } },
+    },
+    {
+      name: 'movil',
+      testIgnore: /compilada/,
+      use: { baseURL: DEV, viewport: { width: 360, height: 740 }, isMobile: true, hasTouch: true },
+    },
+    {
+      // Versión compilada: la única con service worker, necesaria para probar el uso sin conexión.
+      name: 'compilada',
+      testMatch: /compilada/,
+      use: { baseURL: BUILT, viewport: { width: 1280, height: 800 } },
+    },
+  ],
+  webServer: [
+    {
+      command: 'npm run dev -- --port 5173 --strictPort',
+      url: `${DEV}/app/`,
+      reuseExistingServer: true,
+    },
+    {
+      command: 'npm run build && npm run preview -- --port 4173 --strictPort',
+      url: `${BUILT}/app/`,
+      reuseExistingServer: true,
+      timeout: 180_000,
+    },
+  ],
+});
