@@ -16,7 +16,7 @@ Cuatro cambios grandes:
 1. **Funciona bien en el móvil y en el navegador**, con instalación opcional.
 2. **Cuenta opcional** con Google para tener los mismos datos en todos los dispositivos.
 3. **Plan familiar:** una persona, el anfitrión, crea el plan e invita a las cuentas que quiera. El anfitrión crea el menú familiar de la semana (desayuno, comida y cena), que respeta las restricciones de todos, y la lista de la compra es común. Cada miembro puede además retocar su propia copia del menú; esos retoques son privados. La referencia es el plan familiar de Microsoft 365, pero gratuito.
-4. **Más contenido y más control:** 70 recetas revisadas y con foto, desayunos, recetas propias, notas en las comidas y modo cocina.
+4. **Más contenido y más control:** 70 recetas revisadas, desayunos, recetas propias, notas en las comidas y modo cocina.
 
 La app sigue pudiendo usarse entera sin cuenta, sin conexión y sin pagar nada.
 
@@ -26,7 +26,7 @@ La app sigue pudiendo usarse entera sin cuenta, sin conexión y sin pagar nada.
 - Toda la app es cómoda en un teléfono, incluida la compra en el supermercado.
 - Quien quiera puede crear una cuenta y sincronizar; quien no, usa la app igual que en la v1.
 - En un plan familiar, los cambios del anfitrión y de la lista común llegan a todos en tiempo casi real, y los retoques personales de cada uno no los ve nadie más.
-- El catálogo queda cerrado: 70 recetas de comida y cena y 8 desayunos, revisados y con foto.
+- El catálogo queda cerrado: 70 recetas de comida y cena y 8 desayunos, revisados. Las fotos del catálogo se aplazan a la v3 (§2.4).
 - Ningún dato de la v1 se pierde al actualizar.
 - Lo que ya funcionaba sigue funcionando.
 
@@ -50,6 +50,7 @@ La app sigue pudiendo usarse entera sin cuenta, sin conexión y sin pagar nada.
 
 ### 2.4 Fuera de la v2
 - **Versión de pago.** Aplazada. La v2 no cobra nada ni reserva funciones.
+- **Fotos de las recetas del catálogo.** Aplazadas a la v3 por decisión del autor (2026-10-12). Las recetas del catálogo siguen mostrando un marcador en lugar de foto. Queda hecho el trabajo previo: el procesado de imágenes y una primera búsqueda de candidatas con licencia abierta (`npm run photos:propose`), sin ninguna descargada. Las recetas propias sí pueden llevar foto.
 - **Dietas médicas.** Descartadas por ahora. No se retomarán sin un dietista-nutricionista colegiado que las diseñe o revise.
 - **Inteligencia artificial más allá de "texto a receta"** (§13): proponer menús, sustituciones, inventar recetas o dar consejos.
 - Tiendas de aplicaciones, otros idiomas, importar recetas desde páginas web, recordatorios, sobras, aprovechar ingredientes, imprimir, valorar recetas.
@@ -60,7 +61,7 @@ La app sigue pudiendo usarse entera sin cuenta, sin conexión y sin pagar nada.
 
 | # | Decisión |
 |---|---|
-| E1 | Las recetas y fotos pendientes de la v1 pasan a la v2. |
+| E1 | Las recetas y fotos pendientes de la v1 pasan a la v2. El 2026-10-12 el autor aplazó las fotos del catálogo a la v3. |
 | E2 | Toda la app debe funcionar bien en móvil. |
 | E3 | Sincronización automática mediante cuenta opcional. |
 | E4 | Uso en navegador con instalación opcional. Las tiendas quedan para después. |
@@ -227,7 +228,7 @@ Prioridad: **A** imprescindible, **B** importante, **C** deseable.
 |---|---|---|---|
 | K1 | Quiero un catálogo suficiente y variado. | 70 recetas de comida y cena y 8 desayunos, con la cobertura de §9.2. | A |
 | K2 | Quiero poder fiarme de los alérgenos del catálogo. | Todas las recetas tienen fecha de revisión, hecha con la lista de §9.3. El aviso de "borrador" desaparece. | A |
-| K3 | Quiero ver una foto de cada plato. | Todas las recetas del catálogo tienen foto con licencia abierta y atribución visible. | A |
+| K3 | Quiero ver una foto de cada plato. | Todas las recetas del catálogo tienen foto con licencia abierta y atribución visible. **Aplazada a la v3.** | — |
 
 ### 4.8 Prueba con otras personas
 
@@ -468,8 +469,8 @@ Compiten con las del catálogo en igualdad de condiciones. Los borradores y las 
 
 ### 9.1 Contenido
 - 70 recetas de comida y cena (hoy hay 25) y 8 desayunos.
-- Todas con foto de licencia abierta, según las reglas de la v1 (§13.3).
-- Se completa el procesado de imágenes pendiente de la v1.
+- Sin foto en la v2: las fotos del catálogo se aplazan a la v3 (§2.4). Cuando se añadan, serán de licencia abierta, según las reglas de la v1 (§13.3).
+- El procesado de imágenes pendiente de la v1 está hecho y se usará entonces.
 
 ### 9.2 Cobertura mínima
 
@@ -493,6 +494,8 @@ Compiten con las del catálogo en igualdad de condiciones. Los borradores y las 
 5. Los tiempos son realistas.
 6. La foto corresponde al plato y no muestra ingredientes que la receta no lleva.
 7. La foto tiene licencia admitida, con autor y enlace registrados.
+
+Los puntos 6 y 7 no se aplican en la v2, porque las recetas del catálogo no llevan foto todavía.
 
 Al completarla se anota la fecha en la receta. El validador pasa a exigirla: una receta sin revisar impide compilar.
 
@@ -588,7 +591,7 @@ Capas, tecnologías y reglas de la v1. Todo el acceso a datos sigue pasando por 
 8. Ningún menú incumple la restricción de ningún perfil del plan familiar.
 9. Una receta propia aparece en el menú, respeta los filtros y suma a la compra.
 10. Una receta exportada e importada conserva ingredientes, cantidades y alérgenos.
-11. El catálogo tiene 70 recetas y 8 desayunos, todos revisados y con foto atribuida.
+11. El catálogo tiene 70 recetas y 8 desayunos, todos revisados. (Las fotos, en la v3.)
 12. La cuenta se puede borrar desde la app y sus datos desaparecen del servidor.
 13. En un plan familiar, solo el anfitrión y los administradores pueden cambiar el menú de todos, y solo el anfitrión puede nombrar administradores.
 14. El cambio personal de un miembro no aparece en el dispositivo de ningún otro miembro ni en la lista común.
@@ -647,7 +650,7 @@ Proponer menús a partir de una frase, sugerir sustituciones, inventar recetas y
 | 2 | Notas, modo cocina y desayunos. Migración de datos a la v2. | Primeras novedades visibles. |
 | 3 | Perfiles de comensal y planificador para varios perfiles. | Menú que respeta a toda la casa, aún sin cuentas. |
 | 4 | Recetas propias: editor, ingredientes propios, foto, exportar e importar. | Catálogo ampliable por el usuario. |
-| 5 | Catálogo: hasta 70 recetas y 8 desayunos, fotos y revisión, por tandas de unas 10. | Catálogo cerrado. Avanza en paralelo desde la fase 0; cada tanda puede publicarse al terminarla. |
+| 5 | Catálogo: hasta 70 recetas y 8 desayunos, calorías y revisión. Las fotos se aplazan a la v3. | Catálogo cerrado. Avanza en paralelo desde la fase 0; cada tanda puede publicarse al terminarla. |
 | 6 | Cuenta con Google y sincronización entre dispositivos de una persona. | Mismos datos en móvil y ordenador. |
 | 7 | Planes familiares: crear, invitar y unirse; menú familiar del anfitrión y lista común en tiempo real. | Menú familiar y lista compartidos. |
 | 7 bis | Copia personal: cambios privados, avisos cuando cambia el plan y "Mis extras". | Cada miembro con su versión del menú. |

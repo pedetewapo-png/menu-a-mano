@@ -134,7 +134,7 @@ export function checkCatalog(rawIngredients: unknown, rawRecipes: RawRecipeFile[
   const pending = (label: string, missing: Recipe[]) => {
     if (missing.length > 0) warnings.push(`${missing.length} de ${recipes.length} recetas ${label}`);
   };
-  pending('sin imagen', recipes.filter((r) => !r.image));
+  // Las fotos del catálogo se aplazan a la v3: que falten no es trabajo pendiente de esta versión.
   pending('con ingredientes y alérgenos sin revisar por una persona', recipes.filter((r) => !r.reviewedOn));
 
   if (errors.length > 0) return { errors, warnings };
