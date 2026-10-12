@@ -9,6 +9,9 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: true,
   reporter: [['list']],
+  // El servidor de desarrollo compila cada página la primera vez que se pide; con todas
+  // las pruebas arrancando a la vez, esa primera carga puede tardar más de lo habitual.
+  expect: { timeout: 15_000 },
   use: {
     channel: 'msedge',
     locale: 'es-ES',

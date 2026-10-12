@@ -9,12 +9,13 @@ import { t } from '../../i18n';
 import { RecipeImage } from '../components/RecipeImage';
 import { Stepper } from '../components/Stepper';
 import { describeViolation, formatRecipeIngredient } from '../format';
-import { useFavorites, usePreferences, useWeek } from '../hooks';
+import { useFavorites, usePreferences, useProfiles, useWeek } from '../hooks';
 import { patchSlot } from '../planActions';
 
 export function RecipeDetailPage() {
   const { recipeId } = useParams();
   const prefs = usePreferences();
+  const profiles = useProfiles();
   const favorites = useFavorites();
   const { weekStart } = useWeek();
   const [servings, setServings] = useState<number | null>(null);
@@ -22,7 +23,7 @@ export function RecipeDetailPage() {
   const [mealType, setMealType] = useState<MealType | null>(null);
   const [message, setMessage] = useState('');
 
-  if (!prefs || !favorites) return <p>{t.common.loading}</p>;
+  if (!prefs || !profiles || !favorites) return <p>{t.common.loading}</p>;
   const recipe = recipeId ? catalog.recipeById.get(recipeId) : undefined;
   if (!recipe) {
     return (
@@ -99,7 +100,7 @@ export function RecipeDetailPage() {
           </dl>
           {problems.length > 0 && (
             <p className="callout" role="note">
-              {t.recipes.notCompatible}: {problems.map((p) => describeViolation(p, catalog)).join('; ')}.
+              {t.recipes.notCompatible}: {problems.map((p) => describeViolation(p, recipe, catalog, profiles)).join('; ')}.
             </p>
           )}
           <div className="toolbar">
@@ -157,7 +158,7 @@ export function RecipeDetailPage() {
       <section className="card" aria-labelledby="add-title">
         <h2 id="add-title">{t.recipes.addToMenu}</h2>
         {problems.length > 0 ? (
-          <p>{t.recipes.addToMenuDisabled(describeViolation(problems[0]!, catalog))}</p>
+          <p>{t.recipes.addToMenuDisabled(describeViolation(problems[0]!, recipe, catalog, profiles))}</p>
         ) : (
           <div className="toolbar">
             <select aria-label={t.prefs.dayColumn} value={day} onChange={(e) => setDay(Number(e.target.value))}>

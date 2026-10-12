@@ -1,7 +1,18 @@
 import { describe, expect, it } from 'vitest';
 import { BACKUP_APP_ID, BACKUP_SCHEMA_VERSION, parseBackup } from '../data/backupFormat';
+import { DEFAULT_SETTINGS } from '../domain/household';
 import { emptyPlan } from '../domain/planner';
-import { DEFAULT_PREFERENCES } from '../domain/types';
+import { DEFAULT_PREFERENCES, type DinerProfile } from '../domain/types';
+
+const ana: DinerProfile = {
+  id: 'ana',
+  name: 'Ana',
+  diet: 'vegetarian',
+  excludedIngredientIds: ['champinones'],
+  excludedGroups: [],
+  excludedAllergens: ['gluten'],
+  createdAt: '2026-10-10T18:00:00.000Z',
+};
 
 const valid = () => ({
   app: BACKUP_APP_ID,
@@ -9,7 +20,8 @@ const valid = () => ({
   exportedAt: '2026-10-10T18:00:00.000Z',
   notice: '',
   data: {
-    preferences: { ...DEFAULT_PREFERENCES, onboardingDone: true },
+    settings: { ...DEFAULT_SETTINGS, onboardingDone: true },
+    profiles: [ana],
     weekPlans: [{ ...emptyPlan('2026-10-12', DEFAULT_PREFERENCES), updatedAt: '2026-10-10T18:00:00.000Z' }],
     savedPlans: [],
     favorites: [{ recipeId: 'pisto', addedAt: '2026-10-10T18:00:00.000Z' }],
@@ -45,8 +57,12 @@ describe('parseBackup', () => {
     broken.data.weekPlans[0]!.slots.pop();
     expect(parseBackup(JSON.stringify(broken))).toMatchObject({ ok: false, reason: 'invalid' });
 
-    const badDiet = valid() as unknown as { data: { preferences: { diet: string } } };
-    badDiet.data.preferences.diet = 'carnívora';
+    const badDiet = valid() as unknown as { data: { profiles: { diet: string }[] } };
+    badDiet.data.profiles[0]!.diet = 'carnívora';
     expect(parseBackup(JSON.stringify(badDiet))).toMatchObject({ ok: false, reason: 'invalid' });
+
+    const noName = valid();
+    noName.data.profiles[0] = { ...ana, name: '   ' };
+    expect(parseBackup(JSON.stringify(noName))).toMatchObject({ ok: false, reason: 'invalid' });
   });
 });

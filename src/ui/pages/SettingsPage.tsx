@@ -2,33 +2,71 @@ import { useRef, useState } from 'react';
 import { exportBackup, importBackup } from '../../data/backup';
 import { parseBackup } from '../../data/backupFormat';
 import { catalog } from '../../data/catalog';
-import { clearAllData, savePreferences } from '../../data/repos';
-import type { Preferences } from '../../domain/types';
+import { clearAllData, createProfile, deleteProfile, saveProfile, saveSettings } from '../../data/repos';
+import { combinePreferences } from '../../domain/household';
+import { MAX_PROFILES, type DinerProfile, type HouseholdSettings } from '../../domain/types';
 import { t } from '../../i18n';
 import { promptInstall } from '../../install';
 import { getTextScale, getTheme, setTextScale, setTheme, TEXT_SCALES, THEMES } from '../appearance';
-import { AvoidSection, DietSection, WeekSection } from '../components/PreferencesForm';
+import { ServingsField, WeekSection } from '../components/PreferencesForm';
+import { ProfileDialog } from '../components/ProfileDialog';
 import { formatDateTime } from '../format';
-import { useInstallState, useMeta, usePending, usePreferences, useWeek } from '../hooks';
+import { useHousehold, useInstallState, useMeta, usePending, useWeek } from '../hooks';
 import { refreshBreakfasts } from '../planActions';
 
+/** Resumen de una ficha en una línea: "Vegetariana · evita champiñones · alérgenos: gluten". */
+function summarize(profile: DinerProfile): string {
+  const avoided = [
+    ...profile.excludedGroups.map((group) => t.group[group].toLowerCase()),
+    ...profile.excludedIngredientIds.map((id) => catalog.ingredients.get(id)?.name ?? id),
+  ];
+  const parts = [t.diet[profile.diet]];
+  if (avoided.length > 0) parts.push(t.profiles.avoids(avoided.join(', ')));
+  if (profile.excludedAllergens.length > 0) {
+    parts.push(t.profiles.allergens(profile.excludedAllergens.map((a) => t.allergen[a].toLowerCase()).join(', ')));
+  }
+  if (parts.length === 1) parts.push(t.profiles.noNeeds);
+  return parts.join(' · ');
+}
+
 export function SettingsPage() {
-  const [prefs, showPrefs] = usePending(usePreferences());
+  const [household, showHousehold] = usePending(useHousehold());
   const meta = useMeta();
   const install = useInstallState();
   const { weekStart } = useWeek();
   const fileInput = useRef<HTMLInputElement>(null);
   const [message, setMessage] = useState('');
+  const [editing, setEditing] = useState<{ profile: DinerProfile; isNew: boolean } | null>(null);
   const [textScale, setScale] = useState(getTextScale);
   const [theme, setThemeState] = useState(getTheme);
 
-  if (!prefs || !meta) return <p>{t.common.loading}</p>;
+  if (!household || !meta) return <p>{t.common.loading}</p>;
+  const { profiles, settings } = household;
 
-  const change = async (patch: Partial<Preferences>) => {
-    const next = { ...prefs, ...patch };
-    showPrefs(next);
-    await savePreferences(next);
-    if ('habitualBreakfastIds' in patch) await refreshBreakfasts(weekStart, next);
+  const changeSettings = async (patch: Partial<HouseholdSettings>) => {
+    const next = { ...settings, ...patch };
+    showHousehold({ profiles, settings: next });
+    await saveSettings(next);
+    if ('habitualBreakfastIds' in patch) await refreshBreakfasts(weekStart, combinePreferences(profiles, next));
+  };
+
+  const saveEdited = async (profile: DinerProfile, isNew: boolean) => {
+    await saveProfile(profile);
+    let text = t.profiles.saved(profile.name);
+    // Una persona más en casa es, como mínimo, un comensal más.
+    const count = profiles.length + (isNew ? 1 : 0);
+    if (isNew && settings.servings < count) {
+      await saveSettings({ ...settings, servings: count });
+      text += t.profiles.servingsRaised(count);
+    }
+    setEditing(null);
+    setMessage(text);
+  };
+
+  const removeProfile = async (profile: DinerProfile) => {
+    if (!window.confirm(t.profiles.removeConfirm(profile.name))) return;
+    await deleteProfile(profile.id);
+    setMessage(t.profiles.removed(profile.name));
   };
 
   const download = async () => {
@@ -70,19 +108,65 @@ export function SettingsPage() {
         {message}
       </p>
 
-      <section className="card" aria-labelledby="settings-prefs">
-        <h2 id="settings-prefs">{t.settings.preferences}</h2>
-        <p className="hint">{t.settings.preferencesHint}</p>
-        <div className="settings-grid">
-          <div>
-            <DietSection value={prefs} onChange={change} />
-            <WeekSection value={prefs} onChange={change} />
-          </div>
-          <div>
-            <AvoidSection value={prefs} onChange={change} />
-          </div>
-        </div>
+      <section className="card" aria-labelledby="settings-profiles">
+        <h2 id="settings-profiles">{t.profiles.title}</h2>
+        <p className="hint">{t.profiles.hint}</p>
+        <ul className="profile-list">
+          {profiles.map((profile) => (
+            <li key={profile.id} className="profile-row">
+              <div>
+                <strong>{profile.name}</strong>
+                <p className="hint">{summarize(profile)}</p>
+              </div>
+              <div className="toolbar">
+                <button
+                  type="button"
+                  className="button button-small"
+                  aria-label={t.profiles.editFor(profile.name)}
+                  onClick={() => setEditing({ profile, isNew: false })}
+                >
+                  {t.profiles.edit}
+                </button>
+                {/* Siempre tiene que quedar al menos un comensal. */}
+                {profiles.length > 1 && (
+                  <button
+                    type="button"
+                    className="button button-small button-quiet"
+                    aria-label={t.profiles.removeFor(profile.name)}
+                    onClick={() => removeProfile(profile)}
+                  >
+                    {t.profiles.remove}
+                  </button>
+                )}
+              </div>
+            </li>
+          ))}
+        </ul>
+        {profiles.length < MAX_PROFILES ? (
+          <button type="button" className="button" onClick={() => setEditing({ profile: createProfile(), isNew: true })}>
+            {t.profiles.add}
+          </button>
+        ) : (
+          <p className="hint">{t.profiles.limit(MAX_PROFILES)}</p>
+        )}
       </section>
+
+      <section className="card" aria-labelledby="settings-menu">
+        <h2 id="settings-menu">{t.profiles.menuTitle}</h2>
+        <p className="hint">{t.profiles.menuHint}</p>
+        <ServingsField value={settings.servings} onChange={(servings) => changeSettings({ servings })} />
+        <WeekSection value={settings} preferences={combinePreferences(profiles, settings)} onChange={changeSettings} />
+      </section>
+
+      {editing && (
+        <ProfileDialog
+          key={editing.profile.id}
+          profile={editing.profile}
+          isNew={editing.isNew}
+          onSave={(profile) => saveEdited(profile, editing.isNew)}
+          onClose={() => setEditing(null)}
+        />
+      )}
 
       <section className="card" aria-labelledby="settings-data">
         <h2 id="settings-data">{t.settings.data}</h2>

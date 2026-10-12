@@ -1,4 +1,4 @@
-import type { MealSlot, MealType, Preferences, WeekPlan } from '../domain/types';
+import type { DinerProfile, HouseholdSettings, MealSlot, MealType, Preferences, WeekPlan } from '../domain/types';
 import { DAYS_PER_WEEK, DEFAULT_PREFERENCES, MEAL_TYPES, MEALS_PER_DAY } from '../domain/types';
 
 // Conversión de los datos de la v1 (solo comida y cena) al formato de la v2
@@ -51,6 +51,55 @@ export function migrateWeekPlan<T extends { slots: unknown }>(plan: T): T {
 
 function emptySlot(day: number, mealType: MealType): MealSlot {
   return { day, mealType, active: true, recipeId: null, locked: false, origin: 'generated' };
+}
+
+// ---------- Esquema 3: las preferencias se reparten entre fichas de comensal y ajustes de la casa ----------
+
+/** La ficha que se crea a partir de las preferencias antiguas, que eran de una sola persona. */
+export const MIGRATED_PROFILE_ID = 'principal';
+const MIGRATED_PROFILE_NAME = 'Yo';
+const MIGRATED_PROFILE_DATE = '2026-01-01T00:00:00.000Z';
+
+/** Ajustes de la casa a partir de datos guardados, completando lo que falte con los valores por defecto. */
+export function normalizeSettings(raw: unknown): HouseholdSettings {
+  const prefs = migratePreferences(raw);
+  return {
+    servings: prefs.servings,
+    maxTotalMinutes: prefs.maxTotalMinutes,
+    preferBudget: prefs.preferBudget,
+    activeSlots: prefs.activeSlots,
+    habitualBreakfastIds: prefs.habitualBreakfastIds,
+    onboardingDone: prefs.onboardingDone,
+  };
+}
+
+/** Separa unas preferencias antiguas en los ajustes de la casa y la ficha de su único comensal. */
+export function splitPreferences(raw: unknown): { settings: HouseholdSettings; profiles: DinerProfile[] } {
+  const prefs = migratePreferences(raw);
+  const settings = normalizeSettings(raw);
+  // Quien no había terminado la configuración inicial aún no tiene ficha: la creará al hacerla.
+  if (!prefs.onboardingDone) return { settings, profiles: [] };
+  return {
+    settings,
+    profiles: [
+      {
+        id: MIGRATED_PROFILE_ID,
+        name: MIGRATED_PROFILE_NAME,
+        diet: prefs.diet,
+        excludedIngredientIds: prefs.excludedIngredientIds,
+        excludedGroups: prefs.excludedGroups,
+        excludedAllergens: prefs.excludedAllergens,
+        createdAt: MIGRATED_PROFILE_DATE,
+      },
+    ],
+  };
+}
+
+/** Datos de una copia de seguridad del esquema 2, llevados al esquema 3. */
+export function migrateBackupDataV2(data: unknown): unknown {
+  if (!isObject(data) || 'settings' in data) return data;
+  const { preferences, ...rest } = data;
+  return { ...rest, ...splitPreferences(preferences) };
 }
 
 /** Datos de una copia de seguridad de la v1, llevados al formato de la v2. */

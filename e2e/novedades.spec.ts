@@ -91,6 +91,51 @@ test('modo cocina: ingredientes, pasos uno a uno y salida', async ({ page }) => 
   await expect(page.getByRole('heading', { level: 1, name: 'Pisto' })).toBeVisible();
 });
 
+test('comensales: el menú respeta a todos y dice de quién es cada restricción', async ({ page }) => {
+  await startApp(page);
+  await openScreen(page, '#/ajustes', 'Ajustes');
+  // La configuración inicial ya creó la primera ficha.
+  await expect(page.locator('.profile-row')).toHaveCount(1);
+  await expect(page.locator('.profile-row')).toContainText('Yo');
+
+  // Segunda persona, con alergia al gluten.
+  await page.getByRole('button', { name: 'Añadir persona' }).click();
+  const dialog = page.getByRole('dialog');
+  await dialog.getByRole('textbox', { name: 'Nombre' }).fill('Ana');
+  await dialog.getByRole('checkbox', { name: 'Gluten' }).check();
+  await expectAccessible(page);
+  await dialog.getByRole('button', { name: 'Guardar' }).click();
+  await expect(page.getByText('Ficha de Ana guardada.')).toBeVisible();
+  await expect(page.locator('.profile-row', { hasText: 'Ana' })).toContainText('alérgenos: gluten');
+
+  // Las recetas con gluten dejan de valer, y se indica por quién.
+  await openScreen(page, '#/recetas', 'Recetas');
+  const macarrones = page.locator('.recipe-card', { hasText: 'Macarrones con tomate y verduras' });
+  await expect(macarrones).toContainText('contiene o puede contener gluten (Ana)');
+
+  // Al regenerar, ningún plato lleva gluten: la pasta desaparece de la compra.
+  await openScreen(page, '#/menu', 'Menú semanal');
+  await page.getByRole('button', { name: 'Regenerar' }).click();
+  await expect(page.getByText('Menú generado.')).toBeVisible();
+  await expect(page.locator('.slot .tag-warn')).toHaveCount(0);
+  await openScreen(page, '#/compra', 'Lista de la compra');
+  await expect(page.getByRole('checkbox', { name: /Marcar Pasta corta/ })).toHaveCount(0);
+  await expect(page.getByRole('checkbox', { name: /Marcar Cuscús/ })).toHaveCount(0);
+
+  // Se puede editar la ficha y quitar al comensal.
+  await openScreen(page, '#/ajustes', 'Ajustes');
+  await page.getByRole('button', { name: 'Editar la ficha de Ana' }).click();
+  await dialog.getByRole('radio', { name: /Vegetariana/ }).check();
+  await dialog.getByRole('button', { name: 'Guardar' }).click();
+  await expect(page.locator('.profile-row', { hasText: 'Ana' })).toContainText('Vegetariana');
+
+  page.once('dialog', (confirm) => confirm.accept());
+  await page.getByRole('button', { name: 'Quitar a Ana' }).click();
+  await expect(page.locator('.profile-row')).toHaveCount(1);
+  await openScreen(page, '#/recetas', 'Recetas');
+  await expect(macarrones.getByText(/No cumple/)).toHaveCount(0);
+});
+
 test('la app se usa en una pestaña y ofrece instalarse desde Ajustes', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('link', { name: 'Abrir Menú a Mano' }).click();

@@ -217,7 +217,7 @@ export function App() {
   const week = useMemo(() => ({ weekStart, setWeekStart }), [weekStart]);
 
   if (!prefs) return <p className="loading">{t.common.loading}</p>;
-  if (!prefs.onboardingDone) return <OnboardingPage initial={prefs} />;
+  if (!prefs.onboardingDone) return <OnboardingPage />;
 
   return (
     <WeekContext.Provider value={week}>

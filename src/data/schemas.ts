@@ -12,6 +12,7 @@ import {
   MEALS_PER_DAY,
   MIN_SERVINGS,
   NOTE_MAX_LENGTH,
+  PROFILE_NAME_MAX_LENGTH,
   RECIPE_UNITS,
   SHOP_SECTIONS,
 } from '../domain/types';
@@ -83,12 +84,18 @@ export const recipeSchema = z.strictObject({
 
 // ---------- Datos de usuario ----------
 
-export const preferencesSchema = z.object({
+export const profileSchema = z.object({
+  id: z.string().min(1),
+  name: z.string().trim().min(1).max(PROFILE_NAME_MAX_LENGTH),
   diet: z.enum(DIETS),
-  servings,
   excludedIngredientIds: z.array(z.string()),
   excludedGroups: z.array(z.enum(INGREDIENT_GROUPS)),
   excludedAllergens: z.array(z.enum(ALLERGENS)),
+  createdAt: z.string(),
+});
+
+export const settingsSchema = z.object({
+  servings,
   maxTotalMinutes: z.number().int().positive().nullable(),
   preferBudget: z.boolean(),
   activeSlots: z.array(z.array(z.boolean()).length(MEALS_PER_DAY)).length(DAYS_PER_WEEK),

@@ -1,20 +1,61 @@
-import type { Meta, Preferences, SavedPlan, ShoppingListState, WeekPlan } from '../domain/types';
-import { db, PREFERENCES_KEY, SCHEMA_VERSION } from './db';
-import { migratePreferences } from './migrations';
+import { combinePreferences } from '../domain/household';
+import type {
+  DinerProfile,
+  HouseholdSettings,
+  Meta,
+  Preferences,
+  SavedPlan,
+  ShoppingListState,
+  WeekPlan,
+} from '../domain/types';
+import { db, SCHEMA_VERSION, SETTINGS_KEY } from './db';
+import { normalizeSettings } from './migrations';
 
 // La interfaz solo accede a los datos a través de este módulo, para poder
 // cambiar IndexedDB por otro almacenamiento sin tocar las pantallas.
 
 const META_KEY = 'meta';
 
-export async function getPreferences(): Promise<Preferences> {
-  const row = await db.kv.get(PREFERENCES_KEY);
+export async function getSettings(): Promise<HouseholdSettings> {
+  const row = await db.kv.get(SETTINGS_KEY);
   // Completa con los valores por defecto cualquier campo que falte.
-  return migratePreferences(row?.value);
+  return normalizeSettings(row?.value);
 }
 
-export async function savePreferences(preferences: Preferences): Promise<void> {
-  await db.kv.put({ key: PREFERENCES_KEY, value: preferences });
+export async function saveSettings(settings: HouseholdSettings): Promise<void> {
+  await db.kv.put({ key: SETTINGS_KEY, value: settings });
+}
+
+/** Fichas de comensal, en el orden en que se crearon. */
+export async function getProfiles(): Promise<DinerProfile[]> {
+  const profiles = await db.profiles.toArray();
+  return profiles.sort((a, b) => a.createdAt.localeCompare(b.createdAt) || a.name.localeCompare(b.name, 'es'));
+}
+
+/** Ficha nueva, todavía sin guardar. */
+export function createProfile(name = ''): DinerProfile {
+  return {
+    id: crypto.randomUUID(),
+    name,
+    diet: 'omnivore',
+    excludedIngredientIds: [],
+    excludedGroups: [],
+    excludedAllergens: [],
+    createdAt: new Date().toISOString(),
+  };
+}
+
+export async function saveProfile(profile: DinerProfile): Promise<void> {
+  await db.profiles.put(profile);
+}
+
+export async function deleteProfile(id: string): Promise<void> {
+  await db.profiles.delete(id);
+}
+
+/** Preferencias con las que se planifica: los ajustes de la casa más las necesidades de todos los comensales. */
+export async function getPreferences(): Promise<Preferences> {
+  return combinePreferences(await getProfiles(), await getSettings());
 }
 
 export async function getMeta(): Promise<Meta> {
@@ -72,9 +113,10 @@ export async function updateShoppingState(
 }
 
 export async function clearAllData(): Promise<void> {
-  await db.transaction('rw', [db.kv, db.weekPlans, db.savedPlans, db.favorites, db.shoppingLists], async () => {
+  await db.transaction('rw', [db.kv, db.profiles, db.weekPlans, db.savedPlans, db.favorites, db.shoppingLists], async () => {
     await Promise.all([
       db.kv.clear(),
+      db.profiles.clear(),
       db.weekPlans.clear(),
       db.savedPlans.clear(),
       db.favorites.clear(),

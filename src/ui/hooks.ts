@@ -1,8 +1,8 @@
 import { useLiveQuery } from 'dexie-react-hooks';
 import { createContext, useContext, useEffect, useState, useSyncExternalStore } from 'react';
 import { db } from '../data/db';
-import { getMeta, getPreferences } from '../data/repos';
-import type { Meta, Preferences, WeekPlan } from '../domain/types';
+import { getMeta, getPreferences, getProfiles, getSettings } from '../data/repos';
+import type { DinerProfile, HouseholdSettings, Meta, Preferences, WeekPlan } from '../domain/types';
 import { getInstallState, subscribeInstall, type InstallState } from '../install';
 import { getPwaState, subscribePwa, type PwaState } from '../pwa';
 
@@ -57,9 +57,24 @@ export function useWakeLock(): void {
   }, []);
 }
 
-/** undefined mientras carga. */
+/** Preferencias con las que se planifica (las de todos los comensales a la vez). undefined mientras carga. */
 export function usePreferences(): Preferences | undefined {
   return useLiveQuery(() => getPreferences(), []);
+}
+
+/** Fichas de comensal; sirven para decir de quién es cada restricción. undefined mientras carga. */
+export function useProfiles(): DinerProfile[] | undefined {
+  return useLiveQuery(() => getProfiles(), []);
+}
+
+export interface Household {
+  profiles: DinerProfile[];
+  settings: HouseholdSettings;
+}
+
+/** Las fichas de comensal y los ajustes de la casa, por separado. undefined mientras carga. */
+export function useHousehold(): Household | undefined {
+  return useLiveQuery(async () => ({ profiles: await getProfiles(), settings: await getSettings() }), []);
 }
 
 export function useMeta(): Meta | undefined {

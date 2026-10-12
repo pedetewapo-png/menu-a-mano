@@ -1,6 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import { BACKUP_APP_ID, parseBackup } from '../data/backupFormat';
-import { migratePreferences, migrateWeekPlan } from '../data/migrations';
+import {
+  migrateBackupDataV2,
+  MIGRATED_PROFILE_ID,
+  migratePreferences,
+  migrateWeekPlan,
+  splitPreferences,
+} from '../data/migrations';
+import { combinePreferences } from '../domain/household';
 import { emptyPlan, slotIndex } from '../domain/planner';
 import { DEFAULT_PREFERENCES, type MealSlot } from '../domain/types';
 
@@ -85,8 +92,45 @@ describe('migración de la v1 a la v2', () => {
     if (!result.ok) return;
     expect(result.data.weekPlans[0]!.slots).toHaveLength(21);
     expect(result.data.weekPlans[0]!.slots[slotIndex(0, 'lunch')]).toMatchObject({ recipeId: 'pisto', locked: true });
-    expect(result.data.preferences.diet).toBe('vegetarian');
+    // Las preferencias, que eran de una sola persona, pasan a ser su ficha y los ajustes de la casa.
+    expect(result.data.profiles).toHaveLength(1);
+    expect(result.data.profiles[0]).toMatchObject({
+      diet: 'vegetarian',
+      excludedIngredientIds: ['champinones'],
+      excludedAllergens: ['gluten'],
+    });
+    expect(result.data.settings).toMatchObject({ servings: 3, maxTotalMinutes: 30, preferBudget: true });
     expect(result.data.favorites).toHaveLength(1);
+  });
+
+  it('las preferencias se reparten entre la ficha y los ajustes sin perder nada', () => {
+    const { settings, profiles } = splitPreferences(migratePreferences(v1Preferences));
+    const combined = combinePreferences(profiles, settings);
+    expect(combined).toEqual(migratePreferences(v1Preferences));
+  });
+
+  it('quien no había terminado la configuración inicial no recibe ficha', () => {
+    const { settings, profiles } = splitPreferences({ ...v1Preferences, onboardingDone: false });
+    expect(profiles).toEqual([]);
+    expect(settings.onboardingDone).toBe(false);
+  });
+
+  it('una copia del esquema 2 se importa convertida, y convertirla dos veces no cambia nada', () => {
+    const data = {
+      preferences: migratePreferences(v1Preferences),
+      weekPlans: [migrateWeekPlan(v1Plan())],
+      savedPlans: [],
+      favorites: [],
+      shoppingLists: [],
+    };
+    const result = parseBackup(JSON.stringify({ app: BACKUP_APP_ID, schemaVersion: 2, data }));
+    expect(result.ok).toBe(true);
+    if (!result.ok) return;
+    expect(result.data.profiles[0]!.id).toBe(MIGRATED_PROFILE_ID);
+    expect(result.data.settings.habitualBreakfastIds).toEqual([]);
+
+    const once = migrateBackupDataV2(data);
+    expect(migrateBackupDataV2(once)).toBe(once);
   });
 
   it('una copia de la v1 dañada se sigue rechazando', () => {

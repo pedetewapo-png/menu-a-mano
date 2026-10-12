@@ -1,7 +1,8 @@
 import type { Violation } from '../domain/filters';
+import { profilesBehindFilter, profilesBehindViolation } from '../domain/household';
 import type { PlannerNotice } from '../domain/planner';
 import type { ShoppingItem } from '../domain/shopping';
-import type { BaseUnit, Catalog, Ingredient, RecipeIngredient } from '../domain/types';
+import type { BaseUnit, Catalog, DinerProfile, Ingredient, Recipe, RecipeIngredient } from '../domain/types';
 import { roundForRecipe } from '../domain/units';
 import { addDays, parseIsoDate } from '../domain/week';
 import { locale, t } from '../i18n';
@@ -85,7 +86,14 @@ export function shoppingItemQuantity(item: ShoppingItem): string {
   return item.approxUnits ? `${base} (${t.units.approx(`${item.approxUnits} ${t.units.piece(item.approxUnits)}`)})` : base;
 }
 
-export function describeViolation(violation: Violation, catalog: Catalog): string {
+const nameList = new Intl.ListFormat(locale, { type: 'conjunction' });
+
+/** "Ana y Luis". Vacío si solo hay un comensal: no hace falta decir de quién es la restricción. */
+function namesIfSeveral(culprits: readonly DinerProfile[], profiles: readonly DinerProfile[]): string {
+  return profiles.length > 1 && culprits.length > 0 ? nameList.format(culprits.map((p) => p.name)) : '';
+}
+
+function violationReason(violation: Violation, catalog: Catalog): string {
   switch (violation.kind) {
     case 'diet':
       return t.violation.diet;
@@ -100,7 +108,20 @@ export function describeViolation(violation: Violation, catalog: Catalog): strin
   }
 }
 
-export function describeNotice(notice: PlannerNotice, catalog: Catalog): string {
+/** Por qué una receta no entra en el menú y, si hay varios comensales, por quién. */
+export function describeViolation(
+  violation: Violation,
+  recipe: Recipe,
+  catalog: Catalog,
+  profiles: readonly DinerProfile[],
+): string {
+  const reason = violationReason(violation, catalog);
+  const culprits = profilesBehindViolation(violation, catalog.derived.get(recipe.id)!.diet, profiles);
+  const names = namesIfSeveral(culprits, profiles);
+  return names ? t.violation.forPeople(reason, names) : reason;
+}
+
+export function describeNotice(notice: PlannerNotice, catalog: Catalog, profiles: readonly DinerProfile[]): string {
   let text: string;
   switch (notice.kind) {
     case 'repeatedFromPreviousWeek':
@@ -118,6 +139,8 @@ export function describeNotice(notice: PlannerNotice, catalog: Catalog): string 
   }
   if (notice.limiting) {
     text += ` ${t.menu.noticeLimiting(t.filterName[notice.limiting.filter], notice.limiting.countWithout)}`;
+    const names = namesIfSeveral(profilesBehindFilter(notice.limiting.filter, profiles), profiles);
+    if (names) text += ` ${t.menu.noticeLimitingPeople(names)}`;
   }
   return text;
 }

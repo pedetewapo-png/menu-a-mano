@@ -20,7 +20,7 @@ import { Dialog } from '../components/Dialog';
 import { RecipeImage } from '../components/RecipeImage';
 import { Stepper } from '../components/Stepper';
 import { describeNotice, formatDayNumber, formatWeekRange, normalize } from '../format';
-import { useFavorites, usePreferences, useWeek, useWeekPlan } from '../hooks';
+import { useFavorites, usePreferences, useProfiles, useWeek, useWeekPlan } from '../hooks';
 import { applySavedPlan, generateWeek, moveSlot, patchSlot, replaceSlot } from '../planActions';
 
 interface Feedback {
@@ -32,6 +32,7 @@ interface Feedback {
 export function MenuPage() {
   const { weekStart, setWeekStart } = useWeek();
   const prefs = usePreferences();
+  const profiles = useProfiles();
   const favorites = useFavorites();
   const loaded = useWeekPlan(weekStart);
   const [feedback, setFeedback] = useState<Feedback | null>(null);
@@ -42,7 +43,7 @@ export function MenuPage() {
   // Platos ya rechazados en cada franja durante esta sesión, para no volver a proponerlos.
   const rejected = useRef(new Map<string, string[]>());
 
-  if (!prefs || !favorites || !loaded) return <p>{t.common.loading}</p>;
+  if (!prefs || !profiles || !favorites || !loaded) return <p>{t.common.loading}</p>;
 
   const plan = loaded.plan ?? emptyPlan(weekStart, prefs);
   const withBreakfast = breakfastsEnabled(prefs);
@@ -126,7 +127,7 @@ export function MenuPage() {
             <h2 className="callout-title">{t.menu.noticesTitle}</h2>
             <ul>
               {current.notices.map((notice) => (
-                <li key={notice.kind}>{describeNotice(notice, catalog)}</li>
+                <li key={notice.kind}>{describeNotice(notice, catalog, profiles)}</li>
               ))}
             </ul>
             <Link to="/ajustes">{t.menu.reviewPrefs}</Link>

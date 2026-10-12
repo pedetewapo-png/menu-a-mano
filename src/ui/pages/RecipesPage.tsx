@@ -7,12 +7,13 @@ import { DIETS, type Diet } from '../../domain/types';
 import { t } from '../../i18n';
 import { RecipeImage } from '../components/RecipeImage';
 import { describeViolation, normalize } from '../format';
-import { useFavorites, usePreferences } from '../hooks';
+import { useFavorites, usePreferences, useProfiles } from '../hooks';
 
 const TIME_OPTIONS = [20, 30, 45];
 
 export function RecipesPage() {
   const prefs = usePreferences();
+  const profiles = useProfiles();
   const favorites = useFavorites();
   const [query, setQuery] = useState('');
   const [diet, setDiet] = useState<Diet | ''>('');
@@ -20,7 +21,7 @@ export function RecipesPage() {
   const [onlyFavorites, setOnlyFavorites] = useState(false);
   const [onlyCompatible, setOnlyCompatible] = useState(false);
 
-  if (!prefs || !favorites) return <p>{t.common.loading}</p>;
+  if (!prefs || !profiles || !favorites) return <p>{t.common.loading}</p>;
 
   const needle = normalize(query.trim());
   const results = catalog.recipes
@@ -105,7 +106,7 @@ export function RecipesPage() {
               {favorites.has(recipe.id) && <p className="tag">{t.recipes.favorite}</p>}
               {problems.length > 0 && (
                 <p className="tag tag-warn">
-                  {t.recipes.notCompatible}: {describeViolation(problems[0]!, catalog)}
+                  {t.recipes.notCompatible}: {describeViolation(problems[0]!, recipe, catalog, profiles)}
                 </p>
               )}
             </div>

@@ -156,7 +156,39 @@ export interface Catalog {
   derived: Map<string, DerivedRecipeInfo>;
 }
 
+/** Ficha de una persona que come en casa, con sus necesidades personales. */
+export interface DinerProfile {
+  id: string;
+  name: string;
+  diet: Diet;
+  excludedIngredientIds: string[];
+  excludedGroups: IngredientGroup[];
+  excludedAllergens: Allergen[];
+  createdAt: string;
+}
+
+/** Ajustes comunes de la casa: son decisiones de quien cocina, no restricciones de nadie. */
+export interface HouseholdSettings {
+  /** 1–12 */
+  servings: number;
+  maxTotalMinutes: number | null;
+  preferBudget: boolean;
+  /** [día 0–6][desayuno, comida, cena] */
+  activeSlots: boolean[][];
+  /** Desayunos que se alternan durante la semana. Vacío = el menú no tiene desayunos. */
+  habitualBreakfastIds: string[];
+  onboardingDone: boolean;
+}
+
+export const MAX_PROFILES = 12;
+export const PROFILE_NAME_MAX_LENGTH = 40;
+
+/**
+ * Lo que el planificador necesita saber: los ajustes de la casa más la suma de las
+ * restricciones de todos los comensales. No se guarda; se calcula con `combinePreferences`.
+ */
 export interface Preferences {
+  /** La dieta más restrictiva entre todos los comensales. */
   diet: Diet;
   /** 1–12 */
   servings: number;
@@ -191,7 +223,7 @@ export const DEFAULT_PREFERENCES: Preferences = {
 };
 
 /** Los desayunos solo forman parte del menú cuando se han elegido los habituales. */
-export function breakfastsEnabled(prefs: Preferences): boolean {
+export function breakfastsEnabled(prefs: Pick<HouseholdSettings, 'habitualBreakfastIds'>): boolean {
   return prefs.habitualBreakfastIds.length > 0;
 }
 

@@ -10,6 +10,8 @@ import {
   MAX_SERVINGS,
   MEAL_TYPES,
   MIN_SERVINGS,
+  type DinerProfile,
+  type HouseholdSettings,
   type IngredientGroup,
   type Preferences,
 } from '../../domain/types';
@@ -17,47 +19,54 @@ import { t } from '../../i18n';
 import { capitalize, normalize } from '../format';
 import { Stepper } from './Stepper';
 
-interface SectionProps {
-  value: Preferences;
-  onChange: (patch: Partial<Preferences>) => void;
+/** Necesidades personales de un comensal: lo que edita su ficha. */
+export type PersonalNeeds = Pick<DinerProfile, 'diet' | 'excludedIngredientIds' | 'excludedGroups' | 'excludedAllergens'>;
+
+interface PersonalProps {
+  value: PersonalNeeds;
+  onChange: (patch: Partial<PersonalNeeds>) => void;
+}
+
+interface SettingsProps {
+  value: HouseholdSettings;
+  /** Preferencias de todos los comensales a la vez; deciden qué desayunos se pueden elegir. */
+  preferences: Preferences;
+  onChange: (patch: Partial<HouseholdSettings>) => void;
 }
 
 const TIME_OPTIONS = [20, 30, 45, 60];
 
-export function DietSection({ value, onChange }: SectionProps) {
+export function DietField({ value, onChange }: PersonalProps) {
   const name = useId();
   return (
-    <>
-      <fieldset className="field">
-        <legend>{t.prefs.diet}</legend>
-        {DIETS.map((diet) => (
-          <label key={diet} className="choice">
-            <input type="radio" name={name} checked={value.diet === diet} onChange={() => onChange({ diet })} />
-            <span>
-              <strong>{t.diet[diet]}</strong>
-              <span className="hint"> {t.dietHint[diet]}</span>
-            </span>
-          </label>
-        ))}
-      </fieldset>
-      <div className="field">
-        <span className="field-label">{t.prefs.servings}</span>
-        <p className="hint">{t.prefs.servingsHint}</p>
-        <Stepper
-          value={value.servings}
-          min={MIN_SERVINGS}
-          max={MAX_SERVINGS}
-          unitLabel={t.prefs.servingsUnit}
-          onChange={(servings) => onChange({ servings })}
-        />
-      </div>
-    </>
+    <fieldset className="field">
+      <legend>{t.prefs.diet}</legend>
+      {DIETS.map((diet) => (
+        <label key={diet} className="choice">
+          <input type="radio" name={name} checked={value.diet === diet} onChange={() => onChange({ diet })} />
+          <span>
+            <strong>{t.diet[diet]}</strong>
+            <span className="hint"> {t.dietHint[diet]}</span>
+          </span>
+        </label>
+      ))}
+    </fieldset>
+  );
+}
+
+export function ServingsField({ value, onChange }: { value: number; onChange: (servings: number) => void }) {
+  return (
+    <div className="field">
+      <span className="field-label">{t.prefs.servings}</span>
+      <p className="hint">{t.prefs.servingsHint}</p>
+      <Stepper value={value} min={MIN_SERVINGS} max={MAX_SERVINGS} unitLabel={t.prefs.servingsUnit} onChange={onChange} />
+    </div>
   );
 }
 
 type ExclusionOption = { kind: 'group'; id: IngredientGroup; label: string } | { kind: 'ingredient'; id: string; label: string };
 
-function ExclusionPicker({ value, onChange }: SectionProps) {
+function ExclusionPicker({ value, onChange }: PersonalProps) {
   const inputId = useId();
   const [query, setQuery] = useState('');
 
@@ -138,7 +147,7 @@ function ExclusionPicker({ value, onChange }: SectionProps) {
   );
 }
 
-export function AvoidSection({ value, onChange }: SectionProps) {
+export function AvoidSection({ value, onChange }: PersonalProps) {
   return (
     <>
       <ExclusionPicker value={value} onChange={onChange} />
@@ -172,9 +181,9 @@ export function AvoidSection({ value, onChange }: SectionProps) {
   );
 }
 
-function BreakfastPicker({ value, onChange }: SectionProps) {
+function BreakfastPicker({ value, preferences, onChange }: SettingsProps) {
   const chosen = value.habitualBreakfastIds;
-  const compatible = hardCandidates(catalog, value, 'breakfast');
+  const compatible = hardCandidates(catalog, preferences, 'breakfast');
   // Los ya elegidos se muestran siempre, aunque hayan dejado de cumplir, para poder quitarlos.
   const stale = chosen
     .filter((id) => !compatible.some((r) => r.id === id))
@@ -216,7 +225,7 @@ function BreakfastPicker({ value, onChange }: SectionProps) {
   );
 }
 
-export function WeekSection({ value, onChange }: SectionProps) {
+export function WeekSection({ value, preferences, onChange }: SettingsProps) {
   const timeId = useId();
   // La columna de desayunos solo tiene sentido cuando el menú los incluye.
   const meals = MEAL_TYPES.map((mealType, meal) => ({ mealType, meal })).filter(
@@ -291,7 +300,7 @@ export function WeekSection({ value, onChange }: SectionProps) {
           </tbody>
         </table>
       </fieldset>
-      <BreakfastPicker value={value} onChange={onChange} />
+      <BreakfastPicker value={value} preferences={preferences} onChange={onChange} />
     </>
   );
 }

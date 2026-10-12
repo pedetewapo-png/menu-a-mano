@@ -45,7 +45,7 @@ test('cambiar un plato propone otro distinto', async ({ page }) => {
 test('una exclusión nunca aparece en el menú', async ({ page }) => {
   await page.goto('/app/');
   await page.getByRole('button', { name: 'Siguiente' }).click();
-  await page.getByRole('searchbox', { name: 'Ingredientes que no quieres' }).fill('huevo');
+  await page.getByRole('searchbox', { name: 'Ingredientes que evitar' }).fill('huevo');
   await page.getByRole('button', { name: /Añadir «Huevo»/ }).click();
   await page.getByRole('button', { name: 'Siguiente' }).click();
   await page.getByRole('button', { name: 'Crear mi primer menú' }).click();

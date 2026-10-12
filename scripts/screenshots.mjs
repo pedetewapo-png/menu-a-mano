@@ -41,10 +41,19 @@ for (const [size, options] of Object.entries(SIZES)) {
     await page.waitForTimeout(400);
   };
 
-  // Con desayunos habituales, para ver el menú completo.
+  // Con un segundo comensal, para ver cómo se indica de quién es cada restricción.
   await open('#/ajustes');
+  await page.getByRole('button', { name: 'Añadir persona' }).click();
+  const dialog = page.getByRole('dialog');
+  await dialog.getByRole('textbox', { name: 'Nombre' }).fill('Ana');
+  await dialog.getByRole('checkbox', { name: 'Gluten' }).check();
+  await page.screenshot({ path: join(out, `${size}-comensal.png`) });
+  await dialog.getByRole('button', { name: 'Guardar' }).click();
+
+  // Con desayunos habituales, para ver el menú completo.
   await page.getByRole('checkbox', { name: /Fruta troceada con nueces/ }).check();
-  await page.getByRole('checkbox', { name: /Tostadas con tomate y aceite/ }).check();
+  // Sin gluten, porque el segundo comensal lo tiene excluido.
+  await page.getByRole('checkbox', { name: /Yogur con plátano y nueces/ }).check();
 
   for (const [name, hash] of SCREENS) {
     await open(hash);
