@@ -1,0 +1,30 @@
+{
+  "id": "judias-verdes-con-patata",
+  "name": "Judías verdes con patata",
+  "summary": "Hervido de judías y patata con refrito de ajo.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 25,
+  "activeMinutes": 10,
+  "cost": 1,
+  "mainGroup": "vegetables",
+  "cuisine": "spanish",
+  "ingredients": [
+    { "ingredientId": "judias-verdes", "quantity": 400, "unit": "g" },
+    { "ingredientId": "patata", "quantity": 2, "unit": "unit" },
+    { "ingredientId": "ajo", "quantity": 2, "unit": "unit" },
+    { "ingredientId": "pimenton-dulce", "quantity": 1, "unit": "tsp" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Trocea las judías y corta las patatas en trozos medianos.",
+    "Cuécelas juntas en agua con sal 15 minutos y escúrrelas.",
+    "Dora el ajo laminado con el aceite, aparta del fuego y añade el pimentón.",
+    "Vierte el refrito sobre las judías y las patatas."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

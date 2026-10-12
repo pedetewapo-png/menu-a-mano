@@ -1,0 +1,29 @@
+{
+  "id": "tortilla-de-calabacin",
+  "name": "Tortilla de calabacín",
+  "summary": "Más ligera que la de patatas e igual de fácil.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 25,
+  "activeMinutes": 20,
+  "cost": 1,
+  "mainGroup": "eggs",
+  "cuisine": "spanish",
+  "ingredients": [
+    { "ingredientId": "calabacin", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "huevo", "quantity": 4, "unit": "unit" },
+    { "ingredientId": "cebolla", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Corta el calabacín en medias lunas finas y la cebolla en tiras.",
+    "Cocínalos con el aceite y sal a fuego medio 12 minutos, hasta que estén tiernos.",
+    "Mézclalos con los huevos batidos.",
+    "Cuaja la tortilla en una sartén antiadherente, 3 minutos por un lado y 2 por el otro."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

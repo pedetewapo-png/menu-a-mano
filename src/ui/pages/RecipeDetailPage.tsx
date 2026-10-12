@@ -3,14 +3,15 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { buildRecipeFile } from '../../data/recipeFile';
 import { deleteUserRecipe, getUserPhoto, toggleFavorite } from '../../data/repos';
 import { violations } from '../../domain/filters';
+import { kcalPerServing } from '../../domain/nutrition';
 import { slotIndex } from '../../domain/planner';
 import { isUserRecipe, MAX_SERVINGS, MEAL_TYPES, MIN_SERVINGS, type MealType } from '../../domain/types';
 import { isUsable } from '../../domain/userRecipes';
 import { t } from '../../i18n';
 import { RecipeImage } from '../components/RecipeImage';
 import { Stepper } from '../components/Stepper';
-import { describeViolation, formatRecipeIngredient, normalize } from '../format';
-import { useCatalog, useFavorites, usePreferences, useProfiles, useWeek } from '../hooks';
+import { describeViolation, formatKcal, formatRecipeIngredient, normalize } from '../format';
+import { useCatalog, useFavorites, usePreferences, useProfiles, useShowCalories, useWeek } from '../hooks';
 import { patchSlot } from '../planActions';
 
 /** ¿Puede este dispositivo compartir un archivo de receta con otra app (mensajería, correo…)? */
@@ -25,6 +26,7 @@ export function RecipeDetailPage() {
   const prefs = usePreferences();
   const profiles = useProfiles();
   const favorites = useFavorites();
+  const showCalories = useShowCalories();
   const { weekStart } = useWeek();
   const [servings, setServings] = useState<number | null>(null);
   const [day, setDay] = useState(0);
@@ -47,6 +49,7 @@ export function RecipeDetailPage() {
   const factor = shownServings / recipe.baseServings;
   const isFavorite = favorites.has(recipe.id);
   const problems = violations(recipe, catalog, prefs);
+  const kcal = kcalPerServing(recipe, catalog.ingredients);
   const chosenMeal = mealType ?? recipe.mealTypes[0] ?? 'lunch';
   const own = isUserRecipe(recipe) ? recipe : undefined;
   // Un borrador está incompleto: se puede ver y editar, pero no poner en el menú.
@@ -155,7 +158,14 @@ export function RecipeDetailPage() {
               <dt>{t.recipes.suits}</dt>
               <dd>{recipe.mealTypes.map((m) => t.meal[m]).join(', ')}</dd>
             </div>
+            {showCalories && recipe.ingredients.length > 0 && (
+              <div>
+                <dt>{t.calories.label}</dt>
+                <dd>{kcal === null ? t.calories.unavailable : t.calories.perServing(formatKcal(kcal))}</dd>
+              </div>
+            )}
           </dl>
+          {showCalories && kcal !== null && <p className="hint">{t.calories.recipeHint}</p>}
           {problems.length > 0 && (
             <p className="callout" role="note">
               {t.recipes.notCompatible}: {problems.map((p) => describeViolation(p, recipe, catalog, profiles)).join('; ')}.

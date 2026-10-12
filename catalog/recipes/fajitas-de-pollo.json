@@ -1,0 +1,33 @@
+{
+  "id": "fajitas-de-pollo",
+  "name": "Fajitas de pollo",
+  "summary": "Pollo y pimientos salteados, para comer con las manos.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 25,
+  "activeMinutes": 20,
+  "cost": 2,
+  "mainGroup": "whiteMeat",
+  "cuisine": "other",
+  "ingredients": [
+    { "ingredientId": "pechuga-pollo", "quantity": 250, "unit": "g" },
+    { "ingredientId": "pimiento-rojo", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "pimiento-verde", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "cebolla", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "tortillas-trigo", "quantity": 4, "unit": "unit" },
+    { "ingredientId": "comino-molido", "quantity": 0.5, "unit": "tsp" },
+    { "ingredientId": "pimenton-dulce", "quantity": 1, "unit": "tsp" },
+    { "ingredientId": "aceite-oliva", "quantity": 1, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Corta el pollo, los pimientos y la cebolla en tiras.",
+    "Saltea el pollo con el aceite, el comino, el pimentón y sal a fuego vivo 5 minutos. Resérvalo.",
+    "Saltea las verduras 6 minutos en la misma sartén y devuelve el pollo.",
+    "Calienta las tortillas unos segundos en una sartén y rellénalas."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

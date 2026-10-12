@@ -1,0 +1,32 @@
+{
+  "id": "ensalada-de-lentejas",
+  "name": "Ensalada de lentejas",
+  "summary": "Fresca y completa, sin encender el fuego.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 10,
+  "activeMinutes": 10,
+  "cost": 1,
+  "mainGroup": "legumes",
+  "cuisine": "mediterranean",
+  "ingredients": [
+    { "ingredientId": "lentejas-cocidas", "quantity": 400, "unit": "g" },
+    { "ingredientId": "tomate", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "pepino", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "pimiento-rojo", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "cebolleta", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "vinagre", "quantity": 1, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Enjuaga las lentejas bajo el grifo y escúrrelas bien.",
+    "Corta en dados pequeños el tomate, el pepino y el pimiento, y pica la cebolleta.",
+    "Mezcla todo en un bol.",
+    "Aliña con el aceite, el vinagre y la sal."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

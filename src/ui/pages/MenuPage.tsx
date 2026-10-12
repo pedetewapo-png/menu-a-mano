@@ -3,6 +3,7 @@ import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { addSavedPlan, deleteSavedPlan, listSavedPlans } from '../../data/repos';
 import { violations } from '../../domain/filters';
+import { kcalPerServing } from '../../domain/nutrition';
 import { emptyPlan, hardCandidates, type PlannerNotice } from '../../domain/planner';
 import {
   breakfastsEnabled,
@@ -18,8 +19,16 @@ import { t } from '../../i18n';
 import { Dialog } from '../components/Dialog';
 import { RecipeImage } from '../components/RecipeImage';
 import { Stepper } from '../components/Stepper';
-import { describeNotice, formatDayNumber, formatWeekRange, normalize } from '../format';
-import { useCatalog, useFavorites, usePreferences, useProfiles, useWeek, useWeekPlan } from '../hooks';
+import { describeNotice, formatDayNumber, formatKcal, formatReferenceKcal, formatWeekRange, normalize } from '../format';
+import {
+  useCatalog,
+  useFavorites,
+  usePreferences,
+  useProfiles,
+  useShowCalories,
+  useWeek,
+  useWeekPlan,
+} from '../hooks';
 import { applySavedPlan, generateWeek, moveSlot, patchSlot, replaceSlot } from '../planActions';
 
 interface Feedback {
@@ -34,6 +43,7 @@ export function MenuPage() {
   const prefs = usePreferences();
   const profiles = useProfiles();
   const favorites = useFavorites();
+  const showCalories = useShowCalories();
   const loaded = useWeekPlan(weekStart);
   const [feedback, setFeedback] = useState<Feedback | null>(null);
   const [openSlot, setOpenSlot] = useState<number | null>(null);
@@ -50,6 +60,20 @@ export function MenuPage() {
   // Los desayunos solo se muestran cuando se han elegido los habituales.
   const isShown = (slot: MealSlot) => slot.mealType !== 'breakfast' || withBreakfast;
   const hasRecipes = plan.slots.some((s) => s.recipeId && isShown(s));
+  /** Calorías por persona de lo planificado un día. null si no hay nada o si a algún plato le falta el dato. */
+  const dayKcal = (day: number): number | null => {
+    let total = 0;
+    let meals = 0;
+    for (const slot of plan.slots) {
+      if (slot.day !== day || !slot.active || !slot.recipeId || !isShown(slot)) continue;
+      const recipe = catalog.recipeById.get(slot.recipeId);
+      const kcal = recipe ? kcalPerServing(recipe, catalog.ingredients) : null;
+      if (kcal === null) return null;
+      total += kcal;
+      meals++;
+    }
+    return meals > 0 ? total : null;
+  };
   const currentWeek = mondayOf(new Date());
   // En móvil se ve un día cada vez: hoy si es la semana en curso, el lunes si no.
   const todayIndex = weekStart === currentWeek ? (new Date().getDay() + 6) % 7 : -1;
@@ -162,10 +186,15 @@ export function MenuPage() {
       <ol className={`week${withBreakfast ? ' week-with-breakfast' : ''}`}>
         {t.days.map((dayName, day) => (
           <li key={dayName} className={`day${day === selectedDay ? ' day-selected' : ''}`}>
-            <h2 className="day-title">
-              {dayName} <span className="day-number">{formatDayNumber(weekStart, day)}</span>
-              {day === todayIndex && <span className="tag day-today">{t.menu.today}</span>}
-            </h2>
+            <div className="day-head">
+              <h2 className="day-title">
+                {dayName} <span className="day-number">{formatDayNumber(weekStart, day)}</span>
+                {day === todayIndex && <span className="tag day-today">{t.menu.today}</span>}
+              </h2>
+              {showCalories && dayKcal(day) !== null && (
+                <p className="day-kcal">{t.calories.planned(formatKcal(dayKcal(day)!))}</p>
+              )}
+            </div>
             <ul className="day-slots">
               {plan.slots
                 .map((slot, index) => ({ slot, index }))
@@ -185,6 +214,7 @@ export function MenuPage() {
           </li>
         ))}
       </ol>
+      {showCalories && hasRecipes && <p className="hint kcal-reference">{formatReferenceKcal()}</p>}
 
       <SlotDialog
         index={openSlot}
@@ -222,7 +252,9 @@ interface SlotCardProps {
 
 function SlotCard({ slot, prefs, dayName, onChange, onToggleLock, onMore }: SlotCardProps) {
   const catalog = useCatalog();
+  const showCalories = useShowCalories();
   const recipe = slot.recipeId ? catalog.recipeById.get(slot.recipeId) : undefined;
+  const kcal = recipe && showCalories ? kcalPerServing(recipe, catalog.ingredients) : null;
   const mealName = t.meal[slot.mealType];
   const broken = recipe ? violations(recipe, catalog, prefs).length > 0 : false;
 
@@ -240,6 +272,7 @@ function SlotCard({ slot, prefs, dayName, onChange, onToggleLock, onMore }: Slot
           </Link>
           <p className="slot-meta">
             {t.common.minutes(recipe.totalMinutes)}
+            {kcal !== null && ` · ${formatKcal(kcal)}`}
             {slot.servingsOverride !== undefined && ` · ${t.common.servings(slot.servingsOverride)}`}
           </p>
           {slot.locked && <p className="tag">{t.menu.locked}</p>}

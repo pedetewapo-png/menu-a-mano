@@ -9,3 +9,5 @@ public/recipes/
 test-results/
 playwright-report/
 .env*
+# Páginas para revisar el catálogo, generadas con catalog:review y photos:propose
+revision/

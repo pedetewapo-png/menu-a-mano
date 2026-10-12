@@ -1,0 +1,32 @@
+{
+  "id": "arroz-cremoso-con-champinones",
+  "name": "Arroz cremoso con champiñones",
+  "summary": "Arroz meloso con champiñones y queso.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 35,
+  "activeMinutes": 25,
+  "cost": 2,
+  "mainGroup": "grainsPasta",
+  "cuisine": "mediterranean",
+  "ingredients": [
+    { "ingredientId": "arroz", "quantity": 160, "unit": "g" },
+    { "ingredientId": "champinones", "quantity": 250, "unit": "g" },
+    { "ingredientId": "cebolla", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "caldo-verduras", "quantity": 600, "unit": "ml" },
+    { "ingredientId": "queso-rallado", "quantity": 40, "unit": "g" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Calienta el caldo en un cazo y mantenlo caliente.",
+    "Sofríe la cebolla picada con el aceite 4 minutos y añade los champiñones laminados. Cocina 5 minutos.",
+    "Incorpora el arroz y remueve un minuto.",
+    "Añade el caldo poco a poco, removiendo, durante unos 18 minutos, hasta que el arroz esté tierno y cremoso.",
+    "Fuera del fuego, mezcla con el queso y rectifica de sal."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

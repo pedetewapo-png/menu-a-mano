@@ -1,18 +1,21 @@
 {
   "name": "menu-a-mano",
   "private": true,
-  "version": "0.4.0",
+  "version": "0.5.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "npm run catalog:check && npm run catalog:images && npm run check:layers && tsc --noEmit && vite build",
     "check:layers": "tsx scripts/check-layers.ts",
     "catalog:images": "node scripts/build-images.mjs",
+    "catalog:nutrition": "node scripts/build-nutrition.mjs",
     "preview": "vite preview",
     "test": "vitest run",
     "test:e2e": "playwright test",
     "typecheck": "tsc --noEmit",
     "catalog:check": "tsx scripts/check-catalog.ts",
+    "catalog:review": "tsx scripts/review-recipes.ts",
+    "photos:propose": "node scripts/propose-photos.mjs",
     "icons": "node scripts/make-icons.mjs",
     "screenshots": "node scripts/screenshots.mjs",
     "deploy": "node scripts/deploy.mjs"

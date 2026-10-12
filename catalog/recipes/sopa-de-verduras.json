@@ -1,0 +1,31 @@
+{
+  "id": "sopa-de-verduras",
+  "name": "Sopa de verduras",
+  "summary": "Verduras en dados cocidas en caldo.",
+  "mealTypes": ["dinner"],
+  "baseServings": 2,
+  "totalMinutes": 30,
+  "activeMinutes": 10,
+  "cost": 1,
+  "mainGroup": "vegetables",
+  "cuisine": "spanish",
+  "ingredients": [
+    { "ingredientId": "puerro", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "zanahoria", "quantity": 2, "unit": "unit" },
+    { "ingredientId": "patata", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "judias-verdes", "quantity": 100, "unit": "g" },
+    { "ingredientId": "caldo-verduras", "quantity": 800, "unit": "ml" },
+    { "ingredientId": "aceite-oliva", "quantity": 1, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Corta el puerro, la zanahoria, la patata y las judías verdes en trozos pequeños.",
+    "Rehógalas con el aceite en una olla 5 minutos.",
+    "Añade el caldo y lleva a ebullición.",
+    "Cuece a fuego suave 20 minutos y rectifica de sal."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

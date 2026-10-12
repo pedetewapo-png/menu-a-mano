@@ -41,6 +41,8 @@ export function CustomIngredientDialog({ ingredient, isNew, onSave, onClose }: C
   const [diet, setDiet] = useState<Diet | null>(isNew ? null : ingredient.diet);
   const [noAllergens, setNoAllergens] = useState(!isNew && ingredient.allergens.length === 0);
   const [error, setError] = useState('');
+  // Las calorías se escriben por 100 g, por 100 ml o por unidad, según cómo se compre.
+  const [kcal, setKcal] = useState(ingredient.nutrition ? String(ingredient.nutrition.kcal) : '');
   const id = useId();
 
   const toggle = <T,>(list: T[], item: T, on: boolean) => (on ? [...list, item] : list.filter((x) => x !== item));
@@ -52,7 +54,11 @@ export function CustomIngredientDialog({ ingredient, isNew, onSave, onClose }: C
       setError(t.customIngredient.allergensRequired);
       return;
     }
-    onSave({ ...draft, name, diet });
+    const value = Number(kcal);
+    // Por unidad: se guarda como si la unidad pesara 100 g, y así el cálculo es el mismo para todo.
+    const nutrition =
+      kcal.trim() !== '' && value >= 0 ? { kcal: value, ...(draft.baseUnit === 'unit' ? { gramsPerUnit: 100 } : {}) } : undefined;
+    onSave({ ...draft, name, diet, nutrition });
   };
 
   return (
@@ -112,6 +118,22 @@ export function CustomIngredientDialog({ ingredient, isNew, onSave, onClose }: C
               </option>
             ))}
           </select>
+        </div>
+        <div className="field">
+          <label className="field-label" htmlFor={`${id}-kcal`}>
+            {t.calories.custom[draft.baseUnit]}
+          </label>
+          <input
+            id={`${id}-kcal`}
+            type="number"
+            inputMode="decimal"
+            min={0}
+            max={900}
+            step="any"
+            value={kcal}
+            onChange={(e) => setKcal(e.target.value)}
+          />
+          <p className="hint">{t.calories.customHint}</p>
         </div>
         <label className="choice">
           <input

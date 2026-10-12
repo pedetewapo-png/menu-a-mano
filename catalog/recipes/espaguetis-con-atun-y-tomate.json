@@ -1,0 +1,32 @@
+{
+  "id": "espaguetis-con-atun-y-tomate",
+  "name": "Espaguetis con atún y tomate",
+  "summary": "Pasta de despensa: casi todo sale de una lata.",
+  "mealTypes": ["lunch"],
+  "baseServings": 2,
+  "totalMinutes": 20,
+  "activeMinutes": 10,
+  "cost": 1,
+  "mainGroup": "grainsPasta",
+  "cuisine": "mediterranean",
+  "ingredients": [
+    { "ingredientId": "espaguetis", "quantity": 180, "unit": "g" },
+    { "ingredientId": "atun-conserva", "quantity": 120, "unit": "g" },
+    { "ingredientId": "tomate-triturado", "quantity": 300, "unit": "g" },
+    { "ingredientId": "aceitunas", "quantity": 40, "unit": "g" },
+    { "ingredientId": "ajo", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "oregano", "quantity": 1, "unit": "tsp" },
+    { "ingredientId": "aceite-oliva", "quantity": 1, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Cuece los espaguetis en agua con sal el tiempo que indique el envase.",
+    "Mientras tanto, dora el ajo picado con el aceite y añade el tomate y el orégano. Cocina 8 minutos.",
+    "Incorpora el atún desmigado y las aceitunas, y calienta un minuto.",
+    "Escurre la pasta y mézclala con la salsa."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

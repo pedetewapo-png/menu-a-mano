@@ -1,0 +1,33 @@
+{
+  "id": "espaguetis-con-bolonesa-de-soja",
+  "name": "Espaguetis con boloñesa de soja",
+  "summary": "La boloñesa de siempre, con soja texturizada.",
+  "mealTypes": ["lunch"],
+  "baseServings": 2,
+  "totalMinutes": 30,
+  "activeMinutes": 15,
+  "cost": 1,
+  "mainGroup": "plantProtein",
+  "cuisine": "mediterranean",
+  "ingredients": [
+    { "ingredientId": "espaguetis", "quantity": 180, "unit": "g" },
+    { "ingredientId": "soja-texturizada", "quantity": 60, "unit": "g" },
+    { "ingredientId": "tomate-triturado", "quantity": 300, "unit": "g" },
+    { "ingredientId": "cebolla", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "zanahoria", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "oregano", "quantity": 1, "unit": "tsp" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Hidrata la soja en agua caliente 10 minutos y escúrrela bien.",
+    "Pica la cebolla y la zanahoria y sofríelas con el aceite 5 minutos.",
+    "Añade la soja, remueve 2 minutos y agrega el tomate, el orégano y sal.",
+    "Cuece a fuego suave 12 minutos.",
+    "Cuece los espaguetis en agua con sal, escúrrelos y mézclalos con la salsa."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "acelgas-rehogadas-con-patata",
+  "name": "Acelgas rehogadas con patata",
+  "summary": "Verdura hervida y rehogada con ajo.",
+  "mealTypes": ["dinner"],
+  "baseServings": 2,
+  "totalMinutes": 25,
+  "activeMinutes": 10,
+  "cost": 1,
+  "mainGroup": "vegetables",
+  "cuisine": "spanish",
+  "ingredients": [
+    { "ingredientId": "acelgas", "quantity": 500, "unit": "g" },
+    { "ingredientId": "patata", "quantity": 2, "unit": "unit" },
+    { "ingredientId": "ajo", "quantity": 2, "unit": "unit" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Trocea las acelgas y corta las patatas en dados.",
+    "Cuece las patatas en agua con sal 8 minutos, añade las acelgas y cuece 6 minutos más. Escurre bien.",
+    "Dora el ajo laminado con el aceite en una sartén.",
+    "Añade las acelgas y las patatas y rehoga 3 minutos."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

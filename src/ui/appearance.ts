@@ -24,6 +24,22 @@ function write(key: string, value: string): void {
   }
 }
 
+// Mostrar u ocultar las calorías también es una preferencia de este dispositivo.
+const CALORIES_KEY = 'mam.showCalories';
+const listeners = new Set<() => void>();
+
+export const getShowCalories = () => read(CALORIES_KEY, ['1', '0'], '1') === '1';
+
+export function setShowCalories(show: boolean): void {
+  write(CALORIES_KEY, show ? '1' : '0');
+  for (const listener of listeners) listener();
+}
+
+export function subscribeAppearance(listener: () => void): () => void {
+  listeners.add(listener);
+  return () => listeners.delete(listener);
+}
+
 export const getTextScale = () => read(TEXT_KEY, TEXT_SCALES, '100');
 export const getTheme = () => read(THEME_KEY, THEMES, 'system');
 

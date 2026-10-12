@@ -1,0 +1,31 @@
+{
+  "id": "garbanzos-salteados-con-calabacin",
+  "name": "Garbanzos salteados con calabacín",
+  "summary": "Un salteado de un cuarto de hora.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 15,
+  "activeMinutes": 15,
+  "cost": 1,
+  "mainGroup": "legumes",
+  "cuisine": "mediterranean",
+  "ingredients": [
+    { "ingredientId": "garbanzos-cocidos", "quantity": 400, "unit": "g" },
+    { "ingredientId": "calabacin", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "tomate-cherry", "quantity": 150, "unit": "g" },
+    { "ingredientId": "ajo", "quantity": 2, "unit": "unit" },
+    { "ingredientId": "oregano", "quantity": 1, "unit": "tsp" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Corta el calabacín en dados y los tomates por la mitad. Lamina el ajo.",
+    "Saltea el calabacín con el aceite a fuego vivo 5 minutos.",
+    "Añade el ajo y los tomates y cocina 3 minutos más.",
+    "Incorpora los garbanzos escurridos, el orégano y la sal, y saltea 3 minutos."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

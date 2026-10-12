@@ -6,11 +6,12 @@ import { combinePreferences } from '../../domain/household';
 import { MAX_PROFILES, type Catalog, type DinerProfile, type HouseholdSettings } from '../../domain/types';
 import { t } from '../../i18n';
 import { promptInstall } from '../../install';
-import { getTextScale, getTheme, setTextScale, setTheme, TEXT_SCALES, THEMES } from '../appearance';
+import { nutritionSource } from '../../data/catalog';
+import { getTextScale, getTheme, setShowCalories, setTextScale, setTheme, TEXT_SCALES, THEMES } from '../appearance';
 import { ServingsField, WeekSection } from '../components/PreferencesForm';
 import { ProfileDialog } from '../components/ProfileDialog';
-import { formatDateTime } from '../format';
-import { useCatalog, useHousehold, useInstallState, useMeta, usePending, useWeek } from '../hooks';
+import { formatDateTime, formatReferenceKcal } from '../format';
+import { useCatalog, useHousehold, useInstallState, useMeta, usePending, useShowCalories, useWeek } from '../hooks';
 import { refreshBreakfasts } from '../planActions';
 
 /** Resumen de una ficha en una línea: "Vegetariana · evita champiñones · alérgenos: gluten". */
@@ -33,6 +34,7 @@ export function SettingsPage() {
   const [household, showHousehold] = usePending(useHousehold());
   const meta = useMeta();
   const install = useInstallState();
+  const showCalories = useShowCalories();
   const { weekStart } = useWeek();
   const fileInput = useRef<HTMLInputElement>(null);
   const [message, setMessage] = useState('');
@@ -196,6 +198,19 @@ export function SettingsPage() {
             {t.settings.deleteAll}
           </button>
         </div>
+      </section>
+
+      <section className="card" aria-labelledby="settings-calories">
+        <h2 id="settings-calories">{t.calories.settingsTitle}</h2>
+        <label className="choice">
+          <input type="checkbox" checked={showCalories} onChange={(e) => setShowCalories(e.target.checked)} />
+          <span>
+            <strong>{t.calories.show}</strong>
+            <span className="hint"> {t.calories.showHint}</span>
+          </span>
+        </label>
+        <p className="hint">{formatReferenceKcal()}</p>
+        <p className="hint">{t.calories.source(`${nutritionSource.name} (${nutritionSource.version})`, nutritionSource.license)}</p>
       </section>
 
       <section className="card" aria-labelledby="settings-install">

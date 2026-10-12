@@ -519,8 +519,14 @@ Decidido por el autor el 2026-10-11.
 - No hay objetivos, ni colores de "te has pasado", ni mensajes que juzguen. La app no pide peso, edad ni altura (E22).
 - Junto a las calorías, un aviso breve: son orientativas y dependen de las marcas y de la forma de cocinar.
 
-### Pendiente
-- Qué tabla oficial se usa, tras comprobar sus condiciones de uso.
+### Tabla utilizada y decisiones de implementación (2026-10-12)
+- **Tabla:** USDA FoodData Central, conjunto SR Legacy de abril de 2018. Es de dominio público, así que sus valores pueden distribuirse con la app. La descarga la aprobó el autor.
+- Cada ingrediente del catálogo se asocia a mano con un alimento de la tabla (`catalog/nutrition-sources.json`); un script copia de ahí los valores (`catalog/nutrition.json`). Ningún valor se escribe a ojo.
+- Se usa el **peso de compra** de cada ingrediente, sin descontar pieles, huesos ni lo que se desecha, y se cuenta todo el aceite de la receta aunque parte se quede en la sartén. Por eso las cifras tienden a quedar algo por encima de lo que realmente se come, y se redondean a la decena.
+- Las pizcas y lo que va "al gusto" no suman. El laurel, que se retira, tampoco.
+- Las unidades (un huevo, un diente de ajo) y las cucharadas se pasan a gramos con el peso anotado para cada ingrediente.
+- El total del día solo se muestra si todos los platos de ese día tienen cifra.
+- El campo de calorías de un ingrediente propio se pide por 100 g, por 100 ml o por unidad, según cómo se mida ese ingrediente, que es como viene en las etiquetas.
 
 ## 10. Privacidad
 

@@ -1,0 +1,30 @@
+{
+  "id": "revuelto-de-tofu-con-espinacas",
+  "name": "Revuelto de tofu con espinacas",
+  "summary": "Como un revuelto de huevo, pero vegetal.",
+  "mealTypes": ["dinner"],
+  "baseServings": 2,
+  "totalMinutes": 15,
+  "activeMinutes": 15,
+  "cost": 2,
+  "mainGroup": "plantProtein",
+  "cuisine": "other",
+  "ingredients": [
+    { "ingredientId": "tofu", "quantity": 250, "unit": "g" },
+    { "ingredientId": "espinacas", "quantity": 200, "unit": "g" },
+    { "ingredientId": "cebolla", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "ajo", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "comino-molido", "quantity": 0.5, "unit": "tsp" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Sofríe la cebolla y el ajo picados con el aceite 4 minutos.",
+    "Desmenuza el tofu con las manos, añádelo con el comino y sal, y saltea 5 minutos.",
+    "Incorpora las espinacas y remueve hasta que reduzcan."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

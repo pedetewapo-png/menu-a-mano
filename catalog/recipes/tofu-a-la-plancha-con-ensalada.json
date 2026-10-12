@@ -1,0 +1,31 @@
+{
+  "id": "tofu-a-la-plancha-con-ensalada",
+  "name": "Tofu a la plancha con ensalada",
+  "summary": "Tofu dorado con salsa de soja y ensalada.",
+  "mealTypes": ["dinner"],
+  "baseServings": 2,
+  "totalMinutes": 15,
+  "activeMinutes": 15,
+  "cost": 2,
+  "mainGroup": "plantProtein",
+  "cuisine": "other",
+  "ingredients": [
+    { "ingredientId": "tofu", "quantity": 250, "unit": "g" },
+    { "ingredientId": "lechuga", "quantity": 100, "unit": "g" },
+    { "ingredientId": "tomate", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "pepino", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "salsa-soja", "quantity": 1, "unit": "tbsp" },
+    { "ingredientId": "limon", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" }
+  ],
+  "steps": [
+    "Seca el tofu con papel de cocina y córtalo en filetes.",
+    "Dóralo en una sartén con una cucharada de aceite, 3 minutos por cada lado.",
+    "Añade la salsa de soja y deja que se impregne un minuto.",
+    "Sirve con la lechuga, el tomate y el pepino aliñados con el resto del aceite y el limón."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

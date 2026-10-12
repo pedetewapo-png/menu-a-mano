@@ -1,0 +1,32 @@
+{
+  "id": "ensalada-de-arroz",
+  "name": "Ensalada de arroz",
+  "summary": "Arroz frío con verduras, para llevar.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 25,
+  "activeMinutes": 10,
+  "cost": 1,
+  "mainGroup": "grainsPasta",
+  "cuisine": "mediterranean",
+  "ingredients": [
+    { "ingredientId": "arroz", "quantity": 160, "unit": "g" },
+    { "ingredientId": "maiz-dulce", "quantity": 140, "unit": "g" },
+    { "ingredientId": "tomate", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "pimiento-verde", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "aceitunas", "quantity": 40, "unit": "g" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "vinagre", "quantity": 1, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Cuece el arroz en agua con sal, escúrrelo y enfríalo bajo el grifo.",
+    "Corta el tomate y el pimiento en dados pequeños.",
+    "Mezcla el arroz con las verduras, el maíz y las aceitunas.",
+    "Aliña con el aceite, el vinagre y sal."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "alubias-blancas-con-verduras",
+  "name": "Alubias blancas con verduras",
+  "summary": "Un plato de cuchara que se hace en veinte minutos.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 20,
+  "activeMinutes": 10,
+  "cost": 1,
+  "mainGroup": "legumes",
+  "cuisine": "spanish",
+  "ingredients": [
+    { "ingredientId": "alubias-cocidas", "quantity": 400, "unit": "g" },
+    { "ingredientId": "puerro", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "zanahoria", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "pimiento-verde", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "tomate-triturado", "quantity": 100, "unit": "g" },
+    { "ingredientId": "pimenton-dulce", "quantity": 1, "unit": "tsp" },
+    { "ingredientId": "laurel", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Pica el puerro, la zanahoria y el pimiento, y sofríelos con el aceite 8 minutos.",
+    "Añade el pimentón, el tomate y el laurel, y cocina 2 minutos.",
+    "Incorpora las alubias enjuagadas y un vaso de agua.",
+    "Cuece a fuego suave 8 minutos y rectifica de sal."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

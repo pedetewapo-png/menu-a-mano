@@ -1,0 +1,30 @@
+{
+  "id": "guisantes-con-jamon",
+  "name": "Guisantes con jamón",
+  "summary": "Un clásico rápido con guisantes congelados.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 15,
+  "activeMinutes": 10,
+  "cost": 1,
+  "mainGroup": "vegetables",
+  "cuisine": "spanish",
+  "ingredients": [
+    { "ingredientId": "guisantes-congelados", "quantity": 400, "unit": "g" },
+    { "ingredientId": "jamon-taquitos", "quantity": 60, "unit": "g" },
+    { "ingredientId": "cebolla", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "ajo", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "aceite-oliva", "quantity": 1, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste", "note": "prueba antes: el jamón ya aporta sal" }
+  ],
+  "steps": [
+    "Pica la cebolla y el ajo y sofríelos con el aceite 5 minutos.",
+    "Añade el jamón y remueve un minuto.",
+    "Incorpora los guisantes y medio vaso de agua, tapa y cuece 6 minutos.",
+    "Destapa, deja evaporar el líquido y rectifica de sal."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

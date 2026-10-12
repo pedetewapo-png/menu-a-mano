@@ -5,6 +5,12 @@ import { getCatalog, getMeta, getPreferences, getProfiles, getSettings } from '.
 import type { Catalog, DinerProfile, HouseholdSettings, Meta, Preferences, WeekPlan } from '../domain/types';
 import { getInstallState, subscribeInstall, type InstallState } from '../install';
 import { getPwaState, subscribePwa, type PwaState } from '../pwa';
+import { getShowCalories, subscribeAppearance } from './appearance';
+
+/** ¿Quiere esta persona ver las calorías? Se decide en Ajustes y vale para este dispositivo. */
+export function useShowCalories(): boolean {
+  return useSyncExternalStore(subscribeAppearance, getShowCalories);
+}
 
 export function useInstallState(): InstallState {
   return useSyncExternalStore(subscribeInstall, getInstallState);

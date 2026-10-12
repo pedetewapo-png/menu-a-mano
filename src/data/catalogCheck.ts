@@ -1,7 +1,7 @@
 import { buildCatalog } from '../domain/catalog';
 import type { Catalog, Ingredient, Recipe } from '../domain/types';
 import { isUsableUnit } from '../domain/units';
-import { ingredientSchema, recipeSchema } from './schemas';
+import { ingredientSchema, nutritionFileSchema, recipeSchema } from './schemas';
 
 export interface RawRecipeFile {
   /** Nombre del archivo sin extensión. */
@@ -45,14 +45,21 @@ const COVERAGE: { label: string; minimum: number; test: (r: Recipe, c: Catalog) 
   },
 ];
 
+const NO_NUTRITION_SOURCE = { name: '-', version: '-', url: 'https://example.org/', license: '-' };
+
 function describeIssues(error: { issues: { path: PropertyKey[]; message: string }[] }): string {
   return error.issues.map((i) => `${i.path.join('.') || '(raíz)'}: ${i.message}`).join('; ');
 }
 
 /** Valida el catálogo en bruto. Los errores impiden compilar; los avisos señalan trabajo pendiente. */
-export function checkCatalog(rawIngredients: unknown, rawRecipes: RawRecipeFile[]): CatalogReport {
+export function checkCatalog(rawIngredients: unknown, rawRecipes: RawRecipeFile[], rawNutrition?: unknown): CatalogReport {
   const errors: string[] = [];
   const warnings: string[] = [];
+
+  // Las calorías vienen en un archivo aparte, con su procedencia, y se unen aquí a cada ingrediente.
+  const nutrition = nutritionFileSchema.safeParse(rawNutrition ?? { source: NO_NUTRITION_SOURCE, foods: {} });
+  if (!nutrition.success) errors.push(`nutrition.json: ${describeIssues(nutrition.error)}`);
+  const foods = nutrition.success ? nutrition.data.foods : {};
 
   const ingredients: Ingredient[] = [];
   if (!Array.isArray(rawIngredients)) {
@@ -60,9 +67,26 @@ export function checkCatalog(rawIngredients: unknown, rawRecipes: RawRecipeFile[
   } else {
     for (const [index, raw] of rawIngredients.entries()) {
       const parsed = ingredientSchema.safeParse(raw);
-      if (parsed.success) ingredients.push(parsed.data);
-      else errors.push(`Ingrediente nº ${index + 1}: ${describeIssues(parsed.error)}`);
+      if (!parsed.success) {
+        errors.push(`Ingrediente nº ${index + 1}: ${describeIssues(parsed.error)}`);
+        continue;
+      }
+      const food = foods[parsed.data.id];
+      if (!food) {
+        ingredients.push(parsed.data);
+        continue;
+      }
+      const { fdcId: _fdcId, description: _description, ...values } = food;
+      ingredients.push({ ...parsed.data, nutrition: values });
     }
+  }
+  const known = new Set(ingredients.map((i) => i.id));
+  for (const id of Object.keys(foods)) {
+    if (!known.has(id)) errors.push(`nutrition.json: "${id}" no es un ingrediente del catálogo`);
+  }
+  if (rawNutrition !== undefined) {
+    const missing = ingredients.filter((i) => !i.nutrition).map((i) => i.id);
+    if (missing.length > 0) warnings.push(`Ingredientes sin datos de calorías: ${missing.join(', ')}`);
   }
   const ingredientIds = new Set<string>();
   for (const ingredient of ingredients) {

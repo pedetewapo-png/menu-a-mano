@@ -448,6 +448,26 @@ export const es = {
       unknownIngredients: 'La receta usa ingredientes que esta versión de la app no conoce. No se ha guardado nada.',
     },
   },
+  calories: {
+    label: 'Calorías',
+    about: (kcal: string) => `unas ${kcal} kcal`,
+    perServing: (text: string) => `${text} por ración`,
+    unavailable: 'no disponibles',
+    planned: (text: string) => `Planificado: ${text}`,
+    recipeHint: 'Valor orientativo, calculado con los ingredientes de la receta. Depende de las marcas y de la forma de cocinar.',
+    reference: (kcal: string) =>
+      `Las calorías son por persona y orientativas, y solo cuentan las comidas planificadas. Referencia para un adulto: ${kcal} kcal al día, contando todo lo que se come y se bebe.`,
+    settingsTitle: 'Calorías',
+    show: 'Mostrar las calorías',
+    showHint: 'En las recetas y en el menú. Es una preferencia de este dispositivo.',
+    source: (name: string, license: string) => `Datos: ${name}. ${license}.`,
+    custom: {
+      g: 'Calorías por 100 g (opcional)',
+      ml: 'Calorías por 100 ml (opcional)',
+      unit: 'Calorías por unidad (opcional)',
+    } as Record<string, string>,
+    customHint: 'Cópialas de la etiqueta del producto. Si lo dejas vacío, las recetas que lo usen no mostrarán calorías.',
+  },
   shopping: {
     title: 'Lista de la compra',
     empty: 'Esta semana no tiene menú, así que la lista está vacía.',

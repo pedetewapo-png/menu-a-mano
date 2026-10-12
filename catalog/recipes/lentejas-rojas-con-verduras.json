@@ -1,0 +1,33 @@
+{
+  "id": "lentejas-rojas-con-verduras",
+  "name": "Lentejas rojas con verduras",
+  "summary": "Cremosas y con un toque de curry, en menos de media hora.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 25,
+  "activeMinutes": 10,
+  "cost": 1,
+  "mainGroup": "legumes",
+  "cuisine": "other",
+  "ingredients": [
+    { "ingredientId": "lentejas-rojas", "quantity": 160, "unit": "g" },
+    { "ingredientId": "cebolla", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "zanahoria", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "tomate-triturado", "quantity": 150, "unit": "g" },
+    { "ingredientId": "ajo", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "curry-polvo", "quantity": 1, "unit": "tsp" },
+    { "ingredientId": "aceite-oliva", "quantity": 1, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Pica la cebolla, la zanahoria y el ajo, y sofríelos con el aceite 5 minutos.",
+    "Añade el curry, remueve unos segundos y agrega el tomate.",
+    "Incorpora las lentejas enjuagadas y el triple de su volumen de agua.",
+    "Cuece a fuego suave 15 minutos, hasta que las lentejas se deshagan. Sala al final."
+  ],
+  "notes": "Las lentejas rojas no necesitan remojo y se cuecen mucho antes que las pardinas.",
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

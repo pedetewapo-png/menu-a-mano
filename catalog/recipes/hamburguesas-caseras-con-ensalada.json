@@ -1,0 +1,32 @@
+{
+  "id": "hamburguesas-caseras-con-ensalada",
+  "name": "Hamburguesas caseras con ensalada",
+  "summary": "Hamburguesas sin pan, con ensalada de lechuga y tomate.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 20,
+  "activeMinutes": 20,
+  "cost": 2,
+  "mainGroup": "redMeat",
+  "cuisine": "other",
+  "ingredients": [
+    { "ingredientId": "carne-picada", "quantity": 300, "unit": "g" },
+    { "ingredientId": "ajo", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "perejil", "quantity": null, "unit": "toTaste" },
+    { "ingredientId": "lechuga", "quantity": 100, "unit": "g" },
+    { "ingredientId": "tomate", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "vinagre", "quantity": 1, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Mezcla la carne con el ajo muy picado, perejil y sal.",
+    "Forma dos hamburguesas y aplánalas.",
+    "Cocínalas en una sartén caliente con unas gotas de aceite, 4 minutos por cada lado.",
+    "Sirve con la lechuga y el tomate aliñados con el resto del aceite, el vinagre y sal."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

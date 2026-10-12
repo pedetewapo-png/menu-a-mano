@@ -1,5 +1,6 @@
 import type { Violation } from '../domain/filters';
 import { profilesBehindFilter, profilesBehindViolation } from '../domain/household';
+import { REFERENCE_KCAL_PER_DAY, roundKcal } from '../domain/nutrition';
 import type { PlannerNotice } from '../domain/planner';
 import type { ShoppingItem } from '../domain/shopping';
 import type { BaseUnit, Catalog, DinerProfile, Ingredient, Recipe, RecipeIngredient } from '../domain/types';
@@ -8,6 +9,8 @@ import { addDays, parseIsoDate } from '../domain/week';
 import { locale, t } from '../i18n';
 
 const numberFormat = new Intl.NumberFormat(locale, { maximumFractionDigits: 2 });
+// Con separador de millares también en cifras de cuatro dígitos (1.240), que en español se omite por defecto.
+const wholeNumber = new Intl.NumberFormat(locale, { maximumFractionDigits: 0, useGrouping: 'always' });
 const dayMonth = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'long' });
 const dayOnly = new Intl.DateTimeFormat(locale, { day: 'numeric' });
 const dateTime = new Intl.DateTimeFormat(locale, { dateStyle: 'long', timeStyle: 'short' });
@@ -33,6 +36,11 @@ export function formatDayNumber(weekStart: string, day: number): string {
 }
 
 export const formatDateTime = (iso: string) => dateTime.format(new Date(iso));
+
+/** "unas 520 kcal": siempre aproximado y redondeado a la decena. */
+export const formatKcal = (kcal: number) => t.calories.about(wholeNumber.format(roundKcal(kcal)));
+
+export const formatReferenceKcal = () => t.calories.reference(wholeNumber.format(REFERENCE_KCAL_PER_DAY));
 
 export function formatBaseQuantity(quantity: number, unit: BaseUnit): string {
   if (unit === 'unit') return numberFormat.format(quantity);

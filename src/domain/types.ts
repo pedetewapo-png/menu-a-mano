@@ -76,6 +76,23 @@ export const INGREDIENT_GROUPS = [
 ] as const;
 export type IngredientGroup = (typeof INGREDIENT_GROUPS)[number];
 
+/**
+ * Valores por 100 g de alimento. En los ingredientes de la app vienen de una tabla
+ * oficial; en los propios, de la etiqueta que copia el usuario (solo las calorías).
+ */
+export interface Nutrition {
+  kcal: number;
+  protein?: number;
+  fat?: number;
+  carbs?: number;
+  /** Peso de una unidad (un huevo, un diente de ajo) cuando difiere del de compra. */
+  gramsPerUnit?: number;
+  /** Para pasar cucharadas y mililitros a gramos. */
+  gramsPerMl?: number;
+  /** Se usa para aromatizar y no se come (el laurel): no cuenta. */
+  ignore?: boolean;
+}
+
 export interface Ingredient {
   id: string;
   name: string;
@@ -97,6 +114,7 @@ export interface Ingredient {
   pantryStaple: boolean;
   /** Añadido por el usuario: sus alérgenos los declaró él, no vienen del catálogo. */
   custom?: boolean;
+  nutrition?: Nutrition;
 }
 
 /** Ingrediente creado por el usuario. Sus alérgenos se eligieron expresamente al crearlo. */

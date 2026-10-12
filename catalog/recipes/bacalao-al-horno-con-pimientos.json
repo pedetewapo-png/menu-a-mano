@@ -1,0 +1,31 @@
+{
+  "id": "bacalao-al-horno-con-pimientos",
+  "name": "Bacalao al horno con pimientos",
+  "summary": "Bacalao desalado sobre pimientos asados.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 30,
+  "activeMinutes": 10,
+  "cost": 2,
+  "mainGroup": "fish",
+  "cuisine": "spanish",
+  "ingredients": [
+    { "ingredientId": "bacalao-desalado", "quantity": 300, "unit": "g" },
+    { "ingredientId": "pimiento-rojo", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "pimiento-verde", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "cebolla", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "ajo", "quantity": 2, "unit": "unit" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste", "note": "prueba antes: el bacalao ya aporta sal" }
+  ],
+  "steps": [
+    "Precalienta el horno a 200 °C.",
+    "Corta los pimientos y la cebolla en tiras y repártelos en una bandeja con el ajo laminado, el aceite y una pizca de sal.",
+    "Hornea 15 minutos.",
+    "Coloca el bacalao encima y hornea 10 minutos más."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

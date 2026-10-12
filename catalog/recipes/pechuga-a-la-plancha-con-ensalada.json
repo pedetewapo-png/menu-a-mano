@@ -1,0 +1,32 @@
+{
+  "id": "pechuga-a-la-plancha-con-ensalada",
+  "name": "Pechuga de pollo a la plancha con ensalada",
+  "summary": "Lo más sencillo: pollo a la plancha y ensalada.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 15,
+  "activeMinutes": 15,
+  "cost": 2,
+  "mainGroup": "whiteMeat",
+  "cuisine": "spanish",
+  "ingredients": [
+    { "ingredientId": "pechuga-pollo", "quantity": 300, "unit": "g" },
+    { "ingredientId": "lechuga", "quantity": 100, "unit": "g" },
+    { "ingredientId": "tomate", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "pepino", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "vinagre", "quantity": 1, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" },
+    { "ingredientId": "pimienta-negra", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Corta la pechuga en filetes finos y salpimiéntalos.",
+    "Cocínalos en una sartén muy caliente con unas gotas de aceite, 3 minutos por cada lado.",
+    "Trocea la lechuga, el tomate y el pepino.",
+    "Aliña la ensalada con el resto del aceite, el vinagre y sal, y sirve junto al pollo."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

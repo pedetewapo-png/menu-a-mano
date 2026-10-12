@@ -1,0 +1,31 @@
+{
+  "id": "pasta-con-brocoli-y-ajo",
+  "name": "Pasta con brócoli y ajo",
+  "summary": "La pasta y el brócoli se cuecen en la misma olla.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 20,
+  "activeMinutes": 10,
+  "cost": 1,
+  "mainGroup": "grainsPasta",
+  "cuisine": "mediterranean",
+  "ingredients": [
+    { "ingredientId": "pasta-corta", "quantity": 180, "unit": "g" },
+    { "ingredientId": "brocoli", "quantity": 300, "unit": "g" },
+    { "ingredientId": "ajo", "quantity": 3, "unit": "unit" },
+    { "ingredientId": "limon", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "aceite-oliva", "quantity": 3, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" },
+    { "ingredientId": "pimienta-negra", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Separa el brócoli en ramilletes pequeños.",
+    "Cuece la pasta en agua con sal. Cuando falten 4 minutos, añade el brócoli a la misma olla.",
+    "Mientras tanto, dora el ajo laminado con el aceite a fuego suave.",
+    "Escurre la pasta y el brócoli, y mézclalos con el aceite, unas gotas de limón y pimienta."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

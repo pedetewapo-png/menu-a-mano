@@ -1,0 +1,31 @@
+{
+  "id": "berenjena-al-horno-con-tomate-y-mozzarella",
+  "name": "Berenjena al horno con tomate y mozzarella",
+  "summary": "Capas de berenjena, tomate y queso gratinadas.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 40,
+  "activeMinutes": 15,
+  "cost": 2,
+  "mainGroup": "vegetables",
+  "cuisine": "mediterranean",
+  "ingredients": [
+    { "ingredientId": "berenjena", "quantity": 2, "unit": "unit" },
+    { "ingredientId": "tomate-triturado", "quantity": 300, "unit": "g" },
+    { "ingredientId": "mozzarella", "quantity": 125, "unit": "g" },
+    { "ingredientId": "oregano", "quantity": 1, "unit": "tsp" },
+    { "ingredientId": "albahaca", "quantity": null, "unit": "toTaste" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Precalienta el horno a 200 °C.",
+    "Corta las berenjenas en rodajas, píntalas con aceite, sálalas y hornéalas 15 minutos.",
+    "En una fuente, alterna capas de berenjena, tomate con orégano y mozzarella en rodajas.",
+    "Hornea 15 minutos más y sirve con albahaca."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

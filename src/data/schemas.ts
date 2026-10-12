@@ -85,9 +85,28 @@ export const recipeSchema = z.strictObject({
   retired: z.boolean().optional(),
 });
 
+// ---------- Calorías ----------
+
+const nutritionSchema = z.object({
+  kcal: z.number().min(0).max(900),
+  protein: z.number().min(0).optional(),
+  fat: z.number().min(0).optional(),
+  carbs: z.number().min(0).optional(),
+  gramsPerUnit: z.number().positive().optional(),
+  gramsPerMl: z.number().positive().optional(),
+  ignore: z.boolean().optional(),
+});
+
+/** catalog/nutrition.json: valores de una tabla oficial, con su procedencia. */
+export const nutritionFileSchema = z.object({
+  source: z.object({ name: z.string().min(1), version: z.string(), url: z.url(), license: z.string().min(1), note: z.string().optional() }),
+  foods: z.record(z.string(), nutritionSchema.extend({ fdcId: z.number().int(), description: z.string().min(1) })),
+});
+
 // ---------- Recetas e ingredientes propios ----------
 
 export const customIngredientSchema = z.object({
+  nutrition: nutritionSchema.optional(),
   id: z.string().startsWith(USER_ID_PREFIX),
   name: z.string().trim().min(1).max(60),
   namePlural: z.string().optional(),

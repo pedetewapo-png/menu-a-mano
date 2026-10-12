@@ -1,0 +1,35 @@
+{
+  "id": "chili-de-alubias-y-maiz",
+  "name": "Chili de alubias y maíz",
+  "summary": "Alubias en salsa de tomate con comino, sin carne.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 30,
+  "activeMinutes": 15,
+  "cost": 1,
+  "mainGroup": "legumes",
+  "cuisine": "other",
+  "ingredients": [
+    { "ingredientId": "alubias-cocidas", "quantity": 400, "unit": "g" },
+    { "ingredientId": "maiz-dulce", "quantity": 140, "unit": "g" },
+    { "ingredientId": "pimiento-rojo", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "cebolla", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "ajo", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "tomate-triturado", "quantity": 300, "unit": "g" },
+    { "ingredientId": "comino-molido", "quantity": 1, "unit": "tsp" },
+    { "ingredientId": "pimenton-dulce", "quantity": 1, "unit": "tsp" },
+    { "ingredientId": "aceite-oliva", "quantity": 1, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Pica la cebolla, el pimiento y el ajo, y sofríelos con el aceite 6 minutos.",
+    "Añade el comino y el pimentón, remueve y agrega el tomate.",
+    "Cocina a fuego suave 10 minutos.",
+    "Incorpora las alubias enjuagadas y el maíz, sala y cuece 8 minutos más."
+  ],
+  "notes": "Queda muy bien con arroz blanco.",
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

@@ -1,0 +1,728 @@
+{
+  "source": {
+    "name": "U.S. Department of Agriculture, Agricultural Research Service. FoodData Central: SR Legacy",
+    "version": "2018-04",
+    "url": "https://fdc.nal.usda.gov/",
+    "license": "Dominio público (CC0 1.0)",
+    "note": "Valores por 100 g de alimento. No se han modificado; solo se han redondeado las densidades."
+  },
+  "foods": {
+    "cebolla": {
+      "fdcId": 170000,
+      "description": "Onions, raw",
+      "kcal": 40,
+      "protein": 1.1,
+      "fat": 0.1,
+      "carbs": 9.34,
+      "gramsPerMl": 0.67
+    },
+    "ajo": {
+      "fdcId": 169230,
+      "description": "Garlic, raw",
+      "kcal": 149,
+      "protein": 6.36,
+      "fat": 0.5,
+      "carbs": 33.06,
+      "gramsPerUnit": 3,
+      "gramsPerMl": 0.56
+    },
+    "zanahoria": {
+      "fdcId": 170393,
+      "description": "Carrots, raw",
+      "kcal": 41,
+      "protein": 0.93,
+      "fat": 0.24,
+      "carbs": 9.58,
+      "gramsPerMl": 0.54
+    },
+    "pimiento-verde": {
+      "fdcId": 170427,
+      "description": "Peppers, sweet, green, raw",
+      "kcal": 20,
+      "protein": 0.86,
+      "fat": 0.17,
+      "carbs": 4.64,
+      "gramsPerMl": 0.62
+    },
+    "pimiento-rojo": {
+      "fdcId": 170108,
+      "description": "Peppers, sweet, red, raw",
+      "kcal": 26,
+      "protein": 0.99,
+      "fat": 0.3,
+      "carbs": 6.03,
+      "gramsPerMl": 0.62
+    },
+    "tomate": {
+      "fdcId": 170457,
+      "description": "Tomatoes, red, ripe, raw, year round average",
+      "kcal": 18,
+      "protein": 0.88,
+      "fat": 0.2,
+      "carbs": 3.89,
+      "gramsPerMl": 0.63
+    },
+    "tomate-cherry": {
+      "fdcId": 170457,
+      "description": "Tomatoes, red, ripe, raw, year round average",
+      "kcal": 18,
+      "protein": 0.88,
+      "fat": 0.2,
+      "carbs": 3.89,
+      "gramsPerMl": 0.63
+    },
+    "calabacin": {
+      "fdcId": 169291,
+      "description": "Squash, summer, zucchini, includes skin, raw",
+      "kcal": 17,
+      "protein": 1.21,
+      "fat": 0.32,
+      "carbs": 3.11,
+      "gramsPerMl": 0.52
+    },
+    "berenjena": {
+      "fdcId": 169228,
+      "description": "Eggplant, raw",
+      "kcal": 25,
+      "protein": 0.98,
+      "fat": 0.18,
+      "carbs": 5.88,
+      "gramsPerMl": 0.35
+    },
+    "patata": {
+      "fdcId": 170026,
+      "description": "Potatoes, flesh and skin, raw",
+      "kcal": 77,
+      "protein": 2.05,
+      "fat": 0.09,
+      "carbs": 17.49,
+      "gramsPerMl": 0.63
+    },
+    "espinacas": {
+      "fdcId": 168462,
+      "description": "Spinach, raw",
+      "kcal": 23,
+      "protein": 2.86,
+      "fat": 0.39,
+      "carbs": 3.63,
+      "gramsPerMl": 0.13
+    },
+    "champinones": {
+      "fdcId": 169251,
+      "description": "Mushrooms, white, raw",
+      "kcal": 22,
+      "protein": 3.09,
+      "fat": 0.34,
+      "carbs": 3.26,
+      "gramsPerMl": 0.3
+    },
+    "brocoli": {
+      "fdcId": 170379,
+      "description": "Broccoli, raw",
+      "kcal": 34,
+      "protein": 2.82,
+      "fat": 0.37,
+      "carbs": 6.64,
+      "gramsPerMl": 0.38
+    },
+    "calabaza": {
+      "fdcId": 168448,
+      "description": "Pumpkin, raw",
+      "kcal": 26,
+      "protein": 1,
+      "fat": 0.1,
+      "carbs": 6.5,
+      "gramsPerMl": 0.49
+    },
+    "judias-verdes": {
+      "fdcId": 169961,
+      "description": "Beans, snap, green, raw",
+      "kcal": 31,
+      "protein": 1.83,
+      "fat": 0.22,
+      "carbs": 6.97,
+      "gramsPerMl": 0.42
+    },
+    "cebolleta": {
+      "fdcId": 170005,
+      "description": "Onions, spring or scallions (includes tops and bulb), raw",
+      "kcal": 32,
+      "protein": 1.83,
+      "fat": 0.19,
+      "carbs": 7.34,
+      "gramsPerMl": 0.4
+    },
+    "limon": {
+      "fdcId": 167747,
+      "description": "Lemon juice, raw",
+      "kcal": 22,
+      "protein": 0.35,
+      "fat": 0.24,
+      "carbs": 6.9,
+      "gramsPerUnit": 48,
+      "gramsPerMl": 1.03
+    },
+    "perejil": {
+      "fdcId": 170416,
+      "description": "Parsley, fresh",
+      "kcal": 36,
+      "protein": 2.97,
+      "fat": 0.79,
+      "carbs": 6.33,
+      "gramsPerMl": 0.25
+    },
+    "aguacate": {
+      "fdcId": 171705,
+      "description": "Avocados, raw, all commercial varieties",
+      "kcal": 160,
+      "protein": 2,
+      "fat": 14.66,
+      "carbs": 8.53,
+      "gramsPerMl": 0.63
+    },
+    "platano": {
+      "fdcId": 173944,
+      "description": "Bananas, raw",
+      "kcal": 89,
+      "protein": 1.09,
+      "fat": 0.33,
+      "carbs": 22.84,
+      "gramsPerMl": 0.95
+    },
+    "manzana": {
+      "fdcId": 171688,
+      "description": "Apples, raw, with skin (Includes foods for USDA's Food Distribution Program)",
+      "kcal": 52,
+      "protein": 0.26,
+      "fat": 0.17,
+      "carbs": 13.81,
+      "gramsPerMl": 0.53
+    },
+    "puerro": {
+      "fdcId": 169246,
+      "description": "Leeks, (bulb and lower leaf-portion), raw",
+      "kcal": 61,
+      "protein": 1.5,
+      "fat": 0.3,
+      "carbs": 14.15,
+      "gramsPerMl": 0.38
+    },
+    "coliflor": {
+      "fdcId": 169986,
+      "description": "Cauliflower, raw",
+      "kcal": 25,
+      "protein": 1.92,
+      "fat": 0.28,
+      "carbs": 4.97,
+      "gramsPerMl": 0.45
+    },
+    "pepino": {
+      "fdcId": 168409,
+      "description": "Cucumber, with peel, raw",
+      "kcal": 15,
+      "protein": 0.65,
+      "fat": 0.11,
+      "carbs": 3.63,
+      "gramsPerMl": 0.44
+    },
+    "lechuga": {
+      "fdcId": 169247,
+      "description": "Lettuce, cos or romaine, raw",
+      "kcal": 17,
+      "protein": 1.23,
+      "fat": 0.3,
+      "carbs": 3.29,
+      "gramsPerMl": 0.2
+    },
+    "acelgas": {
+      "fdcId": 169991,
+      "description": "Chard, swiss, raw",
+      "kcal": 19,
+      "protein": 1.8,
+      "fat": 0.2,
+      "carbs": 3.74,
+      "gramsPerMl": 0.15
+    },
+    "esparragos-verdes": {
+      "fdcId": 168389,
+      "description": "Asparagus, raw",
+      "kcal": 20,
+      "protein": 2.2,
+      "fat": 0.12,
+      "carbs": 3.88,
+      "gramsPerMl": 0.57
+    },
+    "albahaca": {
+      "fdcId": 172232,
+      "description": "Basil, fresh",
+      "kcal": 23,
+      "protein": 3.15,
+      "fat": 0.64,
+      "carbs": 2.65,
+      "gramsPerMl": 0.18
+    },
+    "contramuslos-pollo": {
+      "fdcId": 173627,
+      "description": "Chicken, broilers or fryers, dark meat, thigh, meat only, raw",
+      "kcal": 121,
+      "protein": 19.66,
+      "fat": 4.12,
+      "carbs": 0
+    },
+    "pechuga-pollo": {
+      "fdcId": 171077,
+      "description": "Chicken, broiler or fryers, breast, skinless, boneless, meat only, raw",
+      "kcal": 120,
+      "protein": 22.5,
+      "fat": 2.62,
+      "carbs": 0
+    },
+    "lomo-cerdo": {
+      "fdcId": 168230,
+      "description": "Pork, fresh, loin, whole, separable lean only, raw",
+      "kcal": 143,
+      "protein": 21.43,
+      "fat": 5.66,
+      "carbs": 0
+    },
+    "filetes-ternera": {
+      "fdcId": 174055,
+      "description": "Beef, top sirloin, steak, separable lean only, trimmed to 1/8\" fat, all grades, raw",
+      "kcal": 131,
+      "protein": 22.09,
+      "fat": 4.08,
+      "carbs": 0
+    },
+    "carne-picada": {
+      "fdcId": 174036,
+      "description": "Beef, ground, 80% lean meat / 20% fat, raw",
+      "kcal": 254,
+      "protein": 17.17,
+      "fat": 20,
+      "carbs": 0
+    },
+    "jamon-taquitos": {
+      "fdcId": 168282,
+      "description": "Pork, cured, ham, center slice, country-style, separable lean only, raw",
+      "kcal": 195,
+      "protein": 27.8,
+      "fat": 8.32,
+      "carbs": 0.3
+    },
+    "merluza": {
+      "fdcId": 173713,
+      "description": "Fish, whiting, mixed species, raw",
+      "kcal": 90,
+      "protein": 18.31,
+      "fat": 1.31,
+      "carbs": 0
+    },
+    "salmon": {
+      "fdcId": 175167,
+      "description": "Fish, salmon, Atlantic, farmed, raw",
+      "kcal": 208,
+      "protein": 20.42,
+      "fat": 13.42,
+      "carbs": 0
+    },
+    "bacalao-desalado": {
+      "fdcId": 171955,
+      "description": "Fish, cod, Atlantic, raw",
+      "kcal": 82,
+      "protein": 17.81,
+      "fat": 0.67,
+      "carbs": 0
+    },
+    "atun-conserva": {
+      "fdcId": 173708,
+      "description": "Fish, tuna, light, canned in oil, drained solids",
+      "kcal": 198,
+      "protein": 29.13,
+      "fat": 8.21,
+      "carbs": 0,
+      "gramsPerMl": 0.62
+    },
+    "gambas-peladas": {
+      "fdcId": 175179,
+      "description": "Crustaceans, shrimp, raw",
+      "kcal": 85,
+      "protein": 20.1,
+      "fat": 0.51,
+      "carbs": 0
+    },
+    "calamares": {
+      "fdcId": 174223,
+      "description": "Mollusks, squid, mixed species, raw",
+      "kcal": 92,
+      "protein": 15.58,
+      "fat": 1.38,
+      "carbs": 3.08
+    },
+    "huevo": {
+      "fdcId": 171287,
+      "description": "Egg, whole, raw, fresh",
+      "kcal": 143,
+      "protein": 12.56,
+      "fat": 9.51,
+      "carbs": 0.72,
+      "gramsPerUnit": 50,
+      "gramsPerMl": 1.03
+    },
+    "yogur-natural": {
+      "fdcId": 171284,
+      "description": "Yogurt, plain, whole milk",
+      "kcal": 61,
+      "protein": 3.47,
+      "fat": 3.25,
+      "carbs": 4.66,
+      "gramsPerMl": 1.04
+    },
+    "leche": {
+      "fdcId": 171265,
+      "description": "Milk, whole, 3.25% milkfat, with added vitamin D",
+      "kcal": 61,
+      "protein": 3.15,
+      "fat": 3.25,
+      "carbs": 4.8,
+      "gramsPerMl": 1
+    },
+    "queso-fresco": {
+      "fdcId": 172223,
+      "description": "Cheese, fresh, queso fresco",
+      "kcal": 299,
+      "protein": 18.09,
+      "fat": 23.82,
+      "carbs": 2.98,
+      "gramsPerMl": 0.52
+    },
+    "queso-rallado": {
+      "fdcId": 171247,
+      "description": "Cheese, parmesan, grated",
+      "kcal": 420,
+      "protein": 28.42,
+      "fat": 27.84,
+      "carbs": 13.91,
+      "gramsPerMl": 0.33
+    },
+    "mozzarella": {
+      "fdcId": 170845,
+      "description": "Cheese, mozzarella, whole milk",
+      "kcal": 299,
+      "protein": 22.17,
+      "fat": 22.14,
+      "carbs": 2.4,
+      "gramsPerMl": 0.47
+    },
+    "queso-feta": {
+      "fdcId": 173420,
+      "description": "Cheese, feta",
+      "kcal": 265,
+      "protein": 14.21,
+      "fat": 21.49,
+      "carbs": 3.88,
+      "gramsPerMl": 0.63
+    },
+    "pan": {
+      "fdcId": 172675,
+      "description": "Bread, french or vienna (includes sourdough)",
+      "kcal": 272,
+      "protein": 10.75,
+      "fat": 2.42,
+      "carbs": 51.88
+    },
+    "tortillas-trigo": {
+      "fdcId": 175037,
+      "description": "Tortillas, ready-to-bake or -fry, flour, refrigerated",
+      "kcal": 306,
+      "protein": 8.2,
+      "fat": 7.99,
+      "carbs": 49.38
+    },
+    "tofu": {
+      "fdcId": 172475,
+      "description": "Tofu, raw, firm, prepared with calcium sulfate",
+      "kcal": 144,
+      "protein": 17.27,
+      "fat": 8.72,
+      "carbs": 2.78,
+      "gramsPerMl": 1.07
+    },
+    "lentejas": {
+      "fdcId": 172420,
+      "description": "Lentils, raw",
+      "kcal": 352,
+      "protein": 24.63,
+      "fat": 1.06,
+      "carbs": 63.35,
+      "gramsPerMl": 0.8
+    },
+    "lentejas-rojas": {
+      "fdcId": 174284,
+      "description": "Lentils, pink or red, raw",
+      "kcal": 358,
+      "protein": 23.91,
+      "fat": 2.17,
+      "carbs": 63.1,
+      "gramsPerMl": 0.81
+    },
+    "arroz": {
+      "fdcId": 169760,
+      "description": "Rice, white, medium-grain, raw, unenriched",
+      "kcal": 360,
+      "protein": 6.61,
+      "fat": 0.58,
+      "carbs": 79.34,
+      "gramsPerMl": 0.82
+    },
+    "pasta-corta": {
+      "fdcId": 168927,
+      "description": "Pasta, dry, unenriched",
+      "kcal": 371,
+      "protein": 13.04,
+      "fat": 1.51,
+      "carbs": 74.67,
+      "gramsPerMl": 0.38
+    },
+    "espaguetis": {
+      "fdcId": 168927,
+      "description": "Pasta, dry, unenriched",
+      "kcal": 371,
+      "protein": 13.04,
+      "fat": 1.51,
+      "carbs": 74.67,
+      "gramsPerMl": 0.38
+    },
+    "cuscus": {
+      "fdcId": 169699,
+      "description": "Couscous, dry",
+      "kcal": 376,
+      "protein": 12.76,
+      "fat": 0.64,
+      "carbs": 77.43,
+      "gramsPerMl": 0.73
+    },
+    "quinoa": {
+      "fdcId": 168874,
+      "description": "Quinoa, uncooked",
+      "kcal": 368,
+      "protein": 14.12,
+      "fat": 6.07,
+      "carbs": 64.16,
+      "gramsPerMl": 0.72
+    },
+    "copos-avena": {
+      "fdcId": 173904,
+      "description": "Cereals, oats, regular and quick, not fortified, dry",
+      "kcal": 379,
+      "protein": 13.15,
+      "fat": 6.52,
+      "carbs": 67.7,
+      "gramsPerMl": 0.34
+    },
+    "nueces": {
+      "fdcId": 170187,
+      "description": "Nuts, walnuts, english",
+      "kcal": 654,
+      "protein": 15.23,
+      "fat": 65.21,
+      "carbs": 13.71,
+      "gramsPerMl": 0.49
+    },
+    "soja-texturizada": {
+      "fdcId": 174275,
+      "description": "Soy flour, defatted",
+      "kcal": 327,
+      "protein": 51.46,
+      "fat": 1.22,
+      "carbs": 33.92,
+      "gramsPerMl": 0.44
+    },
+    "garbanzos-cocidos": {
+      "fdcId": 173800,
+      "description": "Chickpeas (garbanzo beans, bengal gram), mature seeds, canned, drained solids",
+      "kcal": 139,
+      "protein": 7.05,
+      "fat": 2.77,
+      "carbs": 22.53
+    },
+    "alubias-cocidas": {
+      "fdcId": 173746,
+      "description": "Beans, navy, mature seeds, cooked, boiled, without salt",
+      "kcal": 140,
+      "protein": 8.23,
+      "fat": 0.62,
+      "carbs": 26.05,
+      "gramsPerMl": 0.77
+    },
+    "lentejas-cocidas": {
+      "fdcId": 172421,
+      "description": "Lentils, mature seeds, cooked, boiled, without salt",
+      "kcal": 116,
+      "protein": 9.02,
+      "fat": 0.38,
+      "carbs": 20.13,
+      "gramsPerMl": 0.82
+    },
+    "tomate-triturado": {
+      "fdcId": 170501,
+      "description": "Tomatoes, crushed, canned",
+      "kcal": 32,
+      "protein": 1.64,
+      "fat": 0.28,
+      "carbs": 7.29,
+      "gramsPerMl": 1.02
+    },
+    "leche-coco": {
+      "fdcId": 170173,
+      "description": "Nuts, coconut milk, canned (liquid expressed from grated meat and water)",
+      "kcal": 197,
+      "protein": 2.02,
+      "fat": 21.33,
+      "carbs": 2.81,
+      "gramsPerMl": 1
+    },
+    "aceitunas": {
+      "fdcId": 169096,
+      "description": "Olives, pickled, canned or bottled, green",
+      "kcal": 145,
+      "protein": 1.03,
+      "fat": 15.32,
+      "carbs": 3.84
+    },
+    "maiz-dulce": {
+      "fdcId": 169214,
+      "description": "Corn, sweet, yellow, canned, whole kernel, drained solids",
+      "kcal": 67,
+      "protein": 2.29,
+      "fat": 1.22,
+      "carbs": 14.34,
+      "gramsPerMl": 0.69
+    },
+    "caldo-verduras": {
+      "fdcId": 171583,
+      "description": "Soup, vegetable broth, ready to serve",
+      "kcal": 5,
+      "protein": 0.24,
+      "fat": 0.07,
+      "carbs": 0.93,
+      "gramsPerMl": 0.93
+    },
+    "guisantes-congelados": {
+      "fdcId": 170016,
+      "description": "Peas, green, frozen, unprepared (Includes foods for USDA's Food Distribution Program)",
+      "kcal": 77,
+      "protein": 5.22,
+      "fat": 0.4,
+      "carbs": 13.62,
+      "gramsPerMl": 0.57
+    },
+    "menestra-congelada": {
+      "fdcId": 170471,
+      "description": "Vegetables, mixed, frozen, unprepared",
+      "kcal": 72,
+      "protein": 3.33,
+      "fat": 0.52,
+      "carbs": 13.47
+    },
+    "aceite-oliva": {
+      "fdcId": 171413,
+      "description": "Oil, olive, salad or cooking",
+      "kcal": 884,
+      "protein": 0,
+      "fat": 100,
+      "carbs": 0,
+      "gramsPerMl": 0.9
+    },
+    "sal": {
+      "fdcId": 173468,
+      "description": "Salt, table",
+      "kcal": 0,
+      "protein": 0,
+      "fat": 0,
+      "carbs": 0,
+      "gramsPerMl": 1.2
+    },
+    "pimienta-negra": {
+      "fdcId": 170931,
+      "description": "Spices, pepper, black",
+      "kcal": 251,
+      "protein": 10.39,
+      "fat": 3.26,
+      "carbs": 63.95,
+      "gramsPerMl": 0.46
+    },
+    "pimenton-dulce": {
+      "fdcId": 171329,
+      "description": "Spices, paprika",
+      "kcal": 282,
+      "protein": 14.14,
+      "fat": 12.89,
+      "carbs": 53.99,
+      "gramsPerMl": 0.46
+    },
+    "comino-molido": {
+      "fdcId": 170923,
+      "description": "Spices, cumin seed",
+      "kcal": 375,
+      "protein": 17.81,
+      "fat": 22.27,
+      "carbs": 44.24,
+      "gramsPerMl": 0.42
+    },
+    "laurel": {
+      "fdcId": 170917,
+      "description": "Spices, bay leaf",
+      "kcal": 313,
+      "protein": 7.61,
+      "fat": 8.36,
+      "carbs": 74.97,
+      "gramsPerMl": 0.12,
+      "ignore": true
+    },
+    "canela": {
+      "fdcId": 171320,
+      "description": "Spices, cinnamon, ground",
+      "kcal": 247,
+      "protein": 3.99,
+      "fat": 1.24,
+      "carbs": 80.59,
+      "gramsPerMl": 0.52
+    },
+    "oregano": {
+      "fdcId": 171328,
+      "description": "Spices, oregano, dried",
+      "kcal": 265,
+      "protein": 9,
+      "fat": 4.28,
+      "carbs": 68.92,
+      "gramsPerMl": 0.2
+    },
+    "curry-polvo": {
+      "fdcId": 170924,
+      "description": "Spices, curry powder",
+      "kcal": 325,
+      "protein": 14.29,
+      "fat": 14.01,
+      "carbs": 55.83,
+      "gramsPerMl": 0.4
+    },
+    "vinagre": {
+      "fdcId": 172240,
+      "description": "Vinegar, red wine",
+      "kcal": 19,
+      "protein": 0.04,
+      "fat": 0,
+      "carbs": 0.27,
+      "gramsPerMl": 1
+    },
+    "salsa-soja": {
+      "fdcId": 174277,
+      "description": "Soy sauce made from soy and wheat (shoyu)",
+      "kcal": 53,
+      "protein": 8.14,
+      "fat": 0.57,
+      "carbs": 4.93,
+      "gramsPerMl": 1.06
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "arroz-con-pollo",
+  "name": "Arroz con pollo",
+  "summary": "Arroz seco con pollo y pimiento, en una sola sartén.",
+  "mealTypes": ["lunch"],
+  "baseServings": 2,
+  "totalMinutes": 40,
+  "activeMinutes": 15,
+  "cost": 1,
+  "mainGroup": "whiteMeat",
+  "cuisine": "spanish",
+  "ingredients": [
+    { "ingredientId": "contramuslos-pollo", "quantity": 300, "unit": "g", "note": "troceados" },
+    { "ingredientId": "arroz", "quantity": 160, "unit": "g" },
+    { "ingredientId": "pimiento-rojo", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "tomate-triturado", "quantity": 100, "unit": "g" },
+    { "ingredientId": "ajo", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "pimenton-dulce", "quantity": 1, "unit": "tsp" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Dora el pollo con sal y el aceite en una sartén amplia. Resérvalo.",
+    "Sofríe el pimiento en dados y el ajo picado 5 minutos.",
+    "Añade el tomate y el pimentón, y cocina 2 minutos.",
+    "Incorpora el arroz y el pollo, remueve y añade el doble del volumen del arroz en agua caliente, con sal.",
+    "Cuece 18 minutos sin remover y deja reposar 5 minutos."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "id": "potaje-de-garbanzos-con-acelgas",
+  "name": "Potaje de garbanzos con acelgas",
+  "summary": "Un guiso rápido con garbanzos de bote.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 25,
+  "activeMinutes": 15,
+  "cost": 1,
+  "mainGroup": "legumes",
+  "cuisine": "spanish",
+  "ingredients": [
+    { "ingredientId": "garbanzos-cocidos", "quantity": 400, "unit": "g" },
+    { "ingredientId": "acelgas", "quantity": 300, "unit": "g" },
+    { "ingredientId": "patata", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "ajo", "quantity": 2, "unit": "unit" },
+    { "ingredientId": "pimenton-dulce", "quantity": 1, "unit": "tsp" },
+    { "ingredientId": "comino-molido", "quantity": 0.5, "unit": "tsp" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Pela la patata y córtala en dados pequeños. Trocea las acelgas, separando las pencas de las hojas.",
+    "Dora el ajo laminado con el aceite en una olla, añade el pimentón y el comino y remueve unos segundos.",
+    "Incorpora la patata y las pencas, cubre con agua y cuece 10 minutos.",
+    "Añade las hojas de acelga y los garbanzos escurridos, sala y cuece 5 minutos más."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

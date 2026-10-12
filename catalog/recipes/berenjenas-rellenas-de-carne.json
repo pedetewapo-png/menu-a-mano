@@ -1,0 +1,31 @@
+{
+  "id": "berenjenas-rellenas-de-carne",
+  "name": "Berenjenas rellenas de carne",
+  "summary": "Berenjenas gratinadas con carne y tomate.",
+  "mealTypes": ["lunch"],
+  "baseServings": 2,
+  "totalMinutes": 50,
+  "activeMinutes": 20,
+  "cost": 2,
+  "mainGroup": "redMeat",
+  "cuisine": "spanish",
+  "ingredients": [
+    { "ingredientId": "berenjena", "quantity": 2, "unit": "unit" },
+    { "ingredientId": "carne-picada", "quantity": 200, "unit": "g" },
+    { "ingredientId": "tomate-triturado", "quantity": 200, "unit": "g" },
+    { "ingredientId": "cebolla", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "queso-rallado", "quantity": 40, "unit": "g" },
+    { "ingredientId": "aceite-oliva", "quantity": 1, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Precalienta el horno a 200 °C. Corta las berenjenas a lo largo, haz cortes en la pulpa y hornéalas 20 minutos.",
+    "Mientras tanto, sofríe la cebolla picada con el aceite y añade la carne con sal.",
+    "Vacía las berenjenas con una cuchara, pica la pulpa y añádela a la carne junto con el tomate. Cocina 10 minutos.",
+    "Rellena las berenjenas, cúbrelas con el queso y gratínalas 8 minutos."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

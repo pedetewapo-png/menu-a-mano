@@ -1,0 +1,30 @@
+{
+  "id": "calamares-encebollados",
+  "name": "Calamares encebollados",
+  "summary": "Calamares tiernos con mucha cebolla pochada.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 35,
+  "activeMinutes": 15,
+  "cost": 2,
+  "mainGroup": "fish",
+  "cuisine": "spanish",
+  "ingredients": [
+    { "ingredientId": "calamares", "quantity": 400, "unit": "g" },
+    { "ingredientId": "cebolla", "quantity": 2, "unit": "unit" },
+    { "ingredientId": "ajo", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "laurel", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Corta la cebolla en tiras finas y los calamares en anillas.",
+    "Pocha la cebolla con el aceite, el ajo y el laurel a fuego suave 12 minutos.",
+    "Añade los calamares con sal, tapa y cocina 15 minutos, hasta que estén tiernos.",
+    "Destapa y deja reducir el jugo un par de minutos."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

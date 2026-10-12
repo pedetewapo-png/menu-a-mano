@@ -491,6 +491,17 @@ input[type='radio'] {
   font-weight: 400;
 }
 
+.day-kcal {
+  margin: 0.15rem 0 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.kcal-reference {
+  margin-top: 1rem;
+  max-width: 44rem;
+}
+
 .day-today {
   margin-left: 0.35rem;
   vertical-align: middle;
@@ -643,7 +654,7 @@ input[type='radio'] {
     grid-row: auto;
   }
 
-  .day-title {
+  .day-head {
     margin-bottom: 0.5rem;
   }
 

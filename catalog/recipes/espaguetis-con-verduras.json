@@ -1,0 +1,33 @@
+{
+  "id": "espaguetis-con-verduras",
+  "name": "Espaguetis con verduras",
+  "summary": "Pasta con verduras salteadas y albahaca.",
+  "mealTypes": ["lunch"],
+  "baseServings": 2,
+  "totalMinutes": 25,
+  "activeMinutes": 15,
+  "cost": 1,
+  "mainGroup": "grainsPasta",
+  "cuisine": "mediterranean",
+  "ingredients": [
+    { "ingredientId": "espaguetis", "quantity": 180, "unit": "g" },
+    { "ingredientId": "calabacin", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "zanahoria", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "tomate-cherry", "quantity": 150, "unit": "g" },
+    { "ingredientId": "ajo", "quantity": 2, "unit": "unit" },
+    { "ingredientId": "albahaca", "quantity": null, "unit": "toTaste" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Cuece los espaguetis en agua con sal el tiempo que indique el envase.",
+    "Corta el calabacín y la zanahoria en bastones finos y los tomates por la mitad.",
+    "Saltea el ajo laminado, el calabacín y la zanahoria con el aceite 6 minutos.",
+    "Añade los tomates y cocina 3 minutos más.",
+    "Escurre la pasta, mézclala con las verduras y sirve con albahaca."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "id": "quinoa-con-verduras",
+  "name": "Quinoa con verduras",
+  "summary": "Quinoa suelta con verduras salteadas y limón.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 25,
+  "activeMinutes": 15,
+  "cost": 2,
+  "mainGroup": "grainsPasta",
+  "cuisine": "other",
+  "ingredients": [
+    { "ingredientId": "quinoa", "quantity": 140, "unit": "g" },
+    { "ingredientId": "calabacin", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "pimiento-rojo", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "zanahoria", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "cebolleta", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "limon", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Enjuaga la quinoa y cuécela en el doble de su volumen de agua con sal 15 minutos.",
+    "Corta el calabacín, el pimiento, la zanahoria y la cebolleta en dados pequeños.",
+    "Saltéalas con el aceite 6 minutos.",
+    "Mezcla la quinoa con las verduras y aliña con el zumo de limón."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

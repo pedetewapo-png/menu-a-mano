@@ -1,0 +1,29 @@
+{
+  "id": "tortilla-de-espinacas",
+  "name": "Tortilla de espinacas",
+  "summary": "Espinacas salteadas con ajo, cuajadas con huevo.",
+  "mealTypes": ["dinner"],
+  "baseServings": 2,
+  "totalMinutes": 20,
+  "activeMinutes": 15,
+  "cost": 1,
+  "mainGroup": "eggs",
+  "cuisine": "spanish",
+  "ingredients": [
+    { "ingredientId": "espinacas", "quantity": 250, "unit": "g" },
+    { "ingredientId": "huevo", "quantity": 4, "unit": "unit" },
+    { "ingredientId": "ajo", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "aceite-oliva", "quantity": 1, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Dora el ajo laminado con el aceite.",
+    "Añade las espinacas y remueve hasta que reduzcan y pierdan el agua.",
+    "Mézclalas con los huevos batidos y sal.",
+    "Cuaja la tortilla en una sartén antiadherente, 3 minutos por un lado y 2 por el otro."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

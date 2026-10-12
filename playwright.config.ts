@@ -16,6 +16,9 @@ export default defineConfig({
     channel: 'msedge',
     locale: 'es-ES',
     timezoneId: 'Europe/Madrid',
+    // Sin transiciones: si la comprobación de contraste coincide con un botón a medio
+    // cambiar de color, falla aunque el color final sea correcto.
+    reducedMotion: 'reduce',
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
   },

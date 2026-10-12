@@ -12,7 +12,10 @@ Aplicación de ordenador, instalable desde una página web, para planificar el m
 | `npm run check:layers` | Comprueba la regla de capas (`ui → data → domain`). |
 | `npm run catalog:images` | Genera las imágenes de las recetas a partir de `catalog/images/`. |
 | `npm run screenshots` | Captura las pantallas principales en `test-results/screens/` (necesita `npm run dev` en marcha). |
-| `npm run catalog:check` | Valida el catálogo. Los errores impiden compilar; los avisos señalan trabajo pendiente. |
+| `npm run catalog:check` | Valida el catálogo. Los errores impiden compilar; los avisos señalan trabajo pendiente. Con `-- --kcal` lista además las calorías por ración de cada receta. |
+| `npm run catalog:nutrition -- <carpeta>` | Regenera `catalog/nutrition.json` a partir de los CSV de USDA FoodData Central (véase «Calorías»). |
+| `npm run catalog:review` | Genera `revision/recetas.html`: todas las recetas con lo que la app calcula de cada una, para revisarlas una a una. |
+| `npm run photos:propose` | Busca en Wikimedia Commons fotos candidatas con licencia abierta y genera `revision/fotos.html` para elegirlas. No descarga ninguna. |
 | `npm run build` | Valida el catálogo, genera las imágenes, comprueba las capas y los tipos, y compila en `dist/`. |
 | `npm run preview` | Sirve `dist/` en `http://localhost:4173/` para probar la instalación y el modo sin conexión. |
 | `npm run icons` | Regenera los iconos PNG a partir de `public/icons/icon.svg`. |
@@ -36,7 +39,8 @@ Se descartó Cloudflare porque sus direcciones compartidas no eran accesibles de
 ```
 index.html        Página de instalación.
 app/index.html    Entrada de la app.
-catalog/          Ingredientes y recetas (un archivo por receta).
+catalog/          Ingredientes, recetas (un archivo por receta) y calorías de cada ingrediente.
+revision/         Páginas generadas para revisar recetas y elegir fotos. No se guardan en el repositorio.
 src/domain/       Lógica pura: planificador, lista de la compra, filtros, unidades.
 src/data/         Catálogo, esquemas, base de datos local, copias de seguridad.
 src/ui/           Pantallas y componentes.
@@ -57,7 +61,27 @@ Dependencias entre capas: `ui → data → domain`. `domain` no importa nada de 
 2. Si usa un ingrediente nuevo, añádelo a `catalog/ingredients.json` con su dieta, alérgenos (`allergens`) y posibles trazas según la marca (`mayContain`).
 3. Ejecuta `npm run catalog:check`.
 
-La dieta y los alérgenos de una receta se calculan a partir de sus ingredientes; no se escriben en la receta.
+La dieta y los alérgenos de una receta se calculan a partir de sus ingredientes; no se escriben en la receta. Las calorías, también.
+
+Si el ingrediente es nuevo, añade además su alimento equivalente en `catalog/nutrition-sources.json` y ejecuta `npm run catalog:nutrition`.
+
+## Calorías
+
+Las calorías salen de una tabla oficial, no de una estimación: [USDA FoodData Central](https://fdc.nal.usda.gov/), conjunto SR Legacy de abril de 2018, de dominio público.
+
+- `catalog/nutrition-sources.json` dice a qué alimento de la tabla corresponde cada ingrediente (`fdcId`) y, cuando hace falta, cuánto pesa una unidad o una cucharada.
+- `npm run catalog:nutrition -- <carpeta con los CSV>` lee la tabla y escribe `catalog/nutrition.json`, que es lo que usa la app. Los CSV no están en el repositorio: se descargan de la página de FoodData Central.
+- Se guardan calorías, proteínas, grasas e hidratos por 100 g. La app solo muestra las calorías.
+
+Las cifras son orientativas y así se presentan («unas 350 kcal»). Se calculan con el peso de compra de cada ingrediente, sin descontar pieles ni huesos, y cuentan todo el aceite de la receta. Lo que va «al gusto» o en pizcas no suma. Si a un ingrediente le falta el dato, la receta no muestra cifra.
+
+## Revisar el catálogo
+
+Una receta es un borrador hasta que una persona la revisa con la lista de comprobación de la especificación (v2, §9.3).
+
+1. `npm run catalog:review` genera `revision/recetas.html`. Se abre con doble clic y se marca cada receta como correcta o por corregir.
+2. `npm run photos:propose` genera `revision/fotos.html` con las fotos candidatas de cada receta. Los términos de búsqueda están en `catalog/photo-queries.json` y las candidatas encontradas, con su autor y su licencia, en `catalog/photo-candidates.json`.
+3. Con el resultado de ambas páginas se anota `reviewedOn` en cada receta revisada y se descargan a `catalog/images/` solo las fotos elegidas.
 
 ## Estado de la v2
 
@@ -70,7 +94,7 @@ Los requisitos están en [ESPECIFICACION-v2.md](ESPECIFICACION-v2.md), que divid
 | 2 | Notas en las comidas, modo cocina, desayunos y migración de los datos de la v1 | Hecha |
 | 3 | Perfiles de comensal: una ficha por persona, menú que respeta a todas y avisos que dicen de quién es cada restricción | Hecha |
 | 4 | Recetas propias: editor, ingredientes propios, foto, exportar e importar por archivo | Hecha |
-| 5 | Catálogo: 70 recetas y 8 desayunos, con foto y revisados; calorías | En curso: 25 recetas y 8 desayunos, sin fotos ni revisión |
+| 5 | Catálogo: 70 recetas y 8 desayunos, con foto y revisados; calorías | Hechas las recetas y las calorías. Faltan la revisión y las fotos, que dependen del autor |
 | 6 | Cuenta con Google y sincronización | Pendiente |
 | 7 | Plan familiar y copia personal | Pendiente |
 | 8 | IA de texto a receta | Pendiente |
@@ -78,8 +102,8 @@ Los requisitos están en [ESPECIFICACION-v2.md](ESPECIFICACION-v2.md), que divid
 
 Pendiente dentro de lo ya hecho:
 
-- **Revisión del catálogo.** Las 33 recetas son un borrador: ninguna tiene `reviewedOn` porque nadie ha revisado todavía sus ingredientes y alérgenos uno a uno.
-- **Imágenes.** Ninguna receta tiene foto; la app muestra un marcador. El script que las procesa ya existe.
+- **Revisión del catálogo.** Las 78 recetas son un borrador: ninguna tiene `reviewedOn` porque nadie ha revisado todavía sus ingredientes y alérgenos uno a uno. La app lo avisa. La página para revisarlas está preparada (véase «Revisar el catálogo»).
+- **Imágenes.** Ninguna receta tiene foto; la app muestra un marcador. Hay candidatas propuestas para todas, pendientes de que el autor las elija; no se ha descargado ninguna.
 - Probar la instalación en un iPhone y en un Android reales.
 
 ## Nota sobre `rollup`

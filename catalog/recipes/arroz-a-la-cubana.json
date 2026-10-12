@@ -1,0 +1,32 @@
+{
+  "id": "arroz-a-la-cubana",
+  "name": "Arroz a la cubana",
+  "summary": "Arroz con tomate, huevo frito y plátano.",
+  "mealTypes": ["lunch"],
+  "baseServings": 2,
+  "totalMinutes": 25,
+  "activeMinutes": 15,
+  "cost": 1,
+  "mainGroup": "grainsPasta",
+  "cuisine": "spanish",
+  "ingredients": [
+    { "ingredientId": "arroz", "quantity": 160, "unit": "g" },
+    { "ingredientId": "huevo", "quantity": 2, "unit": "unit" },
+    { "ingredientId": "tomate-triturado", "quantity": 200, "unit": "g" },
+    { "ingredientId": "platano", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "ajo", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Cuece el arroz en agua con sal el tiempo que indique el envase y escúrrelo.",
+    "Dora el ajo picado con una cucharada de aceite, añade el tomate y sal, y cocina 8 minutos.",
+    "Corta el plátano a lo largo y dóralo en una sartén con el resto del aceite. Resérvalo.",
+    "Fríe los huevos en la misma sartén.",
+    "Sirve el arroz con el tomate, el huevo y el plátano."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "macarrones-a-la-bolonesa",
+  "name": "Macarrones a la boloñesa",
+  "summary": "Pasta con salsa de carne y tomate.",
+  "mealTypes": ["lunch"],
+  "baseServings": 2,
+  "totalMinutes": 30,
+  "activeMinutes": 15,
+  "cost": 1,
+  "mainGroup": "redMeat",
+  "cuisine": "mediterranean",
+  "ingredients": [
+    { "ingredientId": "pasta-corta", "quantity": 180, "unit": "g" },
+    { "ingredientId": "carne-picada", "quantity": 200, "unit": "g" },
+    { "ingredientId": "tomate-triturado", "quantity": 300, "unit": "g" },
+    { "ingredientId": "cebolla", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "zanahoria", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "oregano", "quantity": 1, "unit": "tsp" },
+    { "ingredientId": "aceite-oliva", "quantity": 1, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Pica la cebolla y la zanahoria y sofríelas con el aceite 5 minutos.",
+    "Añade la carne con sal y cocina hasta que pierda el color rosado, deshaciéndola con una cuchara.",
+    "Agrega el tomate y el orégano y cuece a fuego suave 15 minutos.",
+    "Mientras tanto, cuece la pasta en agua con sal y escúrrela.",
+    "Mezcla la pasta con la salsa."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

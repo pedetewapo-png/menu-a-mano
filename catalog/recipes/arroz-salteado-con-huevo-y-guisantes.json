@@ -1,0 +1,32 @@
+{
+  "id": "arroz-salteado-con-huevo-y-guisantes",
+  "name": "Arroz salteado con huevo y guisantes",
+  "summary": "Arroz salteado al estilo oriental.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 20,
+  "activeMinutes": 15,
+  "cost": 1,
+  "mainGroup": "grainsPasta",
+  "cuisine": "other",
+  "ingredients": [
+    { "ingredientId": "arroz", "quantity": 160, "unit": "g" },
+    { "ingredientId": "huevo", "quantity": 2, "unit": "unit" },
+    { "ingredientId": "guisantes-congelados", "quantity": 100, "unit": "g" },
+    { "ingredientId": "zanahoria", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "cebolleta", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "salsa-soja", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" }
+  ],
+  "steps": [
+    "Cuece el arroz el tiempo que indique el envase y escúrrelo.",
+    "Cuaja los huevos batidos en una sartén con un poco de aceite, como una tortilla fina, y córtala en tiras.",
+    "Saltea la zanahoria en dados y los guisantes con el resto del aceite 5 minutos.",
+    "Añade el arroz, el huevo, la cebolleta picada y la salsa de soja, y saltea 2 minutos."
+  ],
+  "notes": "Sale mejor con arroz cocido del día anterior.",
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

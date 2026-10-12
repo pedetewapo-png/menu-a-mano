@@ -1,0 +1,33 @@
+{
+  "id": "pollo-al-curry-con-arroz",
+  "name": "Pollo al curry con arroz",
+  "summary": "Pollo en salsa suave de coco y curry.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 30,
+  "activeMinutes": 15,
+  "cost": 2,
+  "mainGroup": "whiteMeat",
+  "cuisine": "other",
+  "ingredients": [
+    { "ingredientId": "pechuga-pollo", "quantity": 300, "unit": "g" },
+    { "ingredientId": "leche-coco", "quantity": 200, "unit": "ml" },
+    { "ingredientId": "cebolla", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "ajo", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "curry-polvo", "quantity": 2, "unit": "tsp" },
+    { "ingredientId": "arroz", "quantity": 140, "unit": "g" },
+    { "ingredientId": "aceite-oliva", "quantity": 1, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Cuece el arroz en agua con sal el tiempo que indique el envase y escúrrelo.",
+    "Corta el pollo en dados y dóralo con el aceite 5 minutos. Resérvalo.",
+    "En la misma sartén, sofríe la cebolla y el ajo picados 4 minutos y añade el curry.",
+    "Agrega la leche de coco y el pollo, y cuece a fuego suave 8 minutos.",
+    "Rectifica de sal y sirve con el arroz."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "id": "ensalada-de-patata-con-atun-y-huevo",
+  "name": "Ensalada de patata con atún y huevo",
+  "summary": "Una ensalada templada que sirve de plato único.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 25,
+  "activeMinutes": 10,
+  "cost": 1,
+  "mainGroup": "fish",
+  "cuisine": "spanish",
+  "ingredients": [
+    { "ingredientId": "patata", "quantity": 3, "unit": "unit" },
+    { "ingredientId": "atun-conserva", "quantity": 120, "unit": "g" },
+    { "ingredientId": "huevo", "quantity": 2, "unit": "unit" },
+    { "ingredientId": "aceitunas", "quantity": 40, "unit": "g" },
+    { "ingredientId": "cebolleta", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "vinagre", "quantity": 1, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Cuece las patatas con piel en agua con sal unos 20 minutos, hasta que estén tiernas. En los últimos 10 minutos, añade los huevos.",
+    "Pela las patatas y los huevos y córtalos en trozos.",
+    "Mézclalos con el atún desmigado, las aceitunas y la cebolleta picada.",
+    "Aliña con el aceite, el vinagre y sal."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

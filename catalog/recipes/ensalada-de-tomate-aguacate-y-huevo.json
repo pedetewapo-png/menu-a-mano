@@ -1,0 +1,31 @@
+{
+  "id": "ensalada-de-tomate-aguacate-y-huevo",
+  "name": "Ensalada de tomate, aguacate y huevo",
+  "summary": "Una cena fría que llena.",
+  "mealTypes": ["dinner"],
+  "baseServings": 2,
+  "totalMinutes": 12,
+  "activeMinutes": 12,
+  "cost": 2,
+  "mainGroup": "vegetables",
+  "cuisine": "mediterranean",
+  "ingredients": [
+    { "ingredientId": "tomate", "quantity": 2, "unit": "unit" },
+    { "ingredientId": "aguacate", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "huevo", "quantity": 2, "unit": "unit" },
+    { "ingredientId": "cebolleta", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "limon", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Cuece los huevos 10 minutos en agua hirviendo, enfríalos y pélalos.",
+    "Corta el tomate, el aguacate y los huevos en trozos, y pica la cebolleta.",
+    "Mézclalo todo con cuidado.",
+    "Aliña con el aceite, el zumo de limón y sal."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

@@ -21,6 +21,20 @@
   { "id": "platano", "name": "plátano", "namePlural": "plátanos", "section": "produce", "baseUnit": "g", "gramsPerUnit": 120, "diet": "vegan" },
   { "id": "manzana", "name": "manzana", "namePlural": "manzanas", "section": "produce", "baseUnit": "g", "gramsPerUnit": 180, "diet": "vegan" },
 
+  { "id": "puerro", "name": "puerro", "namePlural": "puerros", "section": "produce", "baseUnit": "g", "gramsPerUnit": 150, "diet": "vegan" },
+  { "id": "coliflor", "name": "coliflor", "namePlural": "coliflores", "section": "produce", "baseUnit": "g", "gramsPerUnit": 600, "diet": "vegan" },
+  { "id": "pepino", "name": "pepino", "namePlural": "pepinos", "section": "produce", "baseUnit": "g", "gramsPerUnit": 200, "diet": "vegan" },
+  { "id": "lechuga", "name": "lechuga o mezcla de hojas", "section": "produce", "baseUnit": "g", "diet": "vegan" },
+  { "id": "acelgas", "name": "acelgas", "section": "produce", "baseUnit": "g", "diet": "vegan" },
+  { "id": "esparragos-verdes", "name": "espárragos verdes", "section": "produce", "baseUnit": "g", "diet": "vegan" },
+  { "id": "albahaca", "name": "albahaca fresca", "section": "produce", "baseUnit": "g", "diet": "vegan", "pantryStaple": true },
+
+  { "id": "carne-picada", "name": "carne picada mixta", "section": "meat", "baseUnit": "g", "diet": "omnivore", "mayContain": ["sulphites"], "groups": ["pork", "beef"] },
+  { "id": "jamon-taquitos", "name": "jamón serrano en taquitos", "section": "meat", "baseUnit": "g", "diet": "omnivore", "groups": ["pork"] },
+
+  { "id": "gambas-peladas", "name": "gambas peladas", "section": "fish", "baseUnit": "g", "diet": "omnivore", "allergens": ["crustaceans"], "mayContain": ["sulphites"], "groups": ["shellfish"] },
+  { "id": "calamares", "name": "calamares limpios", "section": "fish", "baseUnit": "g", "diet": "omnivore", "allergens": ["molluscs"], "groups": ["shellfish"] },
+
   { "id": "contramuslos-pollo", "name": "contramuslos de pollo", "section": "meat", "baseUnit": "g", "diet": "omnivore", "groups": ["poultry"] },
   { "id": "pechuga-pollo", "name": "pechuga de pollo", "section": "meat", "baseUnit": "g", "diet": "omnivore", "groups": ["poultry"] },
   { "id": "lomo-cerdo", "name": "cinta de lomo de cerdo", "section": "meat", "baseUnit": "g", "diet": "omnivore", "groups": ["pork"] },
@@ -35,12 +49,21 @@
   { "id": "leche", "name": "leche", "section": "dairyEggs", "baseUnit": "ml", "diet": "vegetarian", "allergens": ["milk"], "groups": ["dairy"] },
   { "id": "queso-fresco", "name": "queso fresco", "section": "dairyEggs", "baseUnit": "g", "diet": "vegetarian", "allergens": ["milk"], "groups": ["dairy"] },
 
+  { "id": "queso-rallado", "name": "queso curado rallado", "section": "dairyEggs", "baseUnit": "g", "diet": "vegetarian", "allergens": ["milk"], "mayContain": ["eggs"], "groups": ["dairy"] },
+  { "id": "mozzarella", "name": "mozzarella", "section": "dairyEggs", "baseUnit": "g", "diet": "vegetarian", "allergens": ["milk"], "groups": ["dairy"] },
+  { "id": "queso-feta", "name": "queso feta", "section": "dairyEggs", "baseUnit": "g", "diet": "vegetarian", "allergens": ["milk"], "groups": ["dairy"] },
+
+  { "id": "tortillas-trigo", "name": "tortilla de trigo", "namePlural": "tortillas de trigo", "section": "bakery", "baseUnit": "g", "gramsPerUnit": 40, "diet": "vegan", "allergens": ["gluten"], "mayContain": ["soy", "milk"] },
   { "id": "pan", "name": "pan", "section": "bakery", "baseUnit": "g", "diet": "vegan", "allergens": ["gluten"], "mayContain": ["sesame", "soy", "milk"] },
 
   { "id": "lentejas", "name": "lentejas pardinas secas", "section": "dryGoods", "baseUnit": "g", "diet": "vegan", "mayContain": ["gluten"], "groups": ["legumes"] },
   { "id": "arroz", "name": "arroz", "section": "dryGoods", "baseUnit": "g", "diet": "vegan" },
   { "id": "pasta-corta", "name": "pasta corta (macarrones o hélices)", "section": "dryGoods", "baseUnit": "g", "diet": "vegan", "allergens": ["gluten"], "mayContain": ["eggs"] },
   { "id": "cuscus", "name": "cuscús", "section": "dryGoods", "baseUnit": "g", "diet": "vegan", "allergens": ["gluten"] },
+  { "id": "lentejas-rojas", "name": "lentejas rojas secas", "section": "dryGoods", "baseUnit": "g", "diet": "vegan", "mayContain": ["gluten"], "groups": ["legumes"] },
+  { "id": "espaguetis", "name": "espaguetis", "section": "dryGoods", "baseUnit": "g", "diet": "vegan", "allergens": ["gluten"], "mayContain": ["eggs"] },
+  { "id": "quinoa", "name": "quinoa", "section": "dryGoods", "baseUnit": "g", "diet": "vegan", "mayContain": ["gluten"] },
+  { "id": "soja-texturizada", "name": "soja texturizada fina", "section": "dryGoods", "baseUnit": "g", "diet": "vegan", "allergens": ["soy"], "mayContain": ["gluten"] },
   { "id": "copos-avena", "name": "copos de avena", "section": "dryGoods", "baseUnit": "g", "diet": "vegan", "allergens": ["gluten"] },
   { "id": "nueces", "name": "nueces peladas", "section": "dryGoods", "baseUnit": "g", "diet": "vegan", "allergens": ["treeNuts"], "mayContain": ["peanuts"], "groups": ["nuts"] },
 
@@ -51,6 +74,11 @@
   { "id": "aceitunas", "name": "aceitunas sin hueso", "section": "canned", "baseUnit": "g", "diet": "vegan" },
   { "id": "atun-conserva", "name": "atún en conserva (escurrido)", "section": "canned", "baseUnit": "g", "diet": "omnivore", "allergens": ["fish"], "mayContain": ["soy"], "groups": ["fish"] },
 
+  { "id": "lentejas-cocidas", "name": "lentejas cocidas (escurridas)", "section": "canned", "baseUnit": "g", "diet": "vegan", "mayContain": ["gluten"], "groups": ["legumes"] },
+  { "id": "maiz-dulce", "name": "maíz dulce en conserva (escurrido)", "section": "canned", "baseUnit": "g", "diet": "vegan" },
+  { "id": "caldo-verduras", "name": "caldo de verduras", "section": "canned", "baseUnit": "ml", "diet": "vegan", "allergens": ["celery"] },
+
+  { "id": "guisantes-congelados", "name": "guisantes congelados", "section": "frozen", "baseUnit": "g", "diet": "vegan" },
   { "id": "menestra-congelada", "name": "menestra de verduras congelada", "section": "frozen", "baseUnit": "g", "diet": "vegan" },
 
   { "id": "tofu", "name": "tofu firme", "section": "other", "baseUnit": "g", "diet": "vegan", "allergens": ["soy"] },

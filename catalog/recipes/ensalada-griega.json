@@ -1,0 +1,32 @@
+{
+  "id": "ensalada-griega",
+  "name": "Ensalada griega",
+  "summary": "Tomate, pepino y queso feta, lista en diez minutos.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 10,
+  "activeMinutes": 10,
+  "cost": 2,
+  "mainGroup": "vegetables",
+  "cuisine": "mediterranean",
+  "ingredients": [
+    { "ingredientId": "tomate", "quantity": 2, "unit": "unit" },
+    { "ingredientId": "pepino", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "cebolleta", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "queso-feta", "quantity": 100, "unit": "g" },
+    { "ingredientId": "aceitunas", "quantity": 40, "unit": "g" },
+    { "ingredientId": "oregano", "quantity": 1, "unit": "tsp" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Corta el tomate y el pepino en trozos grandes y la cebolleta en aros.",
+    "Mézclalos en un bol con las aceitunas.",
+    "Añade el queso feta en dados.",
+    "Aliña con el aceite, el orégano y un poco de sal."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

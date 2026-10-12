@@ -1,0 +1,29 @@
+{
+  "id": "revuelto-de-esparragos-verdes",
+  "name": "Revuelto de espárragos verdes",
+  "summary": "Una cena de temporada en un cuarto de hora.",
+  "mealTypes": ["dinner"],
+  "baseServings": 2,
+  "totalMinutes": 15,
+  "activeMinutes": 15,
+  "cost": 2,
+  "mainGroup": "eggs",
+  "cuisine": "spanish",
+  "ingredients": [
+    { "ingredientId": "esparragos-verdes", "quantity": 250, "unit": "g" },
+    { "ingredientId": "huevo", "quantity": 4, "unit": "unit" },
+    { "ingredientId": "ajo", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "aceite-oliva", "quantity": 1, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Retira la parte dura de los espárragos y trocéalos.",
+    "Saltéalos con el aceite y el ajo laminado 6 minutos.",
+    "Baja el fuego y añade los huevos ligeramente batidos con sal.",
+    "Remueve sin parar hasta que cuajen, pero queden jugosos."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

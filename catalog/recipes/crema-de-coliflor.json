@@ -1,0 +1,31 @@
+{
+  "id": "crema-de-coliflor",
+  "name": "Crema de coliflor",
+  "summary": "Una crema blanca y fina con muy pocos ingredientes.",
+  "mealTypes": ["dinner"],
+  "baseServings": 2,
+  "totalMinutes": 25,
+  "activeMinutes": 10,
+  "cost": 1,
+  "mainGroup": "vegetables",
+  "cuisine": "spanish",
+  "ingredients": [
+    { "ingredientId": "coliflor", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "patata", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "cebolla", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "ajo", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "aceite-oliva", "quantity": 1, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" },
+    { "ingredientId": "pimienta-negra", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Separa la coliflor en ramilletes y trocea la patata y la cebolla.",
+    "Rehoga la cebolla y el ajo con el aceite 3 minutos.",
+    "Añade la coliflor y la patata, cubre justo con agua, sala y cuece 15 minutos.",
+    "Tritura hasta que quede fina y sirve con un poco de pimienta."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

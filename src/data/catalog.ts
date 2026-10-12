@@ -1,4 +1,5 @@
 import rawIngredients from '../../catalog/ingredients.json';
+import rawNutrition from '../../catalog/nutrition.json';
 import { buildCatalog } from '../domain/catalog';
 import type { Catalog, Ingredient, Recipe } from '../domain/types';
 import { checkCatalog } from './catalogCheck';
@@ -10,10 +11,13 @@ function load(): Catalog {
     file: path.split('/').pop()!.replace(/\.json$/, ''),
     data: module.default,
   }));
-  const report = checkCatalog(rawIngredients, rawRecipes);
+  const report = checkCatalog(rawIngredients, rawRecipes, rawNutrition);
   if (!report.catalog) throw new Error(`Catálogo no válido:\n${report.errors.join('\n')}`);
   return report.catalog;
 }
+
+/** De dónde salen las calorías, para citarlo en la app. */
+export const nutritionSource: { name: string; version: string; url: string; license: string } = rawNutrition.source;
 
 /** Catálogo incluido en la app, de solo lectura. */
 export const catalog: Catalog = load();

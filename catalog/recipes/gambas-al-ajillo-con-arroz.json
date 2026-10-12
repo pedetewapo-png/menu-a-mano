@@ -1,0 +1,31 @@
+{
+  "id": "gambas-al-ajillo-con-arroz",
+  "name": "Gambas al ajillo con arroz",
+  "summary": "Gambas salteadas con ajo sobre arroz blanco.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 20,
+  "activeMinutes": 15,
+  "cost": 3,
+  "mainGroup": "fish",
+  "cuisine": "spanish",
+  "ingredients": [
+    { "ingredientId": "gambas-peladas", "quantity": 250, "unit": "g" },
+    { "ingredientId": "arroz", "quantity": 140, "unit": "g" },
+    { "ingredientId": "ajo", "quantity": 3, "unit": "unit" },
+    { "ingredientId": "perejil", "quantity": null, "unit": "toTaste" },
+    { "ingredientId": "limon", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Cuece el arroz en agua con sal el tiempo que indique el envase y escúrrelo.",
+    "Dora el ajo laminado con el aceite a fuego medio.",
+    "Sube el fuego, añade las gambas con sal y saltéalas 2 o 3 minutos, hasta que cambien de color.",
+    "Añade perejil picado y unas gotas de limón, y sirve sobre el arroz."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}

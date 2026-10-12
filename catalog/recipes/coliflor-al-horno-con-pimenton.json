@@ -1,0 +1,30 @@
+{
+  "id": "coliflor-al-horno-con-pimenton",
+  "name": "Coliflor al horno con pimentón",
+  "summary": "Coliflor dorada y crujiente por fuera.",
+  "mealTypes": ["lunch", "dinner"],
+  "baseServings": 2,
+  "totalMinutes": 35,
+  "activeMinutes": 10,
+  "cost": 1,
+  "mainGroup": "vegetables",
+  "cuisine": "spanish",
+  "ingredients": [
+    { "ingredientId": "coliflor", "quantity": 1, "unit": "unit" },
+    { "ingredientId": "ajo", "quantity": 2, "unit": "unit" },
+    { "ingredientId": "pimenton-dulce", "quantity": 1, "unit": "tsp" },
+    { "ingredientId": "limon", "quantity": 0.5, "unit": "unit" },
+    { "ingredientId": "aceite-oliva", "quantity": 2, "unit": "tbsp" },
+    { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
+  ],
+  "steps": [
+    "Precalienta el horno a 200 °C.",
+    "Separa la coliflor en ramilletes y mézclalos con el aceite, el ajo picado, el pimentón y sal.",
+    "Repártelos en una bandeja y hornea 25 minutos, removiendo a mitad de cocción.",
+    "Sirve con un chorro de limón."
+  ],
+  "source": {
+    "author": "Menú a Mano",
+    "license": "Contenido propio"
+  }
+}
