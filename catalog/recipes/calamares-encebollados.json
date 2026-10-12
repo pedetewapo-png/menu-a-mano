@@ -4,7 +4,7 @@
   "summary": "Calamares tiernos con mucha cebolla pochada.",
   "mealTypes": ["lunch", "dinner"],
   "baseServings": 2,
-  "totalMinutes": 35,
+  "totalMinutes": 40,
   "activeMinutes": 15,
   "cost": 2,
   "mainGroup": "fish",
@@ -20,9 +20,10 @@
   "steps": [
     "Corta la cebolla en tiras finas y los calamares en anillas.",
     "Pocha la cebolla con el aceite, el ajo y el laurel a fuego suave 12 minutos.",
-    "Añade los calamares con sal, tapa y cocina 15 minutos, hasta que estén tiernos.",
-    "Destapa y deja reducir el jugo un par de minutos."
+    "Añade los calamares con sal, tapa y cocina unos 15 minutos, hasta que estén tiernos. Si hace falta, déjalos unos minutos más con un poco de agua.",
+    "Destapa, deja reducir el jugo un par de minutos y retira el laurel."
   ],
+  "reviewedOn": "2026-10-12",
   "source": {
     "author": "Menú a Mano",
     "license": "Contenido propio"

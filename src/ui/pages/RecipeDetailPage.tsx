@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { buildRecipeFile } from '../../data/recipeFile';
 import { deleteUserRecipe, getUserPhoto, toggleFavorite } from '../../data/repos';
+import { veganLabelChecks } from '../../domain/catalog';
 import { violations } from '../../domain/filters';
 import { kcalPerServing } from '../../domain/nutrition';
 import { slotIndex } from '../../domain/planner';
@@ -45,6 +46,7 @@ export function RecipeDetailPage() {
   }
 
   const info = catalog.derived.get(recipe.id)!;
+  const veganChecks = veganLabelChecks(recipe, catalog.ingredients);
   const shownServings = servings ?? prefs.servings;
   const factor = shownServings / recipe.baseServings;
   const isFavorite = favorites.has(recipe.id);
@@ -225,6 +227,7 @@ export function RecipeDetailPage() {
           <h3>{t.recipes.allergens}</h3>
           <p>{info.allergens.length > 0 ? info.allergens.map((a) => t.allergen[a]).join(', ') : t.recipes.noAllergens}</p>
           <p className="hint">{t.notices.allergens}</p>
+          {veganChecks.length > 0 && <p className="hint">{t.recipes.veganCheck(veganChecks.map((i) => i.name).join(', '))}</p>}
         </section>
 
         <section aria-labelledby="steps-title">

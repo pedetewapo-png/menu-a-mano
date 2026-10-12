@@ -20,11 +20,12 @@
     { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
   ],
   "steps": [
-    "Pon el cuscús en un bol con sal, cúbrelo con la misma cantidad de agua hirviendo y tápalo 5 minutos.",
+    "Pon el cuscús en un bol con sal, cúbrelo con el mismo volumen de agua hirviendo (o la que indique el envase) y tápalo 5 minutos.",
     "Corta el calabacín, la zanahoria y la cebolla en dados pequeños.",
     "Saltéalos con la mitad del aceite y el comino unos 8 minutos.",
     "Añade los garbanzos escurridos y cocina 2 minutos más.",
     "Suelta el cuscús con un tenedor y el resto del aceite, y mézclalo con las verduras."
   ],
+  "reviewedOn": "2026-10-12",
   "source": { "author": "Menú a Mano", "license": "Contenido propio" }
 }

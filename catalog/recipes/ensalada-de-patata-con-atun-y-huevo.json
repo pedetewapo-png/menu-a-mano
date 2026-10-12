@@ -4,7 +4,7 @@
   "summary": "Una ensalada templada que sirve de plato único.",
   "mealTypes": ["lunch", "dinner"],
   "baseServings": 2,
-  "totalMinutes": 25,
+  "totalMinutes": 40,
   "activeMinutes": 10,
   "cost": 1,
   "mainGroup": "fish",
@@ -20,11 +20,12 @@
     { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
   ],
   "steps": [
-    "Cuece las patatas con piel en agua con sal unos 20 minutos, hasta que estén tiernas. En los últimos 10 minutos, añade los huevos.",
-    "Pela las patatas y los huevos y córtalos en trozos.",
+    "Cuece las patatas con piel en agua con sal unos 25 minutos desde que rompa a hervir, hasta que estén tiernas. En los últimos 10 minutos, añade los huevos.",
+    "Deja que se templen, pela las patatas y los huevos y córtalos en trozos.",
     "Mézclalos con el atún desmigado, las aceitunas y la cebolleta picada.",
     "Aliña con el aceite, el vinagre y sal."
   ],
+  "reviewedOn": "2026-10-12",
   "source": {
     "author": "Menú a Mano",
     "license": "Contenido propio"

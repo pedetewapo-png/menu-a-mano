@@ -4,7 +4,7 @@
   "summary": "Huevos cuajados sobre un sofrito de tomate y pimiento.",
   "mealTypes": ["lunch", "dinner"],
   "baseServings": 2,
-  "totalMinutes": 25,
+  "totalMinutes": 30,
   "activeMinutes": 15,
   "cost": 1,
   "mainGroup": "eggs",
@@ -23,7 +23,8 @@
     "Pica la cebolla, el pimiento y el ajo, y sofríelos con el aceite 8 minutos.",
     "Añade el tomate, el comino y sal. Cocina a fuego suave 10 minutos.",
     "Haz cuatro huecos en la salsa y casca un huevo en cada uno.",
-    "Tapa y cocina 4 o 5 minutos, hasta que la clara esté cuajada."
+    "Tapa y cocina 5 o 6 minutos, hasta que la clara esté bien cuajada. Si prefieres la yema hecha, déjalos un par de minutos más."
   ],
+  "reviewedOn": "2026-10-12",
   "source": { "author": "Menú a Mano", "license": "Contenido propio" }
 }

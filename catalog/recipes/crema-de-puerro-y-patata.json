@@ -4,8 +4,8 @@
   "summary": "Suave y reconfortante, sin lácteos.",
   "mealTypes": ["dinner"],
   "baseServings": 2,
-  "totalMinutes": 30,
-  "activeMinutes": 10,
+  "totalMinutes": 35,
+  "activeMinutes": 15,
   "cost": 1,
   "mainGroup": "vegetables",
   "cuisine": "spanish",
@@ -22,6 +22,7 @@
     "Añade la patata, cubre justo con agua, sala y cuece 20 minutos.",
     "Tritura hasta obtener una crema fina."
   ],
+  "reviewedOn": "2026-10-12",
   "source": {
     "author": "Menú a Mano",
     "license": "Contenido propio"

@@ -4,7 +4,7 @@
   "summary": "La boloñesa de siempre, con soja texturizada.",
   "mealTypes": ["lunch"],
   "baseServings": 2,
-  "totalMinutes": 30,
+  "totalMinutes": 35,
   "activeMinutes": 15,
   "cost": 1,
   "mainGroup": "plantProtein",
@@ -21,11 +21,12 @@
   ],
   "steps": [
     "Hidrata la soja en agua caliente 10 minutos y escúrrela bien.",
-    "Pica la cebolla y la zanahoria y sofríelas con el aceite 5 minutos.",
+    "Mientras tanto, pica la cebolla y la zanahoria y sofríelas con el aceite 5 minutos.",
     "Añade la soja, remueve 2 minutos y agrega el tomate, el orégano y sal.",
     "Cuece a fuego suave 12 minutos.",
-    "Cuece los espaguetis en agua con sal, escúrrelos y mézclalos con la salsa."
+    "Mientras se hace la salsa, cuece los espaguetis en agua con sal. Escúrrelos y mézclalos con la salsa."
   ],
+  "reviewedOn": "2026-10-12",
   "source": {
     "author": "Menú a Mano",
     "license": "Contenido propio"

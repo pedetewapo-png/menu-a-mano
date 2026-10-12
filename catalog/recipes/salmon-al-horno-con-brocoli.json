@@ -4,7 +4,7 @@
   "summary": "Todo en la misma bandeja.",
   "mealTypes": ["lunch", "dinner"],
   "baseServings": 2,
-  "totalMinutes": 25,
+  "totalMinutes": 30,
   "activeMinutes": 10,
   "cost": 3,
   "mainGroup": "fish",
@@ -21,9 +21,10 @@
     "Precalienta el horno a 200 °C.",
     "Separa el brócoli en ramilletes y repártelo en una bandeja con el aceite y sal.",
     "Hornea 8 minutos.",
-    "Añade el salmón con sal y pimienta y hornea 10 o 12 minutos más.",
+    "Añade el salmón con sal y pimienta y hornea 10 o 12 minutos más, hasta que el salmón esté hecho por dentro.",
     "Sirve con un chorro de limón."
   ],
+  "reviewedOn": "2026-10-12",
   "source": {
     "author": "Menú a Mano",
     "license": "Contenido propio"

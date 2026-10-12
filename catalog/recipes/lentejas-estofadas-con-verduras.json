@@ -4,7 +4,7 @@
   "summary": "Un guiso de cuchara sencillo, que se hace casi solo.",
   "mealTypes": ["lunch"],
   "baseServings": 2,
-  "totalMinutes": 45,
+  "totalMinutes": 50,
   "activeMinutes": 15,
   "cost": 1,
   "mainGroup": "legumes",
@@ -26,8 +26,9 @@
     "Sofríe las verduras con el aceite en una olla, a fuego medio, unos 8 minutos.",
     "Añade el tomate y el pimentón, remueve y cocina 2 minutos más.",
     "Incorpora las lentejas y el laurel, y cubre con agua hasta dos dedos por encima.",
-    "Cuece a fuego suave unos 30 minutos, hasta que estén tiernas. Añade la sal al final."
+    "Cuece a fuego suave unos 30 minutos, hasta que estén tiernas. Añade la sal al final y retira el laurel."
   ],
   "notes": "Las lentejas pardinas no necesitan remojo. Si el guiso queda seco, añade un poco más de agua caliente.",
+  "reviewedOn": "2026-10-12",
   "source": { "author": "Menú a Mano", "license": "Contenido propio" }
 }

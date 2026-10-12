@@ -4,7 +4,7 @@
   "summary": "Alubias en salsa de tomate con comino, sin carne.",
   "mealTypes": ["lunch", "dinner"],
   "baseServings": 2,
-  "totalMinutes": 30,
+  "totalMinutes": 35,
   "activeMinutes": 15,
   "cost": 1,
   "mainGroup": "legumes",
@@ -27,7 +27,8 @@
     "Cocina a fuego suave 10 minutos.",
     "Incorpora las alubias enjuagadas y el maíz, sala y cuece 8 minutos más."
   ],
-  "notes": "Queda muy bien con arroz blanco.",
+  "notes": "Queda muy bien con arroz blanco, que no está incluido en la lista de la compra.",
+  "reviewedOn": "2026-10-12",
   "source": {
     "author": "Menú a Mano",
     "license": "Contenido propio"

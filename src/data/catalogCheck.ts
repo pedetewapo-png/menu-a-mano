@@ -131,11 +131,11 @@ export function checkCatalog(rawIngredients: unknown, rawRecipes: RawRecipeFile[
     if (valid) recipes.push(recipe);
   }
 
-  const pending = (label: string, missing: Recipe[]) => {
-    if (missing.length > 0) warnings.push(`${missing.length} de ${recipes.length} recetas ${label}`);
-  };
   // Las fotos del catálogo se aplazan a la v3: que falten no es trabajo pendiente de esta versión.
-  pending('con ingredientes y alérgenos sin revisar por una persona', recipes.filter((r) => !r.reviewedOn));
+  // Una receta no entra en la app hasta que una persona la ha revisado (especificación v2, §9.3).
+  for (const recipe of recipes) {
+    if (!recipe.reviewedOn) errors.push(`Receta "${recipe.id}": falta la fecha de revisión (reviewedOn)`);
+  }
 
   if (errors.length > 0) return { errors, warnings };
 

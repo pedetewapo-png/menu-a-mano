@@ -4,8 +4,8 @@
   "summary": "Un plato de cuchara que se hace en veinte minutos.",
   "mealTypes": ["lunch", "dinner"],
   "baseServings": 2,
-  "totalMinutes": 20,
-  "activeMinutes": 10,
+  "totalMinutes": 25,
+  "activeMinutes": 15,
   "cost": 1,
   "mainGroup": "legumes",
   "cuisine": "spanish",
@@ -23,9 +23,10 @@
   "steps": [
     "Pica el puerro, la zanahoria y el pimiento, y sofríelos con el aceite 8 minutos.",
     "Añade el pimentón, el tomate y el laurel, y cocina 2 minutos.",
-    "Incorpora las alubias enjuagadas y un vaso de agua.",
-    "Cuece a fuego suave 8 minutos y rectifica de sal."
+    "Incorpora las alubias enjuagadas y un vaso de agua (unos 200 ml).",
+    "Cuece a fuego suave 8 minutos, rectifica de sal y retira el laurel."
   ],
+  "reviewedOn": "2026-10-12",
   "source": {
     "author": "Menú a Mano",
     "license": "Contenido propio"

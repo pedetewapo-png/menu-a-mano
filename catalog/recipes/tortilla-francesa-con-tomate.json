@@ -4,8 +4,8 @@
   "summary": "La cena de recurso que nunca falla.",
   "mealTypes": ["dinner"],
   "baseServings": 2,
-  "totalMinutes": 10,
-  "activeMinutes": 10,
+  "totalMinutes": 15,
+  "activeMinutes": 15,
   "cost": 1,
   "mainGroup": "eggs",
   "cuisine": "spanish",
@@ -19,8 +19,9 @@
   "steps": [
     "Corta los tomates en rodajas y alíñalos con la mitad del aceite, sal y orégano.",
     "Bate dos huevos con una pizca de sal.",
-    "Cuaja la tortilla en una sartén con unas gotas de aceite, a fuego medio, y dóblala por la mitad.",
-    "Repite con los otros dos huevos y sirve con el tomate."
+    "Cuaja la tortilla en una sartén con la mitad del aceite que queda, a fuego medio, y dóblala por la mitad cuando esté cuajada.",
+    "Repite con los otros dos huevos y el resto del aceite, y sirve con el tomate."
   ],
+  "reviewedOn": "2026-10-12",
   "source": { "author": "Menú a Mano", "license": "Contenido propio" }
 }

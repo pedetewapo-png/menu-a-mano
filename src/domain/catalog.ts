@@ -45,6 +45,23 @@ export function deriveRecipeInfo(
   };
 }
 
+/**
+ * Ingredientes de una receta vegana que, según la marca, pueden llevar huevo o leche
+ * (el pan, la pasta). La receta solo es vegana si el producto elegido no los lleva.
+ */
+export function veganLabelChecks(
+  recipe: Pick<Recipe, 'id' | 'ingredients'>,
+  ingredients: ReadonlyMap<string, Ingredient>,
+): Ingredient[] {
+  if (deriveRecipeInfo(recipe, ingredients).diet !== 'vegan') return [];
+  const found = new Map<string, Ingredient>();
+  for (const item of recipe.ingredients) {
+    const ingredient = ingredients.get(item.ingredientId)!;
+    if (ingredient.mayContain.includes('eggs') || ingredient.mayContain.includes('milk')) found.set(ingredient.id, ingredient);
+  }
+  return [...found.values()];
+}
+
 export function buildCatalog(ingredientList: Ingredient[], recipeList: Recipe[]): Catalog {
   const ingredients = new Map(ingredientList.map((i) => [i.id, i]));
   const recipes = [...recipeList].sort((a, b) => a.id.localeCompare(b.id));

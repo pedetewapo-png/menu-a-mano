@@ -4,7 +4,7 @@
   "summary": "Verduras de huerta cocinadas despacio en tomate.",
   "mealTypes": ["lunch", "dinner"],
   "baseServings": 2,
-  "totalMinutes": 40,
+  "totalMinutes": 45,
   "activeMinutes": 20,
   "cost": 1,
   "mainGroup": "vegetables",
@@ -25,6 +25,7 @@
     "Añade la berenjena y el calabacín, sala y cocina 10 minutos más.",
     "Incorpora el tomate y cocina a fuego suave 15 minutos, removiendo de vez en cuando."
   ],
-  "notes": "Se conserva bien en la nevera un par de días.",
+  "notes": "Se conserva bien un par de días en la nevera, en un recipiente cerrado.",
+  "reviewedOn": "2026-10-12",
   "source": { "author": "Menú a Mano", "license": "Contenido propio" }
 }

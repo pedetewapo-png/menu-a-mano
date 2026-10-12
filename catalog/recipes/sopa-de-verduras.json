@@ -4,7 +4,7 @@
   "summary": "Verduras en dados cocidas en caldo.",
   "mealTypes": ["dinner"],
   "baseServings": 2,
-  "totalMinutes": 30,
+  "totalMinutes": 35,
   "activeMinutes": 10,
   "cost": 1,
   "mainGroup": "vegetables",
@@ -24,6 +24,7 @@
     "Añade el caldo y lleva a ebullición.",
     "Cuece a fuego suave 20 minutos y rectifica de sal."
   ],
+  "reviewedOn": "2026-10-12",
   "source": {
     "author": "Menú a Mano",
     "license": "Contenido propio"

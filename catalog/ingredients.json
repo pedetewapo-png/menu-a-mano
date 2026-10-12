@@ -29,7 +29,7 @@
   { "id": "esparragos-verdes", "name": "espárragos verdes", "section": "produce", "baseUnit": "g", "diet": "vegan" },
   { "id": "albahaca", "name": "albahaca fresca", "section": "produce", "baseUnit": "g", "diet": "vegan", "pantryStaple": true },
 
-  { "id": "carne-picada", "name": "carne picada mixta", "section": "meat", "baseUnit": "g", "diet": "omnivore", "mayContain": ["sulphites"], "groups": ["pork", "beef"] },
+  { "id": "carne-picada", "name": "carne picada mixta (cerdo y ternera)", "section": "meat", "baseUnit": "g", "diet": "omnivore", "mayContain": ["sulphites"], "groups": ["pork", "beef"] },
   { "id": "jamon-taquitos", "name": "jamón serrano en taquitos", "section": "meat", "baseUnit": "g", "diet": "omnivore", "groups": ["pork"] },
 
   { "id": "gambas-peladas", "name": "gambas peladas", "section": "fish", "baseUnit": "g", "diet": "omnivore", "allergens": ["crustaceans"], "mayContain": ["sulphites"], "groups": ["shellfish"] },

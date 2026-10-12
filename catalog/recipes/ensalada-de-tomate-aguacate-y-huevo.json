@@ -4,8 +4,8 @@
   "summary": "Una cena fría que llena.",
   "mealTypes": ["dinner"],
   "baseServings": 2,
-  "totalMinutes": 12,
-  "activeMinutes": 12,
+  "totalMinutes": 20,
+  "activeMinutes": 10,
   "cost": 2,
   "mainGroup": "vegetables",
   "cuisine": "mediterranean",
@@ -24,6 +24,7 @@
     "Mézclalo todo con cuidado.",
     "Aliña con el aceite, el zumo de limón y sal."
   ],
+  "reviewedOn": "2026-10-12",
   "source": {
     "author": "Menú a Mano",
     "license": "Contenido propio"

@@ -499,6 +499,24 @@ Los puntos 6 y 7 no se aplican en la v2, porque las recetas del catálogo no lle
 
 Al completarla se anota la fecha en la receta. El validador pasa a exigirla: una receta sin revisar impide compilar.
 
+### 9.4 Revisión del 2026-10-12
+El autor revisó las 78 recetas y la tabla de ingredientes, con ayuda de otra IA y de fuentes públicas (AESAN, Ministerio de Sanidad, Food Standards Agency). Fue una revisión sobre el papel: no se cocinaron las recetas ni se comprobaron etiquetas de marcas concretas. Pidió aplicar lo que mejorase las recetas sin volverlas técnicas, porque la app es para cualquier persona.
+
+Aplicado:
+- **Tiempos** más realistas en 22 recetas, contando cortar, precalentar y llevar a ebullición.
+- **Pasos más claros** en unas 50: comprobar que el pollo, la carne picada y el cerdo quedan bien hechos por dentro, que el pescado se separa en lascas y que las tortillas y los revueltos cuajan del todo; retirar el laurel; cantidades de agua en mililitros; reparto del aceite.
+- **Menestra:** la receta ya no usa una bolsa de menestra congelada, cuya composición cambia con la marca, sino cada verdura por separado. Así una exclusión (por ejemplo, de guisantes) no puede saltarse.
+- **Recetas veganas con pan, pasta o tortillas:** la receta avisa de que hay que comprobar en la etiqueta que no lleven huevo ni leche.
+- **Recetas vegetarianas con queso:** una nota recuerda que algunos quesos llevan cuajo animal.
+- **Queso fresco:** sus calorías salían de un queso mexicano mucho más graso; ahora se usa un alimento de la tabla más parecido al queso de Burgos.
+- Corregido «½ cucharaditas» por «½ cucharadita».
+
+No aplicado, por ser demasiado técnico para el uso previsto o por pertenecer a otra versión:
+- Temperaturas de cocción con termómetro, grosores en milímetros y pesos exactos de cada pieza.
+- Distinguir en pantalla entre alérgeno presente, composición variable y trazas con más detalle del actual («lleva» y «puede llevar según la marca»). El filtro ya trata lo dudoso como si lo llevara.
+- Un papel para cada plato (principal, guarnición, entrante) y acompañamientos que entren en la compra. Queda como idea para una versión posterior.
+- Descontar de las calorías el aceite que se escurre o las partes que no se comen. Sigue siendo una limitación declarada (§9 bis); el caso más visible es la tortilla de patatas.
+
 ## 9 bis. Calorías
 
 Decidido por el autor el 2026-10-11.

@@ -296,6 +296,7 @@ export const es = {
     notes: 'Notas',
     allergens: 'Alérgenos declarados',
     noAllergens: 'Ninguno de los 14 de declaración obligatoria.',
+    veganCheck: (names: string) => `Para que sea vegana, comprueba en la etiqueta que no lleven huevo ni leche: ${names}.`,
     totalTime: 'Tiempo total',
     activeTime: 'Tiempo activo',
     dietLabel: 'Dieta',

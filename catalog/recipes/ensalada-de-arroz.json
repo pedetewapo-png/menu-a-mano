@@ -20,11 +20,13 @@
     { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
   ],
   "steps": [
-    "Cuece el arroz en agua con sal, escúrrelo y enfríalo bajo el grifo.",
+    "Cuece el arroz en agua con sal, enfríalo bajo el grifo y escúrrelo bien.",
     "Corta el tomate y el pimiento en dados pequeños.",
     "Mezcla el arroz con las verduras, el maíz y las aceitunas.",
     "Aliña con el aceite, el vinagre y sal."
   ],
+  "notes": "Si no la vas a comer enseguida, guárdala en la nevera y tómala antes de un día.",
+  "reviewedOn": "2026-10-12",
   "source": {
     "author": "Menú a Mano",
     "license": "Contenido propio"

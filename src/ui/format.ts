@@ -71,7 +71,8 @@ export function formatRecipeIngredient(ingredient: Ingredient, item: RecipeIngre
           : (ingredient.unitNamePlural ?? ingredient.namePlural ?? ingredient.name);
       text = `${formatHalves(quantity)} ${name}`;
     } else if (item.unit === 'tbsp' || item.unit === 'tsp') {
-      text = `${formatHalves(quantity)} ${t.units[item.unit](quantity)} ${t.units.of} ${ingredient.name}`;
+      // Media cucharada va en singular: "½ cucharadita", pero "1 ½ cucharaditas".
+      text = `${formatHalves(quantity)} ${t.units[item.unit](quantity <= 1 ? 1 : quantity)} ${t.units.of} ${ingredient.name}`;
     } else {
       text = `${formatBaseQuantity(quantity, item.unit)} ${t.units.of} ${ingredient.name}`;
     }

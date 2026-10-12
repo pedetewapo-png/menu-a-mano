@@ -4,7 +4,7 @@
   "summary": "Arroz salteado al estilo oriental.",
   "mealTypes": ["lunch", "dinner"],
   "baseServings": 2,
-  "totalMinutes": 20,
+  "totalMinutes": 25,
   "activeMinutes": 15,
   "cost": 1,
   "mainGroup": "grainsPasta",
@@ -20,11 +20,12 @@
   ],
   "steps": [
     "Cuece el arroz el tiempo que indique el envase y escúrrelo.",
-    "Cuaja los huevos batidos en una sartén con un poco de aceite, como una tortilla fina, y córtala en tiras.",
+    "Cuaja bien los huevos batidos en una sartén con un poco de aceite, como una tortilla fina, y córtala en tiras.",
     "Saltea la zanahoria en dados y los guisantes con el resto del aceite 5 minutos.",
     "Añade el arroz, el huevo, la cebolleta picada y la salsa de soja, y saltea 2 minutos."
   ],
-  "notes": "Sale mejor con arroz cocido del día anterior.",
+  "notes": "Sale mejor con arroz cocido del día anterior, guardado en la nevera.",
+  "reviewedOn": "2026-10-12",
   "source": {
     "author": "Menú a Mano",
     "license": "Contenido propio"

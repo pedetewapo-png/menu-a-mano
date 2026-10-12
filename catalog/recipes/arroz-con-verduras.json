@@ -4,7 +4,7 @@
   "summary": "Arroz seco en sartén, con judías verdes y pimiento.",
   "mealTypes": ["lunch"],
   "baseServings": 2,
-  "totalMinutes": 35,
+  "totalMinutes": 40,
   "activeMinutes": 15,
   "cost": 1,
   "mainGroup": "grainsPasta",
@@ -26,5 +26,6 @@
     "Incorpora el arroz, remueve y añade el doble de su volumen de agua caliente, con sal.",
     "Cuece 18 minutos sin remover y deja reposar 5 minutos fuera del fuego."
   ],
+  "reviewedOn": "2026-10-12",
   "source": { "author": "Menú a Mano", "license": "Contenido propio" }
 }

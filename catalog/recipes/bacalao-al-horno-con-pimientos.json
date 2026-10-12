@@ -4,7 +4,7 @@
   "summary": "Bacalao desalado sobre pimientos asados.",
   "mealTypes": ["lunch", "dinner"],
   "baseServings": 2,
-  "totalMinutes": 30,
+  "totalMinutes": 35,
   "activeMinutes": 10,
   "cost": 2,
   "mainGroup": "fish",
@@ -22,8 +22,9 @@
     "Precalienta el horno a 200 °C.",
     "Corta los pimientos y la cebolla en tiras y repártelos en una bandeja con el ajo laminado, el aceite y una pizca de sal.",
     "Hornea 15 minutos.",
-    "Coloca el bacalao encima y hornea 10 minutos más."
+    "Coloca el bacalao encima y hornea unos 10 minutos más, hasta que se separe en lascas."
   ],
+  "reviewedOn": "2026-10-12",
   "source": {
     "author": "Menú a Mano",
     "license": "Contenido propio"

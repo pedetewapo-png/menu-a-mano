@@ -4,7 +4,7 @@
   "summary": "Bacalao desalado en una salsa de tomate casera.",
   "mealTypes": ["lunch", "dinner"],
   "baseServings": 2,
-  "totalMinutes": 30,
+  "totalMinutes": 35,
   "activeMinutes": 15,
   "cost": 2,
   "mainGroup": "fish",
@@ -24,5 +24,6 @@
     "Coloca el bacalao sobre la salsa, tapa y cocina 6 u 8 minutos, hasta que se separe en lascas.",
     "Prueba y rectifica de sal solo si hace falta."
   ],
+  "reviewedOn": "2026-10-12",
   "source": { "author": "Menú a Mano", "license": "Contenido propio" }
 }

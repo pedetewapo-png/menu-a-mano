@@ -77,11 +77,11 @@ Las cifras son orientativas y así se presentan («unas 350 kcal»). Se calculan
 
 ## Revisar el catálogo
 
-Una receta es un borrador hasta que una persona la revisa con la lista de comprobación de la especificación (v2, §9.3).
+Una receta no entra en la app hasta que una persona la revisa con la lista de comprobación de la especificación (v2, §9.3): el validador rechaza las que no tienen `reviewedOn`.
 
 1. `npm run catalog:review` genera `revision/recetas.html`. Se abre con doble clic y se marca cada receta como correcta o por corregir.
 2. (Para la v3.) `npm run photos:propose` genera `revision/fotos.html` con las fotos candidatas de cada receta. Los términos de búsqueda están en `catalog/photo-queries.json` y las candidatas encontradas, con su autor y su licencia, en `catalog/photo-candidates.json`.
-3. Con el resultado de ambas páginas se anota `reviewedOn` en cada receta revisada y se descargan a `catalog/images/` solo las fotos elegidas.
+3. Con el resultado se corrige lo que haga falta y se anota `reviewedOn` en cada receta revisada. Las fotos elegidas, cuando las haya, se descargan a `catalog/images/`.
 
 ## Estado de la v2
 
@@ -94,7 +94,7 @@ Los requisitos están en [ESPECIFICACION-v2.md](ESPECIFICACION-v2.md), que divid
 | 2 | Notas en las comidas, modo cocina, desayunos y migración de los datos de la v1 | Hecha |
 | 3 | Perfiles de comensal: una ficha por persona, menú que respeta a todas y avisos que dicen de quién es cada restricción | Hecha |
 | 4 | Recetas propias: editor, ingredientes propios, foto, exportar e importar por archivo | Hecha |
-| 5 | Catálogo: 70 recetas y 8 desayunos, revisados; calorías | Hechas las recetas y las calorías. Falta la revisión, que depende del autor. Las fotos se aplazan a la v3 |
+| 5 | Catálogo: 70 recetas y 8 desayunos, revisados; calorías | Hecha. Las fotos se aplazan a la v3 |
 | 6 | Cuenta con Google y sincronización | Pendiente |
 | 7 | Plan familiar y copia personal | Pendiente |
 | 8 | IA de texto a receta | Pendiente |
@@ -102,7 +102,7 @@ Los requisitos están en [ESPECIFICACION-v2.md](ESPECIFICACION-v2.md), que divid
 
 Pendiente dentro de lo ya hecho:
 
-- **Revisión del catálogo.** Las 78 recetas son un borrador: ninguna tiene `reviewedOn` porque nadie ha revisado todavía sus ingredientes y alérgenos uno a uno. La app lo avisa. La página para revisarlas está preparada (véase «Revisar el catálogo»).
+- **Revisión del catálogo.** Hecha el 2026-10-12: el autor revisó las 78 recetas y la tabla de ingredientes, y se aplicaron sus correcciones (especificación v2, §9.3). Fue una revisión sobre el papel, sin cocinar las recetas ni comprobar marcas concretas; la app sigue pidiendo que se miren las etiquetas. A partir de ahora, una receta sin `reviewedOn` impide compilar.
 - **Imágenes.** Aplazadas a la v3 por decisión del autor (2026-10-12). Ninguna receta del catálogo tiene foto; la app muestra un marcador. Queda preparado el procesado de imágenes y una primera búsqueda de candidatas; no se ha descargado ninguna.
 - Probar la instalación en un iPhone y en un Android reales.
 

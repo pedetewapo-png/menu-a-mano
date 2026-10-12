@@ -4,13 +4,13 @@
   "summary": "Un guiso casero que se hace solo.",
   "mealTypes": ["lunch"],
   "baseServings": 2,
-  "totalMinutes": 40,
+  "totalMinutes": 45,
   "activeMinutes": 15,
   "cost": 1,
   "mainGroup": "whiteMeat",
   "cuisine": "spanish",
   "ingredients": [
-    { "ingredientId": "contramuslos-pollo", "quantity": 400, "unit": "g", "note": "troceados" },
+    { "ingredientId": "contramuslos-pollo", "quantity": 400, "unit": "g", "note": "deshuesados y troceados" },
     { "ingredientId": "zanahoria", "quantity": 2, "unit": "unit" },
     { "ingredientId": "guisantes-congelados", "quantity": 150, "unit": "g" },
     { "ingredientId": "cebolla", "quantity": 0.5, "unit": "unit" },
@@ -20,12 +20,13 @@
     { "ingredientId": "sal", "quantity": null, "unit": "toTaste" }
   ],
   "steps": [
-    "Sala el pollo y dóralo con el aceite en una olla. Resérvalo.",
+    "Sala el pollo y dóralo con el aceite en una olla, unos 5 minutos. Resérvalo.",
     "En la misma olla, sofríe la cebolla y el ajo picados 4 minutos.",
-    "Añade la zanahoria en rodajas, el pollo y el laurel, y cubre con agua.",
+    "Añade la zanahoria en rodajas, el pollo y el laurel, y cubre justo con agua.",
     "Cuece a fuego suave 20 minutos.",
-    "Incorpora los guisantes y cuece 5 minutos más."
+    "Incorpora los guisantes, cuece 5 minutos más y retira el laurel."
   ],
+  "reviewedOn": "2026-10-12",
   "source": {
     "author": "Menú a Mano",
     "license": "Contenido propio"

@@ -47,7 +47,7 @@
     "huevo": { "fdcId": 171287, "unitPortion": "large" },
     "yogur-natural": { "fdcId": 171284 },
     "leche": { "fdcId": 171265 },
-    "queso-fresco": { "fdcId": 172223 },
+    "queso-fresco": { "fdcId": 170851, "note": "El queso fresco de la tabla es el mexicano, mucho más graso. El de tipo Burgos se parece más a la ricotta de leche entera." },
     "queso-rallado": { "fdcId": 171247 },
     "mozzarella": { "fdcId": 170845 },
     "queso-feta": { "fdcId": 173420 },

@@ -4,7 +4,7 @@
   "summary": "Un clásico rápido con guisantes congelados.",
   "mealTypes": ["lunch", "dinner"],
   "baseServings": 2,
-  "totalMinutes": 15,
+  "totalMinutes": 20,
   "activeMinutes": 10,
   "cost": 1,
   "mainGroup": "vegetables",
@@ -20,9 +20,10 @@
   "steps": [
     "Pica la cebolla y el ajo y sofríelos con el aceite 5 minutos.",
     "Añade el jamón y remueve un minuto.",
-    "Incorpora los guisantes y medio vaso de agua, tapa y cuece 6 minutos.",
+    "Incorpora los guisantes y medio vaso de agua (unos 100 ml), tapa y cuece 6 minutos.",
     "Destapa, deja evaporar el líquido y rectifica de sal."
   ],
+  "reviewedOn": "2026-10-12",
   "source": {
     "author": "Menú a Mano",
     "license": "Contenido propio"

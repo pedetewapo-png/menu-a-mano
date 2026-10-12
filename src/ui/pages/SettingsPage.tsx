@@ -3,7 +3,7 @@ import { exportBackup, importBackup } from '../../data/backup';
 import { parseBackup } from '../../data/backupFormat';
 import { clearAllData, createProfile, deleteProfile, saveProfile, saveSettings } from '../../data/repos';
 import { combinePreferences } from '../../domain/household';
-import { MAX_PROFILES, type Catalog, type DinerProfile, type HouseholdSettings } from '../../domain/types';
+import { isUserRecipe, MAX_PROFILES, type Catalog, type DinerProfile, type HouseholdSettings } from '../../domain/types';
 import { t } from '../../i18n';
 import { promptInstall } from '../../install';
 import { nutritionSource } from '../../data/catalog';
@@ -100,6 +100,8 @@ export function SettingsPage() {
   };
 
   const credits = catalog.recipes.filter((r) => r.image);
+  // Mientras quede alguna receta de la app sin revisar por una persona, se avisa.
+  const catalogIsDraft = catalog.recipes.some((r) => !isUserRecipe(r) && !r.reviewedOn);
 
   return (
     <>
@@ -274,7 +276,7 @@ export function SettingsPage() {
         <h2 id="settings-about">{t.settings.about}</h2>
         <p>{t.notices.scope}</p>
         <p>{t.notices.allergens}</p>
-        <p>{t.notices.draftCatalog}</p>
+        {catalogIsDraft && <p>{t.notices.draftCatalog}</p>}
         <p>{t.settings.privacy}</p>
         <h3>{t.settings.credits}</h3>
         {credits.length === 0 ? (
