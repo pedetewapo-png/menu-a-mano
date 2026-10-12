@@ -1,13 +1,17 @@
 import { combinePreferences } from '../domain/household';
 import type {
+  Catalog,
+  CustomIngredient,
   DinerProfile,
   HouseholdSettings,
   Meta,
   Preferences,
   SavedPlan,
   ShoppingListState,
+  UserRecipe,
   WeekPlan,
 } from '../domain/types';
+import { mergeCatalog } from './catalog';
 import { db, SCHEMA_VERSION, SETTINGS_KEY } from './db';
 import { normalizeSettings } from './migrations';
 
@@ -56,6 +60,47 @@ export async function deleteProfile(id: string): Promise<void> {
 /** Preferencias con las que se planifica: los ajustes de la casa más las necesidades de todos los comensales. */
 export async function getPreferences(): Promise<Preferences> {
   return combinePreferences(await getProfiles(), await getSettings());
+}
+
+// ---------- Recetas e ingredientes propios ----------
+
+/** El catálogo de la app más lo que ha añadido el usuario. */
+export async function getCatalog(): Promise<Catalog> {
+  return mergeCatalog(await db.userIngredients.toArray(), await db.userRecipes.toArray());
+}
+
+export function countUserRecipes(): Promise<number> {
+  return db.userRecipes.count();
+}
+
+/**
+ * Guarda una receta propia. `photo` es la foto grande: undefined la deja como
+ * estaba, null la quita y una cadena la sustituye.
+ */
+export async function saveUserRecipe(recipe: UserRecipe, photo?: string | null): Promise<void> {
+  await db.transaction('rw', [db.userRecipes, db.userPhotos], async () => {
+    await db.userRecipes.put(recipe);
+    if (photo === null) await db.userPhotos.delete(recipe.id);
+    else if (photo !== undefined) await db.userPhotos.put({ recipeId: recipe.id, dataUrl: photo });
+  });
+}
+
+export async function deleteUserRecipe(id: string): Promise<void> {
+  await db.transaction('rw', [db.userRecipes, db.userPhotos, db.favorites], async () => {
+    await Promise.all([db.userRecipes.delete(id), db.userPhotos.delete(id), db.favorites.delete(id)]);
+  });
+}
+
+export async function getUserPhoto(recipeId: string): Promise<string | undefined> {
+  return (await db.userPhotos.get(recipeId))?.dataUrl;
+}
+
+export async function saveCustomIngredients(ingredients: CustomIngredient[]): Promise<void> {
+  await db.userIngredients.bulkPut(ingredients);
+}
+
+export function getCustomIngredients(): Promise<CustomIngredient[]> {
+  return db.userIngredients.toArray();
 }
 
 export async function getMeta(): Promise<Meta> {
@@ -113,14 +158,7 @@ export async function updateShoppingState(
 }
 
 export async function clearAllData(): Promise<void> {
-  await db.transaction('rw', [db.kv, db.profiles, db.weekPlans, db.savedPlans, db.favorites, db.shoppingLists], async () => {
-    await Promise.all([
-      db.kv.clear(),
-      db.profiles.clear(),
-      db.weekPlans.clear(),
-      db.savedPlans.clear(),
-      db.favorites.clear(),
-      db.shoppingLists.clear(),
-    ]);
+  await db.transaction('rw', db.tables, async () => {
+    await Promise.all(db.tables.map((table) => table.clear()));
   });
 }

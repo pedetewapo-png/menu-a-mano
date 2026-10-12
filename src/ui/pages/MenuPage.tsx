@@ -1,7 +1,6 @@
 import { useLiveQuery } from 'dexie-react-hooks';
 import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { catalog } from '../../data/catalog';
 import { addSavedPlan, deleteSavedPlan, listSavedPlans } from '../../data/repos';
 import { violations } from '../../domain/filters';
 import { emptyPlan, hardCandidates, type PlannerNotice } from '../../domain/planner';
@@ -20,7 +19,7 @@ import { Dialog } from '../components/Dialog';
 import { RecipeImage } from '../components/RecipeImage';
 import { Stepper } from '../components/Stepper';
 import { describeNotice, formatDayNumber, formatWeekRange, normalize } from '../format';
-import { useFavorites, usePreferences, useProfiles, useWeek, useWeekPlan } from '../hooks';
+import { useCatalog, useFavorites, usePreferences, useProfiles, useWeek, useWeekPlan } from '../hooks';
 import { applySavedPlan, generateWeek, moveSlot, patchSlot, replaceSlot } from '../planActions';
 
 interface Feedback {
@@ -30,6 +29,7 @@ interface Feedback {
 }
 
 export function MenuPage() {
+  const catalog = useCatalog();
   const { weekStart, setWeekStart } = useWeek();
   const prefs = usePreferences();
   const profiles = useProfiles();
@@ -221,6 +221,7 @@ interface SlotCardProps {
 }
 
 function SlotCard({ slot, prefs, dayName, onChange, onToggleLock, onMore }: SlotCardProps) {
+  const catalog = useCatalog();
   const recipe = slot.recipeId ? catalog.recipeById.get(slot.recipeId) : undefined;
   const mealName = t.meal[slot.mealType];
   const broken = recipe ? violations(recipe, catalog, prefs).length > 0 : false;
@@ -293,6 +294,7 @@ interface SlotDialogProps {
 }
 
 function SlotDialog({ index, plan, prefs, onClose, onChoose }: SlotDialogProps) {
+  const catalog = useCatalog();
   const slot = index === null ? undefined : plan.slots[index];
   const [target, setTarget] = useState('');
   if (index === null || !slot) return <Dialog open={false} onClose={onClose} title="" children={null} />;
@@ -445,6 +447,7 @@ interface RecipePickerProps {
 }
 
 function RecipePicker({ index, plan, prefs, onClose }: RecipePickerProps) {
+  const catalog = useCatalog();
   const [query, setQuery] = useState('');
   const slot = index === null ? undefined : plan.slots[index];
   if (index === null || !slot) return <Dialog open={false} onClose={onClose} title="" children={null} />;

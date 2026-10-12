@@ -1,5 +1,4 @@
 import { useId, useState } from 'react';
-import { catalog } from '../../data/catalog';
 import { hardCandidates } from '../../domain/planner';
 import {
   ALLERGENS,
@@ -17,6 +16,7 @@ import {
 } from '../../domain/types';
 import { t } from '../../i18n';
 import { capitalize, normalize } from '../format';
+import { useCatalog } from '../hooks';
 import { Stepper } from './Stepper';
 
 /** Necesidades personales de un comensal: lo que edita su ficha. */
@@ -67,6 +67,7 @@ export function ServingsField({ value, onChange }: { value: number; onChange: (s
 type ExclusionOption = { kind: 'group'; id: IngredientGroup; label: string } | { kind: 'ingredient'; id: string; label: string };
 
 function ExclusionPicker({ value, onChange }: PersonalProps) {
+  const catalog = useCatalog();
   const inputId = useId();
   const [query, setQuery] = useState('');
 
@@ -182,6 +183,7 @@ export function AvoidSection({ value, onChange }: PersonalProps) {
 }
 
 function BreakfastPicker({ value, preferences, onChange }: SettingsProps) {
+  const catalog = useCatalog();
   const chosen = value.habitualBreakfastIds;
   const compatible = hardCandidates(catalog, preferences, 'breakfast');
   // Los ya elegidos se muestran siempre, aunque hayan dejado de cumplir, para poder quitarlos.

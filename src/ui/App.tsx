@@ -4,11 +4,12 @@ import { promptInstall } from '../install';
 import { mondayOf } from '../domain/week';
 import { t } from '../i18n';
 import { dismissPwaNotice, updateNow } from '../pwa';
-import { useInstallState, usePreferences, usePwaState, WeekContext } from './hooks';
+import { CatalogContext, useInstallState, useLiveCatalog, usePreferences, usePwaState, WeekContext } from './hooks';
 import { CookPage } from './pages/CookPage';
 import { MenuPage } from './pages/MenuPage';
 import { OnboardingPage } from './pages/OnboardingPage';
 import { RecipeDetailPage } from './pages/RecipeDetailPage';
+import { RecipeEditorPage } from './pages/RecipeEditorPage';
 import { RecipesPage } from './pages/RecipesPage';
 import { SettingsPage } from './pages/SettingsPage';
 import { ShoppingPage } from './pages/ShoppingPage';
@@ -199,6 +200,8 @@ function Shell() {
           <Routes>
             <Route path="/menu" element={<MenuPage />} />
             <Route path="/recetas" element={<RecipesPage />} />
+            <Route path="/recetas/nueva" element={<RecipeEditorPage />} />
+            <Route path="/recetas/:recipeId/editar" element={<RecipeEditorPage />} />
             <Route path="/recetas/:recipeId" element={<RecipeDetailPage />} />
             <Route path="/compra" element={<ShoppingPage />} />
             <Route path="/ajustes" element={<SettingsPage />} />
@@ -213,21 +216,27 @@ function Shell() {
 
 export function App() {
   const prefs = usePreferences();
+  const catalog = useLiveCatalog();
   const [weekStart, setWeekStart] = useState(() => mondayOf(new Date()));
   const week = useMemo(() => ({ weekStart, setWeekStart }), [weekStart]);
 
-  if (!prefs) return <p className="loading">{t.common.loading}</p>;
-  if (!prefs.onboardingDone) return <OnboardingPage />;
+  if (!prefs || !catalog) return <p className="loading">{t.common.loading}</p>;
 
   return (
-    <WeekContext.Provider value={week}>
-      <HashRouter>
-        <Routes>
-          {/* El modo cocina ocupa toda la pantalla, sin navegación. */}
-          <Route path="/cocinar/:recipeId" element={<CookPage />} />
-          <Route path="*" element={<Shell />} />
-        </Routes>
-      </HashRouter>
-    </WeekContext.Provider>
+    <CatalogContext.Provider value={catalog}>
+      {!prefs.onboardingDone ? (
+        <OnboardingPage />
+      ) : (
+        <WeekContext.Provider value={week}>
+          <HashRouter>
+            <Routes>
+              {/* El modo cocina ocupa toda la pantalla, sin navegación. */}
+              <Route path="/cocinar/:recipeId" element={<CookPage />} />
+              <Route path="*" element={<Shell />} />
+            </Routes>
+          </HashRouter>
+        </WeekContext.Provider>
+      )}
+    </CatalogContext.Provider>
   );
 }

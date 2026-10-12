@@ -1,5 +1,13 @@
 import Dexie, { type Table } from 'dexie';
-import type { DinerProfile, Favorite, SavedPlan, ShoppingListState, WeekPlan } from '../domain/types';
+import type {
+  CustomIngredient,
+  DinerProfile,
+  Favorite,
+  SavedPlan,
+  ShoppingListState,
+  UserRecipe,
+  WeekPlan,
+} from '../domain/types';
 import { migratePreferences, migrateWeekPlan, splitPreferences } from './migrations';
 
 /**
@@ -7,8 +15,15 @@ import { migratePreferences, migrateWeekPlan, splitPreferences } from './migrati
  * 1 = v1 (comida y cena).
  * 2 = se añaden los desayunos.
  * 3 = las preferencias se reparten entre fichas de comensal y ajustes de la casa.
+ * 4 = recetas e ingredientes propios.
  */
-export const SCHEMA_VERSION = 3;
+export const SCHEMA_VERSION = 4;
+
+/** Foto grande de una receta propia. La miniatura va en la propia receta. */
+export interface UserPhoto {
+  recipeId: string;
+  dataUrl: string;
+}
 
 export const SETTINGS_KEY = 'settings';
 /** Clave de las preferencias de los esquemas 1 y 2; desaparece al migrar al 3. */
@@ -29,6 +44,9 @@ export class AppDatabase extends Dexie {
   savedPlans!: Table<SavedPlan, string>;
   favorites!: Table<Favorite, string>;
   shoppingLists!: Table<ShoppingListState, string>;
+  userRecipes!: Table<UserRecipe, string>;
+  userIngredients!: Table<CustomIngredient, string>;
+  userPhotos!: Table<UserPhoto, string>;
 
   constructor() {
     super('menu-a-mano');
@@ -73,6 +91,9 @@ export class AppDatabase extends Dexie {
         await tx.table<DinerProfile, string>('profiles').bulkPut(profiles);
         await kv.delete(LEGACY_PREFERENCES_KEY);
       });
+
+    // 4: tablas nuevas para las recetas e ingredientes del usuario. No hay datos que convertir.
+    this.version(4).stores({ userRecipes: 'id', userIngredients: 'id', userPhotos: 'recipeId' });
   }
 }
 

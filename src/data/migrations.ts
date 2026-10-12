@@ -102,6 +102,12 @@ export function migrateBackupDataV2(data: unknown): unknown {
   return { ...rest, ...splitPreferences(preferences) };
 }
 
+/** Datos de una copia de seguridad del esquema 3, llevados al 4: se añaden las recetas e ingredientes propios, vacíos. */
+export function migrateBackupDataV3(data: unknown): unknown {
+  if (!isObject(data)) return data;
+  return { userRecipes: [], userIngredients: [], userPhotos: [], ...data };
+}
+
 /** Datos de una copia de seguridad de la v1, llevados al formato de la v2. */
 export function migrateBackupDataV1(data: unknown): unknown {
   if (!isObject(data)) return data;

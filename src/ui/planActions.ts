@@ -1,5 +1,4 @@
-import { catalog } from '../data/catalog';
-import { getWeekPlan, saveWeekPlan } from '../data/repos';
+import { getCatalog, getWeekPlan, saveWeekPlan } from '../data/repos';
 import { isCompatible } from '../domain/filters';
 import {
   emptyPlan,
@@ -9,6 +8,7 @@ import {
   type PlannerNotice,
 } from '../domain/planner';
 import type { MealSlot, Preferences, SavedPlan, WeekPlan } from '../domain/types';
+import { isUsable } from '../domain/userRecipes';
 import { addDays } from '../domain/week';
 
 const randomSeed = () => Math.floor(Math.random() * 0xffffffff);
@@ -28,7 +28,7 @@ export async function generateWeek(
   favorites: ReadonlySet<string>,
 ): Promise<PlannerNotice[]> {
   const result = generatePlan({
-    catalog,
+    catalog: await getCatalog(),
     preferences: prefs,
     favorites,
     currentPlan: await loadPlan(weekStart, prefs),
@@ -44,7 +44,7 @@ export async function refreshBreakfasts(weekStart: string, prefs: Preferences): 
   const plan = await getWeekPlan(weekStart);
   // Sin menú todavía no hay nada que rellenar: lo hará "Generar menú".
   if (!plan) return;
-  await saveWeekPlan(redistributeBreakfasts(plan, catalog, prefs, randomSeed()));
+  await saveWeekPlan(redistributeBreakfasts(plan, await getCatalog(), prefs, randomSeed()));
 }
 
 /** Sustituye el plato de una franja por otro compatible. Devuelve el id nuevo o null si no hay alternativas. */
@@ -57,7 +57,7 @@ export async function replaceSlot(
 ): Promise<string | null> {
   const plan = await loadPlan(weekStart, prefs);
   const recipeId = suggestReplacement({
-    catalog,
+    catalog: await getCatalog(),
     preferences: prefs,
     favorites,
     plan,
@@ -110,13 +110,14 @@ export async function moveSlot(weekStart: string, prefs: Preferences, from: numb
 
 /** Aplica un menú guardado. Las recetas que ya no cumplen las preferencias se omiten; devuelve cuántas. */
 export async function applySavedPlan(weekStart: string, prefs: Preferences, saved: SavedPlan): Promise<number> {
+  const catalog = await getCatalog();
   const base = emptyPlan(weekStart, prefs);
   let skipped = 0;
   const slots = base.slots.map((slot) => {
     const source = saved.slots.find((s) => s.day === slot.day && s.mealType === slot.mealType);
     if (!source?.recipeId) return slot;
     const recipe = catalog.recipeById.get(source.recipeId);
-    if (!recipe || recipe.retired || !isCompatible(recipe, catalog, prefs)) {
+    if (!recipe || !isUsable(recipe) || !isCompatible(recipe, catalog, prefs)) {
       skipped++;
       return slot;
     }

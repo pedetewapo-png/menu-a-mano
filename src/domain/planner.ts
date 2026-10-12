@@ -2,6 +2,7 @@ import { violations } from './filters';
 import { mulberry32 } from './rng';
 import type { Catalog, MainGroup, MealSlot, MealType, Preferences, Recipe, WeekPlan } from './types';
 import { DAYS_PER_WEEK, MEAL_TYPES, MEALS_PER_DAY } from './types';
+import { isAutoPlanned, isUsable } from './userRecipes';
 
 /** Pesos y umbrales de los criterios de variedad. Son valores internos, no recomendaciones nutricionales. */
 export const PLANNER_CONFIG = {
@@ -91,17 +92,25 @@ export interface PlannerResult {
   notices: PlannerNotice[];
 }
 
-/** Recetas que cumplen todas las restricciones obligatorias para un tipo de comida. */
+/**
+ * Recetas que se pueden poner en un tipo de comida: cumplen todas las restricciones
+ * obligatorias y no son borradores ni están retiradas. Es lo que se ofrece al elegir a mano.
+ */
 export function hardCandidates(catalog: Catalog, prefs: Preferences, mealType: MealType): Recipe[] {
   return catalog.recipes.filter(
-    (r) => !r.retired && r.mealTypes.includes(mealType) && violations(r, catalog, prefs).length === 0,
+    (r) => isUsable(r) && r.mealTypes.includes(mealType) && violations(r, catalog, prefs).length === 0,
   );
+}
+
+/** Las que además propone el planificador por su cuenta. */
+function autoCandidates(catalog: Catalog, prefs: Preferences, mealType: MealType): Recipe[] {
+  return hardCandidates(catalog, prefs, mealType).filter(isAutoPlanned);
 }
 
 function countCompatible(catalog: Catalog, prefs: Preferences, mealTypes: readonly MealType[]): number {
   return catalog.recipes.filter(
     (r) =>
-      !r.retired &&
+      isAutoPlanned(r) &&
       r.mealTypes.some((m) => mealTypes.includes(m)) &&
       violations(r, catalog, prefs).length === 0,
   ).length;
@@ -200,9 +209,11 @@ function pick(
   ctx: ScoreContext,
   rng: () => number,
 ): Recipe {
+  // Los empates se deshacen al azar (con la semilla). Si se deshicieran por orden alfabético,
+  // las mismas recetas ganarían siempre y otras no llegarían a salir nunca.
   const scored = pool
-    .map((recipe) => ({ recipe, value: score(recipe, index, assigned, ctx) }))
-    .sort((a, b) => b.value - a.value || a.recipe.id.localeCompare(b.recipe.id));
+    .map((recipe) => ({ recipe, value: score(recipe, index, assigned, ctx), tieBreak: rng() }))
+    .sort((a, b) => b.value - a.value || a.tieBreak - b.tieBreak);
   const best = scored[0]!.value;
   const top = scored.filter((s) => best - s.value <= PLANNER_CONFIG.topMargin).slice(0, PLANNER_CONFIG.topChoices);
   return top[Math.floor(rng() * top.length)]!.recipe;
@@ -262,8 +273,8 @@ export function generatePlan(input: PlannerInput): PlannerResult {
   // Solo las franjas bloqueadas conservan su receta.
   const assigned: (string | null)[] = slots.map((s) => (s.active && s.locked ? s.recipeId : null));
   const candidates = {
-    lunch: hardCandidates(catalog, preferences, 'lunch'),
-    dinner: hardCandidates(catalog, preferences, 'dinner'),
+    lunch: autoCandidates(catalog, preferences, 'lunch'),
+    dinner: autoCandidates(catalog, preferences, 'dinner'),
   };
 
   // Comidas y cenas: primero las franjas con menos candidatos.
@@ -368,7 +379,7 @@ export function suggestReplacement(input: ReplacementInput): string | null {
   const slot = plan.slots[index];
   if (!slot) return null;
   const rejected = new Set(input.rejectedIds ?? []);
-  const pool = hardCandidates(catalog, preferences, slot.mealType).filter(
+  const pool = autoCandidates(catalog, preferences, slot.mealType).filter(
     (r) => r.id !== slot.recipeId && !rejected.has(r.id),
   );
   if (pool.length === 0) return null;

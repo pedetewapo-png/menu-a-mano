@@ -1,12 +1,15 @@
 import { z } from 'zod';
-import { MAX_PROFILES } from '../domain/types';
-import { migrateBackupDataV1, migrateBackupDataV2 } from './migrations';
+import { MAX_PROFILES, MAX_USER_RECIPES } from '../domain/types';
+import { migrateBackupDataV1, migrateBackupDataV2, migrateBackupDataV3 } from './migrations';
 import {
+  customIngredientSchema,
   favoriteSchema,
   profileSchema,
   savedPlanSchema,
   settingsSchema,
   shoppingListSchema,
+  userPhotoSchema,
+  userRecipeSchema,
   weekPlanSchema,
 } from './schemas';
 
@@ -15,12 +18,16 @@ export const BACKUP_APP_ID = 'menu-a-mano';
  * 1 = v1 (comida y cena).
  * 2 = se añaden los desayunos.
  * 3 = las preferencias se reparten entre fichas de comensal y ajustes de la casa.
+ * 4 = recetas e ingredientes propios.
  */
-export const BACKUP_SCHEMA_VERSION = 3;
+export const BACKUP_SCHEMA_VERSION = 4;
 
 const backupDataSchema = z.object({
   settings: settingsSchema,
   profiles: z.array(profileSchema).max(MAX_PROFILES),
+  userRecipes: z.array(userRecipeSchema).max(MAX_USER_RECIPES),
+  userIngredients: z.array(customIngredientSchema),
+  userPhotos: z.array(userPhotoSchema),
   weekPlans: z.array(weekPlanSchema),
   savedPlans: z.array(savedPlanSchema),
   favorites: z.array(favoriteSchema),
@@ -58,6 +65,7 @@ export function parseBackup(text: string): BackupParseResult {
   let data = (raw as { data?: unknown }).data;
   if (header.data.schemaVersion <= 1) data = migrateBackupDataV1(data);
   if (header.data.schemaVersion <= 2) data = migrateBackupDataV2(data);
+  if (header.data.schemaVersion <= 3) data = migrateBackupDataV3(data);
 
   const body = backupDataSchema.safeParse(data);
   if (!body.success) {

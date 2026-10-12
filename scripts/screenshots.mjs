@@ -64,6 +64,15 @@ for (const [size, options] of Object.entries(SIZES)) {
   await page.screenshot({ path: join(out, `${size}-cocinar-ingredientes.png`) });
   await page.getByRole('button', { name: 'Empezar a cocinar' }).click();
   await page.screenshot({ path: join(out, `${size}-cocinar-paso.png`) });
+
+  // Editor de recetas, con un par de ingredientes para ver las filas.
+  await open('#/recetas/nueva');
+  await page.getByRole('textbox', { name: 'Nombre de la receta' }).fill('Sopa de fideos de la abuela');
+  for (const name of ['zanahoria', 'cebolla']) {
+    await page.getByRole('searchbox', { name: 'Buscar ingrediente para añadir' }).fill(name);
+    await page.getByRole('button', { name: `Añadir ${name}`, exact: true }).click();
+  }
+  await page.screenshot({ path: join(out, `${size}-editor.png`), fullPage: true });
   await context.close();
 }
 await browser.close();

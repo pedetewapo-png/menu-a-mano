@@ -810,6 +810,103 @@ input[type='radio'] {
   }
 }
 
+/* ---------- Editor de recetas ---------- */
+
+.editor {
+  max-width: 52rem;
+}
+
+.form-error {
+  margin: 0.25rem 0;
+  color: var(--danger);
+  font-weight: 600;
+}
+
+.form-error:empty {
+  display: none;
+}
+
+.input-wide {
+  width: 100%;
+}
+
+.input-number,
+input[type='number'] {
+  width: 7rem;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+}
+
+textarea {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  resize: vertical;
+}
+
+.editor-row {
+  align-items: flex-start;
+  gap: 0.5rem 1.5rem;
+}
+
+.editor-ingredients {
+  margin: 0 0 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.editor-ingredient {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.6rem;
+  padding: 0.6rem 0;
+  border-top: 1px solid var(--surface-alt);
+}
+
+.editor-ingredient-name {
+  flex: 1 1 100%;
+  margin: 0;
+}
+
+.editor-note {
+  flex: 1 1 10rem;
+  min-width: 0;
+}
+
+.editor-steps {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0 0 1rem;
+  padding-left: 1.5rem;
+}
+
+.editor-steps li::marker {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.editor-notes {
+  margin-top: 1.25rem;
+}
+
+.editor-photo {
+  display: block;
+  width: 10rem;
+  height: auto;
+  margin-bottom: 0.75rem;
+  border-radius: var(--radius);
+}
+
 /* ---------- Modo cocina ---------- */
 
 .cook {

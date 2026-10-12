@@ -1,8 +1,8 @@
 import { useLiveQuery } from 'dexie-react-hooks';
 import { createContext, useContext, useEffect, useState, useSyncExternalStore } from 'react';
 import { db } from '../data/db';
-import { getMeta, getPreferences, getProfiles, getSettings } from '../data/repos';
-import type { DinerProfile, HouseholdSettings, Meta, Preferences, WeekPlan } from '../domain/types';
+import { getCatalog, getMeta, getPreferences, getProfiles, getSettings } from '../data/repos';
+import type { Catalog, DinerProfile, HouseholdSettings, Meta, Preferences, WeekPlan } from '../domain/types';
 import { getInstallState, subscribeInstall, type InstallState } from '../install';
 import { getPwaState, subscribePwa, type PwaState } from '../pwa';
 
@@ -55,6 +55,20 @@ export function useWakeLock(): void {
       void sentinel?.release();
     };
   }, []);
+}
+
+/** El catálogo de la app más las recetas e ingredientes del usuario. undefined mientras carga. */
+export function useLiveCatalog(): Catalog | undefined {
+  return useLiveQuery(() => getCatalog(), []);
+}
+
+export const CatalogContext = createContext<Catalog | null>(null);
+
+/** Catálogo completo, ya cargado. Lo proporciona `App` a todas las pantallas. */
+export function useCatalog(): Catalog {
+  const value = useContext(CatalogContext);
+  if (!value) throw new Error('Falta CatalogContext');
+  return value;
 }
 
 /** Preferencias con las que se planifica (las de todos los comensales a la vez). undefined mientras carga. */

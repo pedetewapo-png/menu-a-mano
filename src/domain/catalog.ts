@@ -16,7 +16,11 @@ export function dietAllows(preferred: Diet, required: Diet): boolean {
   return DIET_RANK[required] <= DIET_RANK[preferred];
 }
 
-function deriveRecipeInfo(recipe: Recipe, ingredients: Map<string, Ingredient>): DerivedRecipeInfo {
+/** Dieta, alérgenos y grupos de una receta, calculados a partir de sus ingredientes. */
+export function deriveRecipeInfo(
+  recipe: Pick<Recipe, 'id' | 'ingredients'>,
+  ingredients: ReadonlyMap<string, Ingredient>,
+): DerivedRecipeInfo {
   let rank = 0;
   const allergens = new Set<Allergen>();
   const groups = new Set<IngredientGroup>();

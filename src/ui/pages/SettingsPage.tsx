@@ -1,21 +1,20 @@
 import { useRef, useState } from 'react';
 import { exportBackup, importBackup } from '../../data/backup';
 import { parseBackup } from '../../data/backupFormat';
-import { catalog } from '../../data/catalog';
 import { clearAllData, createProfile, deleteProfile, saveProfile, saveSettings } from '../../data/repos';
 import { combinePreferences } from '../../domain/household';
-import { MAX_PROFILES, type DinerProfile, type HouseholdSettings } from '../../domain/types';
+import { MAX_PROFILES, type Catalog, type DinerProfile, type HouseholdSettings } from '../../domain/types';
 import { t } from '../../i18n';
 import { promptInstall } from '../../install';
 import { getTextScale, getTheme, setTextScale, setTheme, TEXT_SCALES, THEMES } from '../appearance';
 import { ServingsField, WeekSection } from '../components/PreferencesForm';
 import { ProfileDialog } from '../components/ProfileDialog';
 import { formatDateTime } from '../format';
-import { useHousehold, useInstallState, useMeta, usePending, useWeek } from '../hooks';
+import { useCatalog, useHousehold, useInstallState, useMeta, usePending, useWeek } from '../hooks';
 import { refreshBreakfasts } from '../planActions';
 
 /** Resumen de una ficha en una línea: "Vegetariana · evita champiñones · alérgenos: gluten". */
-function summarize(profile: DinerProfile): string {
+function summarize(profile: DinerProfile, catalog: Catalog): string {
   const avoided = [
     ...profile.excludedGroups.map((group) => t.group[group].toLowerCase()),
     ...profile.excludedIngredientIds.map((id) => catalog.ingredients.get(id)?.name ?? id),
@@ -30,6 +29,7 @@ function summarize(profile: DinerProfile): string {
 }
 
 export function SettingsPage() {
+  const catalog = useCatalog();
   const [household, showHousehold] = usePending(useHousehold());
   const meta = useMeta();
   const install = useInstallState();
@@ -116,7 +116,7 @@ export function SettingsPage() {
             <li key={profile.id} className="profile-row">
               <div>
                 <strong>{profile.name}</strong>
-                <p className="hint">{summarize(profile)}</p>
+                <p className="hint">{summarize(profile, catalog)}</p>
               </div>
               <div className="toolbar">
                 <button

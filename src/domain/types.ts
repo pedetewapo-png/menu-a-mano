@@ -95,6 +95,13 @@ export interface Ingredient {
   mayContain: Allergen[];
   groups: IngredientGroup[];
   pantryStaple: boolean;
+  /** Añadido por el usuario: sus alérgenos los declaró él, no vienen del catálogo. */
+  custom?: boolean;
+}
+
+/** Ingrediente creado por el usuario. Sus alérgenos se eligieron expresamente al crearlo. */
+export interface CustomIngredient extends Ingredient {
+  custom: true;
 }
 
 export interface RecipeIngredient {
@@ -139,6 +146,27 @@ export interface Recipe {
   reviewedOn?: string;
   /** Las recetas retiradas no se proponen, pero siguen existiendo para los menús guardados. */
   retired?: boolean;
+}
+
+/** Receta creada o importada por el usuario. */
+export interface UserRecipe extends Recipe {
+  origin: 'own' | 'imported';
+  /** Un borrador está incompleto y no puede usarse en el menú. */
+  status: 'draft' | 'ready';
+  /** Si es false, el planificador no la propone, pero se puede elegir a mano. */
+  includeInPlanner: boolean;
+  /** Miniatura de la foto, como URL de datos. La foto grande se guarda aparte. */
+  photoThumb?: string;
+  updatedAt: string;
+}
+
+export const USER_ID_PREFIX = 'u-';
+export const MAX_USER_RECIPES = 200;
+export const RECIPE_NAME_MAX_LENGTH = 80;
+export const MAX_RECIPE_STEPS = 30;
+
+export function isUserRecipe(recipe: Recipe): recipe is UserRecipe {
+  return 'origin' in recipe;
 }
 
 /** Calculado a partir de los ingredientes; nunca se escribe a mano. */

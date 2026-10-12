@@ -69,7 +69,7 @@ Los requisitos están en [ESPECIFICACION-v2.md](ESPECIFICACION-v2.md), que divid
 | 1 | Móvil y navegador: navegación inferior, menú día a día, uso en pestaña, instalación opcional | Hecha |
 | 2 | Notas en las comidas, modo cocina, desayunos y migración de los datos de la v1 | Hecha |
 | 3 | Perfiles de comensal: una ficha por persona, menú que respeta a todas y avisos que dicen de quién es cada restricción | Hecha |
-| 4 | Recetas propias | Pendiente |
+| 4 | Recetas propias: editor, ingredientes propios, foto, exportar e importar por archivo | Hecha |
 | 5 | Catálogo: 70 recetas y 8 desayunos, con foto y revisados; calorías | En curso: 25 recetas y 8 desayunos, sin fotos ni revisión |
 | 6 | Cuenta con Google y sincronización | Pendiente |
 | 7 | Plan familiar y copia personal | Pendiente |

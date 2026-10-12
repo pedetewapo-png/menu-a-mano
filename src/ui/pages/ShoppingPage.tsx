@@ -1,16 +1,16 @@
 import { useLiveQuery } from 'dexie-react-hooks';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { catalog } from '../../data/catalog';
 import { db } from '../../data/db';
 import { emptyShoppingState, updateShoppingState } from '../../data/repos';
 import { buildShoppingList, type ShoppingItem } from '../../domain/shopping';
 import { breakfastsEnabled, SHOP_SECTIONS, type ShoppingListState } from '../../domain/types';
 import { t } from '../../i18n';
 import { formatBaseQuantity, formatWeekRange, shoppingItemName, shoppingItemQuantity } from '../format';
-import { usePending, usePreferences, useWakeLock, useWeek, useWeekPlan } from '../hooks';
+import { useCatalog, usePending, usePreferences, useWakeLock, useWeek, useWeekPlan } from '../hooks';
 
 export function ShoppingPage() {
+  const catalog = useCatalog();
   const { weekStart } = useWeek();
   const prefs = usePreferences();
   const loaded = useWeekPlan(weekStart);

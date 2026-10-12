@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { catalog } from '../../data/catalog';
 import { MAX_SERVINGS, MIN_SERVINGS } from '../../domain/types';
 import { t } from '../../i18n';
 import { formatRecipeIngredient } from '../format';
-import { usePreferences, useWakeLock } from '../hooks';
+import { useCatalog, usePreferences, useWakeLock } from '../hooks';
 
 /**
  * Modo cocina: la receta a pantalla completa, un paso cada vez y con texto grande,
@@ -12,6 +11,7 @@ import { usePreferences, useWakeLock } from '../hooks';
  * al final, una pantalla de cierre.
  */
 export function CookPage() {
+  const catalog = useCatalog();
   const { recipeId } = useParams();
   const [params] = useSearchParams();
   const navigate = useNavigate();
@@ -21,7 +21,9 @@ export function CookPage() {
   const headingRef = useRef<HTMLHeadingElement>(null);
   useWakeLock();
 
-  const recipe = recipeId ? catalog.recipeById.get(recipeId) : undefined;
+  const found = recipeId ? catalog.recipeById.get(recipeId) : undefined;
+  // Un borrador sin pasos no se puede cocinar.
+  const recipe = found && found.steps.length > 0 ? found : undefined;
   const lastStep = (recipe?.steps.length ?? 0) + 1;
 
   // Al cambiar de paso el foco va al título, para que el lector de pantalla lo anuncie.
